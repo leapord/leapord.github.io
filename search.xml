@@ -13,10 +13,18 @@
       
       <categories>
           
+          <category> site </category>
+          
           <category> 建站 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
       
     </entry>
     
