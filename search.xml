@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>国内访问Github</title>
+      <link href="/2022/08/20/travel-github/"/>
+      <url>/2022/08/20/travel-github/</url>
+      
+        <content type="html"><![CDATA[<h2 id="github访问"><a href="#github访问" class="headerlink" title="github访问"></a>github访问</h2><blockquote><p>github 作为全球最大的开源代码托管平台，但是受限于国内网络环境，Github并未在中国大陆建立镜像；通过域名反向解析 Github最近站点都在 新加坡; 网上大多数采用自建梯子方式访问，毕竟不是合法方式</p><p>解决dns解析Github速度慢，或者dns被污染是最简单有效的途径</p></blockquote><ul><li>国内优质dns<ul><li><p><a href="https://alidns.com/">阿里DNS (alidns.com)</a></p></li><li><p>谷歌dns <a href="https://developers.google.cn/speed/public-dns/">Public DNS  |  Google Developers</a></p></li><li><p>微软dns <a href="https://blog.csdn.net/weixin_39666550/article/details/119267446">微软自带dns服务器,win10微软设置哪个DNS服务器地址最快_weixin_39666550的博客-CSDN博客</a></p></li></ul></li></ul><p> 笔者直接使用 阿里云DNS，阿里云DNS</p><img src="/2022/08/20/travel-github/20220820181718.png" class="" title="aliyundns"><p>打开自己的电脑 网络设置</p><img src="/2022/08/20/travel-github/20220820181842.png" class=""><p>编辑网络 将阿里云dns地址配置上</p><img src="/2022/08/20/travel-github/20220820182159.png" class="" title="logo"><ul><li>访问 github 测试</li></ul><blockquote><p>github站点中的图片都能正常的打卡也没出现卡顿</p></blockquote><img src="/2022/08/20/travel-github/20220820182931.png" class="" title="test">]]></content>
+      
+      
+      <categories>
+          
+          <category> github </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> github </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>搭建自己的hexo</title>
       <link href="/2022/08/20/buildhexo/"/>
       <url>/2022/08/20/buildhexo/</url>
