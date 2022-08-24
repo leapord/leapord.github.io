@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>LVM2 挂盘 | Leapord</title><meta name="keywords" content="lvm2,linux"><meta name="author" content="Leapord"><meta name="copyright" content="Leapord"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="lvm2 挂盘步骤">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVM2 挂盘">
+<meta property="og:url" content="http://leapord.github.io/2022/08/24/lvm2mount/index.html">
+<meta property="og:site_name" content="Leapord">
+<meta property="og:description" content="lvm2 挂盘步骤">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://leapord.github.io/img/backgroud.png">
+<meta property="article:published_time" content="2022-08-24T03:10:46.000Z">
+<meta property="article:modified_time" content="2022-08-24T07:43:00.458Z">
+<meta property="article:author" content="Leapord">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="LVM2">
+<meta property="article:tag" content="挂盘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://leapord.github.io/img/backgroud.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://leapord.github.io/2022/08/24/lvm2mount/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LVM2 挂盘',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-24 15:43:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/backgroud.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Leapord</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LVM2 挂盘</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-24T03:10:46.000Z" title="发表于 2022-08-24 11:10:46">2022-08-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-24T07:43:00.458Z" title="更新于 2022-08-24 15:43:00">2022-08-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="LVM2 挂盘"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="LVM2挂盘步骤"><a href="#LVM2挂盘步骤" class="headerlink" title="LVM2挂盘步骤"></a>LVM2挂盘步骤</h1><blockquote>
+<p>命令工具 (centos)</p>
+<p>    lvm2</p>
+<p>    lsblk</p>
+<p>    blkid</p>
+<p>    mkfs.ext4</p>
+</blockquote>
+<ul>
+<li>首先需要安装lvm2工具包</li>
+</ul>
+<blockquote>
+<p>lvm2工具包是epel中的工具，先安装 epel 再安装 lvm2 ，具体安装epel可参考阿里镜像源处理</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install lvm2</span><br></pre></td></tr></table></figure>
+
+<p>lvm2 共有 12个命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建命令</span></span><br><span class="line">pvcreate</span><br><span class="line">vgcreate</span><br><span class="line">lvcreate</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看命令</span></span><br><span class="line">pvscan</span><br><span class="line">vgscan</span><br><span class="line">lvscan</span><br><span class="line">pvdisplay</span><br><span class="line">vgdisplay</span><br><span class="line">lvdisplay</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">扩容命令</span></span><br><span class="line">vgexted</span><br><span class="line">lvextend</span><br><span class="line">resize2fs</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建物理卷"><a href="#创建物理卷" class="headerlink" title="创建物理卷"></a>创建物理卷</h2><blockquote>
+<p>首先通过 lsblk查看没有被挂载的磁盘 </p>
+</blockquote>
+<img src="/2022/08/24/lvm2mount/lsblk.png" class="" title="lsblk">
+
+<blockquote>
+<p>使用 pvcreate 命令创建 物理卷</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/vdb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pvdisplay</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 运行结果</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Physical volume &quot;/dev/vdb&quot; successfully created.</span><br><span class="line"></span><br><span class="line">  &quot;/dev/vdb&quot; is a new physical volume of &quot;1.99 TiB&quot;</span><br><span class="line">  --- NEW Physical volume ---</span><br><span class="line">  PV Name               /dev/vdb</span><br><span class="line">  VG Name               </span><br><span class="line">  PV Size               1.99 TiB</span><br><span class="line">  Allocatable           NO</span><br><span class="line">  PE Size               0   </span><br><span class="line">  Total PE              0</span><br><span class="line">  Free PE               0</span><br><span class="line">  Allocated PE          0</span><br><span class="line">  PV UUID               HKROb6-76we-bIga-PdZl-791Q-m3au-SNleNF</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建卷组"><a href="#创建卷组" class="headerlink" title="创建卷组"></a>创建卷组</h2><blockquote>
+<p>使用 vgcreate 命令创建 物理卷组</p>
+<p>参数</p>
+<p>    vgcreate [物理卷组名] [物理卷盘符路径…]</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vgcreate vg1 /dev/vdb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">vgdisplay</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Volume group &quot;vg1&quot; successfully created</span><br><span class="line"></span><br><span class="line">  --- Volume group ---</span><br><span class="line">VG Name               vg1</span><br><span class="line">System ID             </span><br><span class="line">Format                lvm2</span><br><span class="line">Metadata Areas        1</span><br><span class="line">Metadata Sequence No  1</span><br><span class="line">VG Access             read/write</span><br><span class="line">VG Status             resizable</span><br><span class="line">MAX LV                0</span><br><span class="line">Cur LV                0</span><br><span class="line">Open LV               0</span><br><span class="line">Max PV                0</span><br><span class="line">Cur PV                1</span><br><span class="line">Act PV                1</span><br><span class="line">VG Size               1.99 TiB</span><br><span class="line">PE Size               4.00 MiB</span><br><span class="line">Total PE              522239</span><br><span class="line">Alloc PE / Size       0 / 0   </span><br><span class="line">Free  PE / Size       522239 / 1.99 TiB</span><br><span class="line">VG UUID               2Inkii-meFJ-HXzJ-aG9P-qKtW-RsMK-7h2ZJ8</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建逻辑卷"><a href="#创建逻辑卷" class="headerlink" title="创建逻辑卷"></a>创建逻辑卷</h2><blockquote>
+<p>使用 lvcreate 创建逻辑卷</p>
+<p>    命令参数</p>
+<p>    lvcreate -n [逻辑卷名] -l [逻辑卷大小，必须小于挂载的物理卷组] [物理卷组名]</p>
+<p>注意 -l 参数可以写具体MB GB等参数也可以直接使用 全部物理卷，或者剩余物理卷 参数 100%VG全部卷组 100%free</p>
+<p>      -l|–extents LogicalExtentsNumber[%{VG|PVS|FREE}] |（逻辑扩展数）<br>      -L|–size LogicalVolumeSize[bBsSkKmMgGtTpPeE]}（逻辑卷大小）</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -n lv1 -l 100%VG vg1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Logical volume &quot;lv1&quot; created.</span><br><span class="line"></span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/vg1/lv1</span><br><span class="line">  LV Name                lv1</span><br><span class="line">  VG Name                vg1</span><br><span class="line">  LV UUID                zLuEBB-Yp5j-2Cs1-req0-rAmP-Tfy0-ygQbcG</span><br><span class="line">  LV Write Access        read/write</span><br><span class="line">  LV Creation host, time 32v64g2t-0001.novalocal, 2022-08-24 15:29:03 +0800</span><br><span class="line">  LV Status              available</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">open                 0</span></span><br><span class="line">  LV Size                1.99 TiB</span><br><span class="line">  Current LE             522239</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently set to     8192</span><br><span class="line">  Block device           252:0</span><br></pre></td></tr></table></figure>
+
+<h2 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h2><blockquote>
+<p>先找到 lv path (命令 lvdisplay查看没有被使用的逻辑卷)</p>
+<p>    eg: /dev/vg1/lv1</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/vg1/lv1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>命令 blkid找到刚才格式化的逻辑卷</p>
+<p>修改 /etc/fstab 将对应的 磁盘挂载到指定的目录上完成挂盘</p>
+</blockquote>
+<p>运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/dev/sr0: BLOCK_SIZE=&quot;2048&quot; UUID=&quot;2022-04-18-10-44-39-00&quot; LABEL=&quot;config-2&quot; TYPE=&quot;iso9660&quot;</span><br><span class="line">/dev/vda1: UUID=&quot;74360858-0ff7-40cc-b0e5-ff2f1ab6f15d&quot; BLOCK_SIZE=&quot;1024&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;efa216ac-01&quot;</span><br><span class="line">/dev/vda2: UUID=&quot;f1539e07-2ec4-4bed-8f6d-58c1086a3fdc&quot; TYPE=&quot;swap&quot; PARTUUID=&quot;efa216ac-02&quot;</span><br><span class="line">/dev/vda3: UUID=&quot;2dace56d-268b-4513-9d0a-5c7c0f636aa6&quot; BLOCK_SIZE=&quot;512&quot; TYPE=&quot;xfs&quot; PARTUUID=&quot;efa216ac-03&quot;</span><br><span class="line">/dev/vdb: UUID=&quot;HKROb6-76we-bIga-PdZl-791Q-m3au-SNleNF&quot; TYPE=&quot;LVM2_member&quot;</span><br><span class="line">/dev/mapper/vg1-lv1: UUID=&quot;7c7a387b-b2f9-4ced-a9d8-9535c7e8e88d&quot; BLOCK_SIZE=&quot;4096&quot; TYPE=&quot;ext4&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意lvm格式化的逻辑卷有点特殊，与fdisk分区挂盘产生的名称不太一样 名称 规则 /dev/mapper/[物理卷组名]-[逻辑卷组名] 对应的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/mapper/vg1-lv1: UUID=&quot;7c7a387b-b2f9-4ced-a9d8-9535c7e8e88d&quot; BLOCK_SIZE=&quot;4096&quot; TYPE=&quot;</span><br></pre></td></tr></table></figure>
+
+<p>修改 /etc/fstab 添加信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=7c7a387b-b2f9-4ced-a9d8-9535c7e8e88d /opt/data                    ext4    defaults        1 2</span><br></pre></td></tr></table></figure>
+
+<p>使用 mount -a 和 df -h查看是否成功挂盘</p>
+<img src="/2022/08/24/lvm2mount/mount_result.png" class="">
+
+
+
+
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://leapord.github.io">Leapord</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://leapord.github.io/2022/08/24/lvm2mount/">http://leapord.github.io/2022/08/24/lvm2mount/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://leapord.github.io" target="_blank">Leapord</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/LVM2/">LVM2</a><a class="post-meta__tags" href="/tags/%E6%8C%82%E7%9B%98/">挂盘</a></div><div class="post_share"><div class="social-share" data-image="/img/backgroud.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/23/jvm2/"><img class="next-cover" src="/img/backgroud.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JVM 学习系列(二)</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Leapord</div><div class="author-info__description">生活就是一场精彩的话剧</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/leapord"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/leapord" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:leapord@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记录点滴生活</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM2%E6%8C%82%E7%9B%98%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">LVM2挂盘步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%89%A9%E7%90%86%E5%8D%B7"><span class="toc-number">1.1.</span> <span class="toc-text">创建物理卷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%8D%B7%E7%BB%84"><span class="toc-number">1.2.</span> <span class="toc-text">创建卷组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%80%BB%E8%BE%91%E5%8D%B7"><span class="toc-number">1.3.</span> <span class="toc-text">创建逻辑卷</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98"><span class="toc-number">1.4.</span> <span class="toc-text">格式化磁盘</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/08/24/lvm2mount/" title="LVM2 挂盘"><img src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LVM2 挂盘"/></a><div class="content"><a class="title" href="/2022/08/24/lvm2mount/" title="LVM2 挂盘">LVM2 挂盘</a><time datetime="2022-08-24T03:10:46.000Z" title="发表于 2022-08-24 11:10:46">2022-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/23/jvm2/" title="JVM 学习系列(二)"><img src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM 学习系列(二)"/></a><div class="content"><a class="title" href="/2022/08/23/jvm2/" title="JVM 学习系列(二)">JVM 学习系列(二)</a><time datetime="2022-08-23T10:42:52.000Z" title="发表于 2022-08-23 18:42:52">2022-08-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/22/jvm/" title="JVM 学习系列 (一)"><img src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JVM 学习系列 (一)"/></a><div class="content"><a class="title" href="/2022/08/22/jvm/" title="JVM 学习系列 (一)">JVM 学习系列 (一)</a><time datetime="2022-08-22T02:34:23.000Z" title="发表于 2022-08-22 10:34:23">2022-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/20/travel-github/" title="国内访问Github"><img src="/img/backgroud.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="国内访问Github"/></a><div class="content"><a class="title" href="/2022/08/20/travel-github/" title="国内访问Github">国内访问Github</a><time datetime="2022-08-20T10:04:24.000Z" title="发表于 2022-08-20 18:04:24">2022-08-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/20/buildhexo/" title="搭建自己的hexo"><img src="/img/backgroud.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="搭建自己的hexo"/></a><div class="content"><a class="title" href="/2022/08/20/buildhexo/" title="搭建自己的hexo">搭建自己的hexo</a><time datetime="2022-08-20T02:29:28.000Z" title="发表于 2022-08-20 10:29:28">2022-08-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Leapord</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
