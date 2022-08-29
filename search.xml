@@ -13,7 +13,7 @@
       
       <categories>
           
-          <category> linux </category>
+          <category> Linux </category>
           
           <category> nginx </category>
           
@@ -22,11 +22,11 @@
       
         <tags>
             
+            <tag> Linux </tag>
+            
             <tag> nginx </tag>
             
             <tag> https </tag>
-            
-            <tag> linux </tag>
             
         </tags>
       
