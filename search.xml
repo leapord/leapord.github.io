@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>WSL2安装及优化</title>
+      <link href="/2022/09/14/wsl/"/>
+      <url>/2022/09/14/wsl/</url>
+      
+        <content type="html"><![CDATA[<p>日常开发中难免一些Linux常用应用例如 redis 等必须在Linux或者macOS系统才能运行的软件；部分软件也有对应的Windows版本，不过体验或者资源消耗难免有些不友好，好在Windows中有WSL（Windows-Subsystem-Linux）。本文将根据微软官方提供的安装方式详细介绍WSL2安装并且介绍如何将WSL2放到C盘之外的位置</p><h2 id="安装WSL"><a href="#安装WSL" class="headerlink" title="安装WSL"></a>安装WSL</h2><blockquote><p>官方提供自动安装和手动安装</p></blockquote><p>官方安装方式</p><p><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual">WSL 的手动安装步骤 | Microsoft Docs</a></p><p><a href="https://docs.microsoft.com/zh-cn/windows/wsl/install">安装 WSL | Microsoft Docs</a></p><h2 id="确保windows虚拟平台正常开启"><a href="#确保windows虚拟平台正常开启" class="headerlink" title="确保windows虚拟平台正常开启"></a>确保windows虚拟平台正常开启</h2><p>    需要注意：</p><p>        如果您自己的电脑中有vmware或者VMbox等虚拟机软件需要自行删除，VMware和vmbox都有自己的虚拟机内核与Windows中的Hyper-V不能兼容共存。打开控制面板 –&gt; 程序卸载 –&gt; 启用或者关闭Windows功能</p><p>        勾选 “虚拟机” 相关选项</p><img src="/2022/09/14/wsl/system_config.png" class=""><h2 id="配置Windows-Powershell权限"><a href="#配置Windows-Powershell权限" class="headerlink" title="配置Windows Powershell权限"></a>配置Windows Powershell权限</h2><p>Windows11或者Windows10都默认使用powershell作为本机终端软件，安装wsl需要管理员权限。打开powershell，配置默认启动时以管理员权限运行</p><img src="/2022/09/14/wsl/powershell1.png" class=""><img src="/2022/09/14/wsl/powershell2.png" class=""><img src="/2022/09/14/wsl/powershell3.png" class=""><h2 id="安装WSL2"><a href="#安装WSL2" class="headerlink" title="安装WSL2"></a>安装WSL2</h2><p>以上步骤操作完成后，开始安装 <strong>wsl2</strong></p><ul><li>首先 打开带有管理员权限powershell,依次执行下面的命令</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br><span class="line"></span><br><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br></pre></td></tr></table></figure><ul><li>下载wsl2的内核更新包并且安装</li></ul><p><a href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">wsl_update</a></p><p>重新打开powershell 设置默认版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --set-default-version 2</span><br></pre></td></tr></table></figure><ul><li>安装Linux发型版</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --list --online</span><br></pre></td></tr></table></figure><p>选择合适的Linux发行版，建议使用默认的发行版</p><img src="/2022/09/14/wsl/wsl.png" class=""><ul><li>安装发行版 (这里演示Debian)</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --install -d Debian</span><br></pre></td></tr></table></figure><img src="/2022/09/14/wsl/debain.png" class=""><p>安装完成后会自动跳出Debian，并提示设置账号和密码，直接关闭即可</p><img src="/2022/09/14/wsl/debian1.png" class=""><ul><li>开启迁移Debian到d盘</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">首先需要创建一个单独存放wsl镜像的目录 本机 目录 d:/wsl</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">首先关闭正在运行的Debian</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">需要注意，这个命令会停止所有正在运行的 wsl</span></span><br><span class="line">wsl --shutdown</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出所有的 本机安装的wsl</span></span><br><span class="line">wsl -l -v</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">到出镜像</span></span><br><span class="line">wsl --export Debian d:/debian.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注销Debian</span></span><br><span class="line">wsl --unregister Debian</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看是否正确注销</span></span><br><span class="line">wsl -l -v</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">导入Debian到c盘中wsl目录</span></span><br><span class="line">wsl --import Debian d:/wsl/debian d:/debian.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">再次查看结果</span></span><br><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure><img src="/2022/09/14/wsl/debian3.png" class=""><p>至此，WSL2安装完成，也不担心wsl发行版系统的安装的内容过多撑爆C盘。</p><p>Linux中的镜像配置，请参考各大镜像站方法操作</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+          <category> WSL2 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> WSL2 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Redis分布式锁最佳实践</title>
       <link href="/2022/09/01/redis-lock/"/>
       <url>/2022/09/01/redis-lock/</url>
