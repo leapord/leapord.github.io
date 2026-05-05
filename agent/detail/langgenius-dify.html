@@ -2,13 +2,14 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Dify 深度解读 | AI Agent 每日简报</title>
+  <title>需评估 | AI Agent 每日简报</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="当前最热门的 AI 应用开发平台，支持工作流编排、RAG、Agent，Stars 突破 14 万，零基础也能快速上线生产级 AI 应用。">
   <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
+   *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
     .container{max-width:900px;margin:0 auto;padding:32px 24px}
     .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
@@ -16,11 +17,11 @@
     .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
     .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
     .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
-    .hero h1{font-size:28px;font-weight:700;margin-bottom:8px}
+    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
     .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
     .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
     .hero .stat{text-align:center}
-    .hero .stat .num{font-size:22px;font-weight:700;color:#409EFF}
+    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
     .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
     .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
     .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
@@ -36,8 +37,6 @@
     .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
     .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
     .compare-table tr:hover{background:#f5f7fa}
-    .score{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600}
-    .score.high{background:#e1f3d8;color:#67c23a}.score.mid{background:#fdf6ec;color:#e6a23c}.score.low{background:#fef0f0;color:#f56c6c}
     .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
     .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
     .who-card .text{color:#7a8ba8;font-size:13px}
@@ -54,14 +53,12 @@
   <a class="back-btn" href="/agent/index.html" style="margin-left:12px">← Dashboard</a>
 
   <div class="hero">
-    <div class="badge">🔥 GitHub Trending 热门</div>
-    <h1>langgenius / dify</h1>
-    <p class="desc">Production-ready platform for agentic workflow development</p>
-    <div class="tag-list">
-      <span class="tag">Dev Agent</span><span class="tag">Agent</span><span class="tag">Agentic AI</span><span class="tag">Agentic Framework</span>
-    </div>
+    <div class="badge">🔥 GitHub Trending TOP 0</div>
+    <h1>langgenius/dify</h1>
+    <p class="desc">Production-ready platform for agentic workflow development.</p>
+    <div class="tag-list"><span class='tag'>Dev Agent</span><span class='tag'>Agent</span><span class='tag'>Agentic Ai</span><span class='tag'>Agentic Framework</span></div>
     <div class="stats">
-      <div class="stat"><div class="num">140.1k ⭐</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">⭐ 140.1k</div><div class="label">Stars</div></div>
       <div class="stat"><div class="num">22.0k</div><div class="label">Forks</div></div>
       <div class="stat"><div class="num">TypeScript</div><div class="label">语言</div></div>
     </div>
@@ -70,70 +67,46 @@
   <div class="section">
     <h2><span class="icon">💡</span> 一句话评价</h2>
     <div class="highlight-box">
-      <p>当前最热门的<strong>一站式 AI 应用开发平台</strong>，支持工作流编排、RAG、Agent 等多种开发模式，零基础也能快速上线一个 AI 应用。Stars 突破 <strong>14 万</strong>，是 AI 应用开发入门的首选框架。</p>
+      <p>当前最热门的 AI 应用开发平台，支持工作流编排、RAG、Agent，Stars 突破 14 万，零基础也能快速上线生产级 AI 应用。</p>
     </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">🔍</span> 是什么</h2>
-    <p>Dify 是一个<strong>开源的 AI 应用开发平台</strong>，核心理念是让 AI 应用开发变得像搭积木一样简单。它将常见的 AI 开发模式封装成可复用的模块，开发者无需从零编写复杂的 LLM 调度逻辑，通过可视化界面或 YAML 配置即可完成 AI 应用的构建。</p>
-    <br>
-    <p>它支持三大核心能力：</p>
-    <ul>
-      <li><strong>工作流编排</strong>：用可视化的 DAG 方式串联多个 LLM 步骤、工具和条件分支</li>
-      <li><strong>RAG 引擎</strong>：内置完整的检索增强生成流程，支持 PDF、网页、数据库等多种数据源</li>
-      <li><strong>Agent 模式</strong>：基于 ReAct / Function Call 的自主代理，支持多轮对话和工具调用</li>
-    </ul>
+    <p>Dify 是一个开源的 AI 应用开发平台，核心理念是让 AI 应用开发变得像搭积木一样简单。它将常见的 AI 开发模式封装成可复用的模块，开发者无需从零编写复杂的 LLM 调度逻辑，通过可视化界面或 YAML 配置即可完成 AI 应用的构建。支持三大核心能力：工作流编排（可视化 DAG）、RAG 引擎（多数据源）、Agent 模式（ReAct/Function Call）。</p>
   </div>
 
   <div class="section">
     <h2><span class="icon">📈</span> 为什么火</h2>
-    <ul>
-      <li><strong>门槛极低</strong>：有手就会用，无需深入了解 LLM 底层原理，就能做出生产级 AI 应用</li>
-      <li><strong>功能完备</strong>：内置日志、监控、多模型切换、API 发布等企业级功能，上线后直接可用</li>
-      <li><strong>部署简单</strong>：支持 Docker 一键部署，也有云端 SaaS 版本</li>
-      <li><strong>社区活跃</strong>：14 万 Stars，贡献者众多，插件生态丰富</li>
-      <li><strong>中文友好</strong>：文档完善，有活跃的中文社区，对国内开发者非常友好</li>
-    </ul>
+    <ul><li>门槛极低：有手就会用，无需深入了解 LLM 底层原理</li><li>功能完备：内置日志、监控、多模型切换、API 发布等企业级功能</li><li>部署简单：支持 Docker 一键部署，也有云端 SaaS 版本</li><li>社区活跃：14 万 Stars，贡献者众多，插件生态丰富</li><li>中文友好：文档完善，有活跃的中文社区</li></ul>
   </div>
 
   <div class="section">
     <h2><span class="icon">⚔️</span> 竞品对比</h2>
+    
     <table class="compare-table">
-      <tr><th>维度</th><th>Dify</th><th>LangChain</th><th>Flowise</th></tr>
-      <tr><td>编程门槛</td><td><span class="score high">低</span> 可视化+代码</td><td><span class="score low">高</span> 纯代码</td><td><span class="score high">极低</span> 纯可视化</td></tr>
-      <tr><td>灵活性</td><td><span class="score mid">中</span> 受限于组件</td><td><span class="score high">高</span> 高度可定制</td><td><span class="score low">低</span> 功能固定</td></tr>
-      <tr><td>企业级特性</td><td><span class="score high">完善</span> 内置监控/多租户</td><td><span class="score low">需自行封装</span></td><td><span class="score low">基础</span></td></tr>
-      <tr><td>Stars</td><td><span class="score high">140k</span></td><td><span class="score high">135k</span></td><td><span class="score mid">~30k</span></td></tr>
+      <tr><th>方案</th><th>编程门槛</th><th>灵活性</th><th>企业特性</th><th>生态</th></tr>
+      <tr><td>Dify</td><td>低</td><td>中</td><td>完善</td><td>140k ⭐</td></tr><tr><td>LangChain</td><td>高</td><td>高</td><td>需自行封装</td><td>135k ⭐</td></tr><tr><td>Flowise</td><td>极低</td><td>低</td><td>基础</td><td>~30k ⭐</td></tr>
     </table>
-    <br>
-    <p><strong>结论：</strong>如果你想快速出活 → Dify / Flowise；如果你要深度定制 → LangChain。Dify 在「速度」和「能力」之间做到了最佳平衡。</p>
   </div>
 
   <div class="section">
     <h2><span class="icon">👥</span> 适合谁用</h2>
     <div class="who-card">
-      <div class="title">✅ 强烈推荐</div>
-      <div class="text">想快速上线 AI 应用（智能客服、私有知识库、AI 助手）但不想写太多代码的团队和个人开发者</div>
-    </div>
-    <div class="who-card">
-      <div class="title">✅ 中小企业</div>
-      <div class="text">需要快速验证 AI 能力、自建 AI 应用、且没有专职 AI 工程师的产品团队</div>
-    </div>
-    <div class="who-card">
-      <div class="title">⚠️ 需要评估</div>
-      <div class="text">需要极深度定制（如自定义训练模型、超复杂 Agent 逻辑）的场景，建议评估 LangChain</div>
-    </div>
+          <div class="title">✅ 强烈推荐</div>
+          <div class="text">想快速上线 AI 应用（智能客服、私有知识库、AI 助手）但不想写太多代码的团队</div>
+        </div><div class="who-card">
+          <div class="title">⚠️ 中小企业</div>
+          <div class="text">需要快速验证 AI 能力、自建 AI 应用、且没有专职 AI 工程师的产品团队</div>
+        </div><div class="who-card">
+          <div class="title">⚠️ 需评估</div>
+          <div class="text">需要极深度定制（自定义训练模型、超复杂 Agent 逻辑）的场景</div>
+        </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">🚀</span> 快速上手</h2>
-    <ul>
-      <li><strong>官方文档</strong>：<a href="https://docs.dify.ai" target="_blank" style="color:#409EFF">https://docs.dify.ai</a></li>
-      <li><strong>GitHub</strong>：<a href="https://github.com/langgenius/dify" target="_blank" style="color:#409EFF">https://github.com/langgenius/dify</a></li>
-      <li><strong>在线体验</strong>：<a href="https://dify.ai" target="_blank" style="color:#409EFF">https://dify.ai</a>（有 SaaS 版可直接试用）</li>
-      <li><strong>Docker 部署</strong>：<code style="background:#f5f5f5;padding:2px 6px;border-radius:4px">docker run -it -p 80:80 dify/dify</code></li>
-    </ul>
+    <ul><li><a href='https://docs.dify.ai' target='_blank' style='color:#409EFF'>官方文档</a></li><li><a href='https://github.com/langgenius/dify' target='_blank' style='color:#409EFF'>GitHub</a></li><li><a href='https://dify.ai' target='_blank' style='color:#409EFF'>在线体验</a></li></ul>
   </div>
 
   <div class="cta-box">
@@ -143,7 +116,8 @@
   <div class="footer">
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
     <a href="/agent/index.html">Dashboard</a> ·
-    报告生成时间: 2026-05-05
+    <a href="/agent/report-2026-05-05.html">日报</a> ·
+    报告生成时间: 2026-05-05 19:04:49
   </div>
 </div>
 </body>

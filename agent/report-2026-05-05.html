@@ -4,67 +4,69 @@
   <meta charset="UTF-8">
   <title>2026-05-05 AI Agent 每日简报</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="AI Agent 领域每日动态 — 2026-05-05 GitHub 热门项目追踪">
+  <meta name="description" content="AI Agent 领域每日动态 — 2026-05-05 GitHub 热门项目精选">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.6}
+    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.6}
     .container{max-width:1100px;margin:0 auto;padding:32px 24px}
-    .page-header{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px}
-    .page-header h1{font-size:28px;font-weight:700;margin-bottom:8px}
-    .page-header p{color:#7a8ba8;font-size:14px}
-    .stats-row{display:flex;gap:24px;margin-top:24px;flex-wrap:wrap}
-    .stat-box{background:rgba(64,158,255,.1);border:1px solid rgba(64,158,255,.2);border-radius:10px;padding:16px 24px;text-align:center;min-width:120px}
-    .stat-num{font-size:24px;font-weight:700;color:#409EFF}
-    .stat-label{font-size:11px;color:#7a8ba8;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
-    .section{margin-bottom:32px}
-    .section-title{font-size:18px;font-weight:600;margin-bottom:16px;color:#1a1a2e;border-left:4px solid #409EFF;padding-left:12px}
-    .proj-card{background:#fff;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0;transition:border-color .2s}
-    .proj-card:hover{border-color:#409EFF}
-    .proj-name{font-size:15px;font-weight:600;color:#1a1a2e;margin-bottom:4px}
-    .proj-name a{color:#409EFF;text-decoration:none}
-    .proj-desc{font-size:13px;color:#7a8ba8;margin-bottom:8px;line-height:1.5}
-    .proj-meta{display:flex;gap:12px;font-size:12px;color:#b0c4de;flex-wrap:wrap;align-items:center}
-    .proj-lang{color:#409EFF;font-weight:500}
-    .proj-tag{padding:2px 8px;background:#ecf5ff;color:#409EFF;border-radius:4px;font-size:11px;margin-left:4px}
-    .rank{font-size:20px;font-weight:700;color:#dcdfe6;width:30px;display:inline-block;text-align:center}
+    .page-header{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
+    .page-header::after{content:' ';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,rgba(64,158,255,.2),transparent 70%);border-radius:50%}
+    .page-header h1{font-size:26px;font-weight:700;margin-bottom:8px}
+    .page-header .subtitle{color:rgba(255,255,255,.6);font-size:14px;margin-bottom:4px}
+    .page-header .date-info{color:#409EFF;font-size:13px;margin-top:16px}
+    .stats-row{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap}
+    .stat-box{background:rgba(64,158,255,.1);border:1px solid rgba(64,158,255,.25);border-radius:10px;padding:14px 20px;text-align:center;min-width:110px}
+    .stat-num{font-size:22px;font-weight:700;color:#409EFF}
+    .stat-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+    .section{margin-bottom:28px}
+    .section-title{font-size:16px;font-weight:600;margin-bottom:14px;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .proj-card{background:#fff;border-radius:10px;padding:14px 16px;margin-bottom:10px;border:1px solid #f0f0f0;transition:all .2s}
+    .proj-card:hover{border-color:#409EFF;box-shadow:0 2px 12px rgba(64,158,255,.1)}
+    .proj-row{display:flex;align-items:flex-start;gap:12px}
+    .rank{font-size:18px;font-weight:700;color:#dcdfe6;width:28px;padding-top:2px;text-align:center;flex-shrink:0}
     .rank.top1{color:#f5a623}.rank.top2{color:#909399}.rank.top3{color:#cd7f32}
+    .proj-main{flex:1;min-width:0}
+    .proj-name{font-size:14px;font-weight:600;color:#1a1a2e;margin-bottom:3px}
+    .proj-name a{color:#409EFF;text-decoration:none}
+    .proj-name a:hover{text-decoration:underline}
+    .proj-brief{font-size:13px;color:#666;margin-bottom:6px;line-height:1.5}
+    .proj-meta{display:flex;gap:10px;font-size:12px;color:#b0c4de;flex-wrap:wrap;align-items:center}
+    .proj-lang{color:#409EFF;font-weight:500}
+    .proj-tag{padding:1px 7px;background:#ecf5ff;color:#409EFF;border-radius:4px;font-size:11px}
+    .detail-link{color:#909399;font-size:12px;text-decoration:none;margin-left:auto;flex-shrink:0;padding-top:2px}
+    .detail-link:hover{color:#409EFF}
     table{width:100%;border-collapse:collapse}
-    th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:13px}
-    th{background:#fafafa;font-weight:600;color:#606266;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+    th,td{text-align:left;padding:9px 12px;border-bottom:1px solid #f0f0f0;font-size:13px}
+    th{background:#fafafa;font-weight:600;color:#606266;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
     tr:hover{background:#f5f7fa}
-    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px;border-top:1px solid #f0f0f0}
+    .footer{text-align:center;padding:20px;color:#b0c4de;font-size:12px;margin-top:24px;border-top:1px solid #f0f0f0}
     .footer a{color:#409EFF}
+    .arxiv-card{background:#fff;border-radius:10px;padding:14px 16px;margin-bottom:10px;border:1px solid #f0f0f0}
+    .arxiv-title{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:4px}
+    .arxiv-title a{color:#409EFF;text-decoration:none}
+    .arxiv-title a:hover{text-decoration:underline}
+    .arxiv-meta{font-size:12px;color:#999;margin-bottom:4px}
+    .arxiv-abs{font-size:12px;color:#666;line-height:1.5}
   </style>
 </head>
 <body>
 <div id="app" class="container">
   <div class="page-header">
     <h1>🤖 2026-05-05 AI Agent 每日简报</h1>
-    <p>GitHub 热门 AI Agent 项目追踪 · 涵盖自主代理、多智能体、工具调用等前沿方向</p>
+    <p class="subtitle">GitHub 热门 AI Agent 项目精选 · 点击项目名称查看深度解读</p>
+    <div class="date-info">📅 Tuesday, May 05, 2026 · 每周日自动生成周报</div>
     <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-num">20</div>
-        <div class="stat-label">收录项目</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">1284.5k</div>
-        <div class="stat-label">总 Stars</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">4</div>
-        <div class="stat-label">编程语言</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">29</div>
-        <div class="stat-label">分类领域</div>
-      </div>
+      <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">精选项目</div></div>
+      <div class="stat-box"><div class="stat-num">1284.7k</div><div class="stat-label">总 Stars</div></div>
+      <div class="stat-box"><div class="stat-num">4</div><div class="stat-label">语言</div></div>
+      <div class="stat-box"><div class="stat-num">29</div><div class="stat-label">分类</div></div>
     </div>
   </div>
 
-  <!-- Categories -->
+  <!-- 分类分布 -->
   <div class="section">
     <div class="section-title">📊 分类分布</div>
     <table>
@@ -82,192 +84,237 @@
     </table>
   </div>
 
-  <!-- Top Projects -->
+  <!-- 每日精选项目 -->
   <div class="section">
-    <div class="section-title">🔥 Top 20 热门项目</div>
+    <div class="section-title">🔥 每日精选 · 20 个热门项目</div>
     <div class="proj-card">
-      <span class="rank top1">#1</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/langgenius/dify" target="_blank">langgenius/dify</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Agent</span><span class="proj-tag">Agentic Ai</span></div>
-        <div class="proj-desc">Production-ready platform for agentic workflow development.</div>
-        <div class="proj-meta">
-          <span class="proj-lang">TypeScript</span>
-          <span>⭐ 140.1k</span>
-          <span>🍴 22.0k</span>
+      <div class="proj-row">
+        <span class="rank top1">#1</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/langgenius-dify.html" target="_blank">langgenius/dify</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Agent</span><span class="proj-tag">Agentic Ai</span></div>
+          <div class="proj-brief">当前最热门的 AI 应用开发平台，支持工作流编排、RAG、Agent，Stars 突破 14 万，零基础也能快速上线生产级 AI 应用。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">TypeScript</span>
+            <span>⭐ 140.1k</span>
+            <span>🍴 22.0k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/langgenius-dify.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank top2">#2</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/langchain-ai/langchain" target="_blank">langchain-ai/langchain</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Framework</span><span class="proj-tag">Agents</span></div>
-        <div class="proj-desc">The agent engineering platform. Available in TypeScript!</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 135.8k</span>
-          <span>🍴 22.4k</span>
+      <div class="proj-row">
+        <span class="rank top2">#2</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/langchain-ai-langchain.html" target="_blank">langchain-ai/langchain</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Framework</span><span class="proj-tag">Agents</span></div>
+          <div class="proj-brief">生态最成熟的 LLM 应用开发框架，Stars 排名第二，提供 Chains、Agents、Tools、Memory 等丰富组件，适合构建复杂 LLM 流水线。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 135.8k</span>
+            <span>🍴 22.4k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/langchain-ai-langchain.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank top3">#3</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank">Shubhamsaboo/awesome-llm-apps</a> <span class="proj-tag">RAG+Agent</span><span class="proj-tag">Agents</span><span class="proj-tag">Llms</span></div>
-        <div class="proj-desc">100+ AI Agent & RAG apps you can actually run — clone, customize, ship.</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 108.8k</span>
-          <span>🍴 16.1k</span>
+      <div class="proj-row">
+        <span class="rank top3">#3</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/Shubhamsaboo-awesome-llm-apps.html" target="_blank">Shubhamsaboo/awesome-llm-apps</a> <span class="proj-tag">RAG+Agent</span><span class="proj-tag">Agents</span><span class="proj-tag">Llms</span></div>
+          <div class="proj-brief">精选 100+ 可直接运行的 AI Agent 和 RAG 应用集合，每个都有完整代码，适合快速参考或直接二开。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 108.8k</span>
+            <span>🍴 16.1k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/Shubhamsaboo-awesome-llm-apps.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#4</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/infiniflow/ragflow" target="_blank">infiniflow/ragflow</a> <span class="proj-tag">Memory</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Llm App</span></div>
-        <div class="proj-desc">RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 79.7k</span>
-          <span>🍴 9.1k</span>
+      <div class="proj-row">
+        <span class="rank ">#4</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/infiniflow-ragflow.html" target="_blank">infiniflow/ragflow</a> <span class="proj-tag">Memory</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Llm App</span></div>
+          <div class="proj-brief">在 RAG 基础上融合 Agent 能力，支持复杂 PDF、表格等长文档的智能解析和多跳问答，适合有大量内部文档的企业。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 79.7k</span>
+            <span>🍴 9.1k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/infiniflow-ragflow.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#5</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/dair-ai/Prompt-Engineering-Guide" target="_blank">dair-ai/Prompt-Engineering-Guide</a> <span class="proj-tag">Memory</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Research Agent</span></div>
-        <div class="proj-desc">🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.</div>
-        <div class="proj-meta">
-          <span class="proj-lang">MDX</span>
-          <span>⭐ 74.2k</span>
-          <span>🍴 8.0k</span>
+      <div class="proj-row">
+        <span class="rank ">#5</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/dair-ai-Prompt-Engineering-Guide.html" target="_blank">dair-ai/Prompt-Engineering-Guide</a> <span class="proj-tag">Memory</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Research Agent</span></div>
+          <div class="proj-brief">🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.</div>
+          <div class="proj-meta">
+            <span class="proj-lang">MDX</span>
+            <span>⭐ 74.2k</span>
+            <span>🍴 8.0k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/dair-ai-Prompt-Engineering-Guide.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#6</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/thedotmack/claude-mem" target="_blank">thedotmack/claude-mem</a> <span class="proj-tag">Tool Calling</span><span class="proj-tag">Memory</span><span class="proj-tag">Code Agent</span></div>
-        <div class="proj-desc">A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.</div>
-        <div class="proj-meta">
-          <span class="proj-lang">TypeScript</span>
-          <span>⭐ 72.2k</span>
-          <span>🍴 6.2k</span>
+      <div class="proj-row">
+        <span class="rank ">#6</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/thedotmack-claude-mem.html" target="_blank">thedotmack/claude-mem</a> <span class="proj-tag">Tool Calling</span><span class="proj-tag">Memory</span><span class="proj-tag">Code Agent</span></div>
+          <div class="proj-brief">A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.</div>
+          <div class="proj-meta">
+            <span class="proj-lang">TypeScript</span>
+            <span>⭐ 72.2k</span>
+            <span>🍴 6.2k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/thedotmack-claude-mem.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#7</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/FoundationAgents/MetaGPT" target="_blank">FoundationAgents/MetaGPT</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">Code Agent</span><span class="proj-tag">Dev Agent</span></div>
-        <div class="proj-desc">🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 67.7k</span>
-          <span>🍴 8.6k</span>
+      <div class="proj-row">
+        <span class="rank ">#7</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/FoundationAgents-MetaGPT.html" target="_blank">FoundationAgents/MetaGPT</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">Code Agent</span><span class="proj-tag">Dev Agent</span></div>
+          <div class="proj-brief">首个将 Agent 团队协作理念落地的开源框架，模拟软件公司组织架构让多个 Agent 协作完成复杂任务，引发多 Agent 研究热潮。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 67.7k</span>
+            <span>🍴 8.6k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/FoundationAgents-MetaGPT.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#8</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/bytedance/deer-flow" target="_blank">bytedance/deer-flow</a> <span class="proj-tag">Tool Calling</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Code Agent</span></div>
-        <div class="proj-desc">An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 65.0k</span>
-          <span>🍴 8.6k</span>
+      <div class="proj-row">
+        <span class="rank ">#8</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/bytedance-deer-flow.html" target="_blank">bytedance/deer-flow</a> <span class="proj-tag">Tool Calling</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Code Agent</span></div>
+          <div class="proj-brief">An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 65.0k</span>
+            <span>🍴 8.6k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/bytedance-deer-flow.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#9</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/microsoft/autogen" target="_blank">microsoft/autogen</a> <span class="proj-tag">Code Agent</span><span class="proj-tag">Agentic</span><span class="proj-tag">Agentic Agi</span></div>
-        <div class="proj-desc">A programming framework for agentic AI</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 57.7k</span>
-          <span>🍴 8.7k</span>
+      <div class="proj-row">
+        <span class="rank ">#9</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/microsoft-autogen.html" target="_blank">microsoft/autogen</a> <span class="proj-tag">Code Agent</span><span class="proj-tag">Agentic</span><span class="proj-tag">Agentic Agi</span></div>
+          <div class="proj-brief">微软开源的多 Agent 编程框架，支持多 Agent 对话协作，背靠微软研究院，适合企业级 AI 应用快速原型开发。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 57.7k</span>
+            <span>🍴 8.7k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/microsoft-autogen.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#10</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/mem0ai/mem0" target="_blank">mem0ai/mem0</a> <span class="proj-tag">Memory</span><span class="proj-tag">Agents</span><span class="proj-tag">Ai</span></div>
-        <div class="proj-desc">Universal memory layer for AI Agents</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 54.8k</span>
-          <span>🍴 6.2k</span>
+      <div class="proj-row">
+        <span class="rank ">#10</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/mem0ai-mem0.html" target="_blank">mem0ai/mem0</a> <span class="proj-tag">Memory</span><span class="proj-tag">Agents</span><span class="proj-tag">Ai</span></div>
+          <div class="proj-brief">为 AI Agent 提供跨会话持久化记忆能力，解决 Agent「记不住」的核心痛点，让 AI 助手真正「认识用户」。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 54.8k</span>
+            <span>🍴 6.2k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/mem0ai-mem0.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#11</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/FlowiseAI/Flowise" target="_blank">FlowiseAI/Flowise</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Agentic Ai</span><span class="proj-tag">Agentic Workflow</span></div>
-        <div class="proj-desc">Build AI Agents, Visually</div>
-        <div class="proj-meta">
-          <span class="proj-lang">TypeScript</span>
-          <span>⭐ 52.5k</span>
-          <span>🍴 24.3k</span>
+      <div class="proj-row">
+        <span class="rank ">#11</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/FlowiseAI-Flowise.html" target="_blank">FlowiseAI/Flowise</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Agentic Ai</span><span class="proj-tag">Agentic Workflow</span></div>
+          <div class="proj-brief">零编码门槛的可视化 AI Flow 构建器，拖拽即可搭建完整 AI 流水线，适合非技术背景用户快速验证 AI 想法。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">TypeScript</span>
+            <span>⭐ 52.5k</span>
+            <span>🍴 24.3k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/FlowiseAI-Flowise.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#12</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/crewAIInc/crewAI" target="_blank">crewAIInc/crewAI</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">Agents</span><span class="proj-tag">Ai</span></div>
-        <div class="proj-desc">Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 50.6k</span>
-          <span>🍴 7.0k</span>
+      <div class="proj-row">
+        <span class="rank ">#12</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/crewAIInc-crewAI.html" target="_blank">crewAIInc/crewAI</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">Agents</span><span class="proj-tag">Ai</span></div>
+          <div class="proj-brief">通过「Crew（团队）」概念让多个 Agent 分工协作，支持复杂任务分解，适合构建自动化工作流（市场调研、自动写报告）。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 50.6k</span>
+            <span>🍴 7.0k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/crewAIInc-crewAI.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#13</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/run-llama/llama_index" target="_blank">run-llama/llama_index</a> <span class="proj-tag">Framework</span><span class="proj-tag">Agents</span><span class="proj-tag">Llamaindex</span></div>
-        <div class="proj-desc">LlamaIndex is the leading document agent and OCR platform</div>
-        <div class="proj-meta">
-          <span class="proj-lang">Python</span>
-          <span>⭐ 49.1k</span>
-          <span>🍴 7.4k</span>
+      <div class="proj-row">
+        <span class="rank ">#13</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/run-llama-llama_index.html" target="_blank">run-llama/llama_index</a> <span class="proj-tag">Framework</span><span class="proj-tag">Agents</span><span class="proj-tag">Llamaindex</span></div>
+          <div class="proj-brief">与 LangChain 并列的文档理解与 RAG 框架，Stars 靠前，生态成熟，特别擅长知识库构建和文档代理。</div>
+          <div class="proj-meta">
+            <span class="proj-lang">Python</span>
+            <span>⭐ 49.1k</span>
+            <span>🍴 7.4k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/run-llama-llama_index.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#14</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/CherryHQ/cherry-studio" target="_blank">CherryHQ/cherry-studio</a> <span class="proj-tag">Agency Agents</span><span class="proj-tag">Ai Agent</span></div>
-        <div class="proj-desc">AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs</div>
-        <div class="proj-meta">
-          <span class="proj-lang">TypeScript</span>
-          <span>⭐ 45.0k</span>
-          <span>🍴 4.3k</span>
+      <div class="proj-row">
+        <span class="rank ">#14</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/CherryHQ-cherry-studio.html" target="_blank">CherryHQ/cherry-studio</a> <span class="proj-tag">Agency Agents</span><span class="proj-tag">Ai Agent</span></div>
+          <div class="proj-brief">AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs</div>
+          <div class="proj-meta">
+            <span class="proj-lang">TypeScript</span>
+            <span>⭐ 45.0k</span>
+            <span>🍴 4.3k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/CherryHQ-cherry-studio.html" target="_blank">深度解读 →</a>
       </div>
     </div>
     <div class="proj-card">
-      <span class="rank ">#15</span>
-      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
-        <div class="proj-name"><a href="https://github.com/ruvnet/ruflo" target="_blank">ruvnet/ruflo</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Code Agent</span></div>
-        <div class="proj-desc">🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features    enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration</div>
-        <div class="proj-meta">
-          <span class="proj-lang">TypeScript</span>
-          <span>⭐ 42.3k</span>
-          <span>🍴 4.7k</span>
+      <div class="proj-row">
+        <span class="rank ">#15</span>
+        <div class="proj-main">
+          <div class="proj-name"><a href="/agent/detail/ruvnet-ruflo.html" target="_blank">ruvnet/ruflo</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Code Agent</span></div>
+          <div class="proj-brief">🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features    enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration</div>
+          <div class="proj-meta">
+            <span class="proj-lang">TypeScript</span>
+            <span>⭐ 42.4k</span>
+            <span>🍴 4.7k</span>
+          </div>
         </div>
+        <a class="detail-link" href="/agent/detail/ruvnet-ruflo.html" target="_blank">深度解读 →</a>
       </div>
     </div>
   </div>
 
-  <!-- Language Distribution -->
+  <!-- 语言分布 -->
   <div class="section">
     <div class="section-title">💻 语言分布</div>
     <table>
@@ -279,20 +326,21 @@
     </table>
   </div>
 
-  <!-- ArXiv Papers -->
+  <!-- ArXiv 最新论文 -->
   <div class="section">
     <div class="section-title">📚 ArXiv 最新论文</div>
-    <p style="color:#999;font-size:13px;">暂无论文数据</p>
+    <p style="color:#999;font-size:13px;padding:12px 0;">暂无论文数据（ArXiv API 限流中，明日自动重试）</p>
   </div>
 
   <div class="footer">
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
-    报告生成时间: 2026-05-05 18:20:45 ·
-    <a href="/agent/index.html">← Dashboard</a>
+    报告生成: 2026-05-05 19:04:49 ·
+    <a href="/agent/index.html">Dashboard</a> ·
+    <a href="/agent/weekly.html">周报总览</a>
   </div>
 </div>
 <script>
-const { createApp, ref } = Vue
+const { createApp } = Vue
 createApp({}).use(ElementPlus).mount('#app')
 </script>
 </body>

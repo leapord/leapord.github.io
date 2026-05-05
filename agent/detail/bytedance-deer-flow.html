@@ -1,31 +1,111 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>deer-flow - AI Agent 深度解读</title>
-<style>
-body{font-family:system-ui;max-width:800px;margin:0 auto;padding:2rem;background:#0f172a;color:#e2e8f0;line-height:1.8}
-h1{color:#38bdf8;border-bottom:2px solid #38bdf8;padding-bottom:.5rem}
-.meta{color:#94a3b8;font-size:.9rem;margin-bottom:2rem}
-.tag{display:inline-block;background:#1e3a5f;color:#38bdf8;padding:.2rem .6rem;border-radius:9999px;font-size:.8rem;margin:.2rem}
-.summary{background:#1e293b;padding:1.5rem;border-radius:12px;border-left:4px solid #38bdf8;margin:1.5rem 0;font-size:1.1rem}
-.back{display:inline-block;background:#38bdf8;color:#0f172a;padding:.6rem 1.2rem;border-radius:8px;text-decoration:none;font-weight:bold}
-</style>
+  <meta charset="UTF-8">
+  <title>bytedance/deer-flow | AI Agent 每日简报</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of">
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <style>
+   *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
+    .container{max-width:900px;margin:0 auto;padding:32px 24px}
+    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
+    .back-btn:hover{background:#409EFF;color:#fff}
+    .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
+    .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
+    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
+    .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
+    .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
+    .hero .stat{text-align:center}
+    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
+    .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
+    .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
+    .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
+    .section h2 .icon{font-size:20px}
+    .section p,.section li{color:#555;font-size:14px}
+    .section ul{padding-left:20px}
+    .section li{margin-bottom:8px}
+    .highlight-box{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
+    .highlight-box p{color:#1a1a2e;font-size:14px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .tag{padding:4px 12px;background:#ecf5ff;color:#409EFF;border-radius:20px;font-size:12px}
+    .compare-table{width:100%;border-collapse:collapse;font-size:13px}
+    .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
+    .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+    .compare-table tr:hover{background:#f5f7fa}
+    .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
+    .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
+    .who-card .text{color:#7a8ba8;font-size:13px}
+    .cta-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:24px;text-align:center;margin-top:24px}
+    .cta-box a{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
+    .cta-box a:hover{transform:scale(1.05)}
+    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}
+    .footer a{color:#409EFF}
+  </style>
 </head>
 <body>
-<a class="back" href="../index.html">← 返回 Dashboard</a>
-<h1>deer-flow</h1>
-<div class="meta">
-<span>⌨️ bytedance/deer-flow</span> &nbsp;|&nbsp; 
-<span>🏷️ </span>
+<div id="app" class="container">
+  <a class="back-btn" href="/agent/report-2026-05-05.html">← 返回日报</a>
+  <a class="back-btn" href="/agent/index.html" style="margin-left:12px">← Dashboard</a>
+
+  <div class="hero">
+    <div class="badge">🔥 GitHub Trending TOP 0</div>
+    <h1>bytedance/deer-flow</h1>
+    <p class="desc">An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</p>
+    <div class="tag-list"><span class='tag'>Tool Calling</span><span class='tag'>RAG+Agent</span><span class='tag'>Code Agent</span><span class='tag'>Research Agent</span></div>
+    <div class="stats">
+      <div class="stat"><div class="num">⭐ 65.0k</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">8.6k</div><div class="label">Forks</div></div>
+      <div class="stat"><div class="num">Python</div><div class="label">语言</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">💡</span> 一句话评价</h2>
+    <div class="highlight-box">
+      <p>An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔍</span> 是什么</h2>
+    <p>An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📈</span> 为什么火</h2>
+    <p>近期在 GitHub 热度较高，受到开发者关注。Stars 65.0k，Forks 8.6k。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚔️</span> 竞品对比</h2>
+    
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">👥</span> 适合谁用</h2>
+    
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🚀</span> 快速上手</h2>
+    <ul><li><a href='https://github.com/bytedance/deer-flow' target='_blank' style='color:#409EFF'>GitHub 仓库</a></li></ul>
+  </div>
+
+  <div class="cta-box">
+    <a href="https://github.com/bytedance/deer-flow" target="_blank">⭐ 去 GitHub 看看</a>
+  </div>
+
+  <div class="footer">
+    © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
+    <a href="/agent/index.html">Dashboard</a> ·
+    <a href="/agent/report-2026-05-05.html">日报</a> ·
+    报告生成时间: 2026-05-05 19:04:49
+  </div>
 </div>
-<div class="summary">An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</div>
-<p><strong>📊 今日排名:</strong> #8</p>
-<p><strong>⭐ Stars:</strong> 65.0k</p>
-<p><strong>🔀 Forks:</strong> 8.6k</p>
-<p><strong>📝 描述:</strong> An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</p>
-<hr style="border-color:#334155;margin:2rem 0">
-<p style="color:#94a3b8">🔗 <a href="https://github.com/bytedance/deer-flow" style="color:#38bdf8">查看 GitHub 原始页面</a></p>
 </body>
 </html>
