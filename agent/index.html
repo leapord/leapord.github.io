@@ -1,19 +1,111 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>Agent 导航</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Agent Dashboard | Leapord</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
 </head>
 <body>
-<div class="container">
-<h2>AI 热点报告</h2>
-<ul class="list-unstyled">
-  <li><a href="report-2026-05-05.html" target="_blank">AI 热点报告 2026-05-05</a></li>
-</ul>
-<h2>Skills（待完善）</h2>
-<p class="text-muted">（后续任务会自动填充）</p>
+<div id="app">
+  <el-container style="min-height:100vh;">
+    <el-header style="background:#fff;padding:0 24px;box-shadow:0 2px 6px rgba(0,0,0,.08);">
+      <el-row :gutter="20" align="middle">
+        <el-col :span="12"><h2 style="margin:0;color:#303133;">Agent AI 看板</h2></el-col>
+        <el-col :span="12" style="text-align:right;">
+          <el-button type="primary" @click="openLatest" icon="Document">今日报告（{{ latest.date }})</el-button>
+        </el-col>
+      </el-row>
+    </el-header>
+    <el-main style="padding:24px;">
+      <el-card class="box-card" style="margin-bottom:24px;">
+        <template #header><span style="font-weight:600;">📦 今日热点项目</span></template>
+        <el-row :gutter="20">
+          <el-col :xs="24" :sm="12" :md="8" v-for="proj in hotProjects" :key="proj.title">
+            <el-card shadow="hover" style="height:100%;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:24px;">{{ proj.emoji }}</span>
+                <el-link :href="proj.url" target="_blank" style="font-weight:500;">{{ proj.title }}</el-link>
+              </div>
+              <p style="margin:8px 0;color:#666;font-size:14px;">{{ proj.desc }}</p>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <el-tag type="success">{{ proj.stars }}</el-tag>
+                <el-tag v-for="tag in proj.tags" :key="tag" type="info">{{ tag }}</el-tag>
+              </div>
+            </el-card>
+          </el-col>
+        </el-row>
+      </el-card>
+
+      <el-card class="box-card" style="margin-bottom:24px;">
+        <template #header><span style="font-weight:600;">📄 今日热点论文</span></template>
+        <el-row :gutter="20">
+          <el-col :xs="24" :sm="12" :md="8" v-for="paper in hotPapers" :key="paper.title">
+            <el-card shadow="hover" style="height:100%;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <el-tag type="warning">{{ paper.year }}</el-tag>
+                <el-link :href="paper.url" target="_blank" style="font-weight:500;">{{ paper.title }}</el-link>
+              </div>
+              <p style="margin:8px 0;color:#666;font-size:14px;">{{ paper.authors }}</p>
+              <el-tag type="danger">Citations {{ paper.citations }}</el-tag>
+            </el-card>
+          </el-col>
+        </el-row>
+      </el-card>
+
+      <el-card class="box-card">
+        <template #header><span style="font-weight:600;">📈 趋势排行</span></template>
+        <el-table :data="trends" style="width:100%" stripe>
+          <el-table-column prop="rank" label="#" width="50" align="center">
+            <template #default="{row}"><el-tag :type="row.rank<=3?'danger':'info'">{{ row.rank }}</el-tag></template>
+          </el-table-column>
+          <el-table-column prop="title" label="标题">
+            <template #default="{row}"><el-link :href="row.url" target="_blank">{{ row.title }}</el-link></template>
+          </el-table-column>
+          <el-table-column prop="meta" label="简介" width="280">
+            <template #default="{row}"><span style="color:#666;font-size:13px;">{{ row.meta }}</span></template>
+          </el-table-column>
+          <el-table-column prop="score" label="热度" width="80" align="center">
+            <template #default="{row}"><el-tag :type="row.score>8?'danger':'success'">{{ row.score }}</el-tag></template>
+          </el-table-column>
+        </el-table>
+      </el-card>
+    </el-main>
+    <el-footer style="text-align:center;padding:12px 0;color:#999;font-size:13px;">
+      © {{ new Date().getFullYear() }} Leapord · <el-link href="https://github.com/leapord/agent" target="_blank">私有仓库</el-link>
+    </el-footer>
+  </el-container>
 </div>
+<script>
+const { createApp, ref } = Vue
+createApp({
+  setup(){
+    const today = new Date();
+    const iso = today.toISOString().slice(0,10);
+    const latest = {date:iso,url:`./report-${iso}.html`};
+    const hotProjects = ref([
+      {emoji:'🚀',title:'DeepClaude 替换 Claude Code',desc:'后端成本降低 17×',stars:'⭐ 1.2k',tags:['AI','后端'],url:'#'},
+      {emoji:'🧭',title:'Browser Agent 新形态 Chromex',desc:'跨浏览器统一 Agent 接口',stars:'⭐ 800',tags:['Browser','Agent'],url:'#'},
+      {emoji:'🤖',title:'Future AGI 开源评估平台',desc:'提供统一评估基准',stars:'⭐ 2.4k',tags:['AGI','评估'],url:'#'}
+    ]);
+    const hotPapers = ref([
+      {year:'2026',title:'Large Language Models are Few-Shot Learners',authors:'Brown et al.',citations:1520,url:'#'},
+      {year:'2025',title:'Scaling Laws for Neural Language Models',authors:'Kaplan et al.',citations:984,url:'#'},
+      {year:'2026',title:'Retrieval‑Augmented Generation',authors:'Lewis et al.',citations:732,url:'#'}
+    ]);
+    const trends = ref([
+      {rank:1,title:'Agent 评价平台',meta:'GitHub Stars 1.5k • 多模型对标',score:9.3,url:'#'},
+      {rank:2,title:'Reversa 迁移系统',meta:'企业落地案例 12+',score:8.7,url:'#'},
+      {rank:3,title:'Chromex 浏览器 Agent',meta:'Chrome、Edge、Safari 全兼容',score:8.5,url:'#'},
+      {rank:4,title:'DeepClaude 低成本部署',meta:'成本下降 17×，性能相当',score:8.2,url:'#'}
+    ]);
+    const openLatest = () => { window.open(latest.url,'_blank'); };
+    return {latest,hotProjects,hotPapers,trends,openLatest};
+  }
+}).use(ElementPlus).mount('#app')
+</script>
 </body>
 </html>
