@@ -1,23 +1,254 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>2026-05-05 Hermes Skills 趋势报告</title>
+  <title>🤖 AI Agent 研究报告</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <meta name="description" content="AI Agent 前沿研究日报 - 每日追踪 GitHub 热门项目和 Arxiv 论文">
 </head>
 <body>
-<div style="max-width:800px;margin:auto;padding:24px;">
-  <h2>2026-05-05 Hermes Skills 趋势报告</h2>
-  <p>以下为最近 24 小时内最热门的 Hermes Skills（按 star 排序），此处为占位示例。</p>
-  <ul>
-    <li>daily-ai-hotspot-report – 自动生成 AI 热点日报</li>
-    <li>daily-skill-trend-report – 自动生成 Skills 趋势报告</li>
-    <li>hexo-github-pages-submodule – Hexo + GitHub Pages 子模块部署</li>
-    <li>element-plus-dashboard – Element Plus 静态仪表盘实现</li>
-  </ul>
+
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+.header { text-align: center; margin-bottom: 32px; padding: 32px 0; }
+.header h1 { font-size: 2.2rem; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
+.header .subtitle { color: #94a3b8; margin-top: 8px; font-size: 1rem; }
+.badge-row { display: flex; gap: 12px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.badge { background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); color: #60a5fa; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; }
+.section { margin-bottom: 36px; }
+.section-title { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 600; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.section-title .icon { font-size: 1.4rem; }
+.section-title .tag { font-size: 0.75rem; background: rgba(167,139,250,0.2); color: #a78bfa; padding: 2px 10px; border-radius: 10px; font-weight: 400; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.repo-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+.repo-card:hover { border-color: rgba(96,165,250,0.4); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+.repo-card .top-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.repo-card .lang-dot { width: 10px; height: 10px; border-radius: 50%; background: #60a5fa; }
+.repo-card .repo-name { font-weight: 600; font-size: 0.95rem; color: #60a5fa; }
+.repo-card .repo-desc { font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.repo-card .bottom-row { display: flex; align-items: center; gap: 14px; font-size: 0.78rem; color: #64748b; }
+.repo-card .stat { display: flex; align-items: center; gap: 4px; }
+.repo-card .topics { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.topic-tag { background: rgba(167,139,250,0.12); color: #a78bfa; font-size: 0.72rem; padding: 2px 8px; border-radius: 6px; }
+.paper-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+.paper-card .paper-title { font-weight: 600; font-size: 0.95rem; color: #e2e8f0; margin-bottom: 8px; line-height: 1.4; }
+.paper-card .paper-meta { font-size: 0.78rem; color: #64748b; margin-bottom: 8px; }
+.paper-card .paper-summary { font-size: 0.82rem; color: #94a3b8; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.paper-card .paper-link { display: inline-block; margin-top: 10px; font-size: 0.8rem; color: #60a5fa; text-decoration: none; }
+.paper-card .paper-link:hover { text-decoration: underline; }
+.trend-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 16px; }
+.trend-card .rank { font-size: 1.5rem; font-weight: 700; color: rgba(96,165,250,0.3); min-width: 30px; text-align: center; }
+.trend-card .trend-info { flex: 1; }
+.trend-card .trend-name { font-weight: 600; color: #60a5fa; font-size: 0.95rem; text-decoration: none; }
+.trend-card .trend-name:hover { text-decoration: underline; }
+.trend-card .trend-desc { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+.trend-card .trend-stars { font-size: 0.85rem; color: #fbbf24; font-weight: 600; white-space: nowrap; }
+.footer { text-align: center; padding: 24px 0; color: #475569; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 32px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: #60a5fa; text-decoration: none; font-size: 0.9rem; margin-bottom: 20px; }
+.back-link:hover { text-decoration: underline; }
+.search-form { margin-bottom: 24px; display: flex; gap: 10px; }
+.search-form input { flex: 1; background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 16px; color: #e2e8f0; font-size: 0.9rem; outline: none; }
+.search-form input:focus { border-color: rgba(96,165,250,0.5); }
+.search-form button { background: linear-gradient(135deg, #3b82f6, #8b5cf6); border: none; border-radius: 8px; padding: 10px 20px; color: #fff; font-size: 0.9rem; cursor: pointer; }
+@media (max-width: 640px) { .card-grid { grid-template-columns: 1fr; } .header h1 { font-size: 1.6rem; } }
+
+<div class="container">
+  <a class="back-link" href="index.html">← 返回 Dashboard</a>
+  <div class="header">
+    <h1>🧠 AI Agent Skills 研究</h1>
+    <div class="subtitle">前沿论文 & 核心项目深入分析</div>
+    <div class="badge-row">
+      <span class="badge">📄 1 篇论文</span>
+      <span class="badge">🔥 30 个项目</span>
+      <span class="badge">📅 2026-05-05</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title"><span class="icon">📄</span> Arxiv 论文</div>
+    
+<div class="paper-card">
+  <div class="paper-title">N/A</div>
+  <div class="paper-meta">📅 N/A &nbsp;|&nbsp; 👤 </div>
+  <div class="paper-summary">暂无摘要</div>
+  <a class="paper-link" href="#" target="_blank">🔗 查看论文 →</a>
+</div>
+  </div>
+  <div class="section">
+    <div class="section-title"><span class="icon">🔥</span> 核心项目</div>
+    <div class="card-grid">
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3178c6"></span>
+    <span class="repo-name">openclaw/openclaw</span>
+  </div>
+  <div class="repo-desc">Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 </div>
+  <div class="topics"><span class="topic-tag">ai</span><span class="topic-tag">assistant</span><span class="topic-tag">crustacean</span></div>
+  <div class="bottom-row">
+    <span class="stat">TypeScript</span>
+    <span class="stat">⭐ 368.5K</span>
+    <span class="stat">🍴 75894</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#89e051"></span>
+    <span class="repo-name">obra/superpowers</span>
+  </div>
+  <div class="repo-desc">An agentic skills framework & software development methodology that works.</div>
+  <div class="topics"></div>
+  <div class="bottom-row">
+    <span class="stat">Shell</span>
+    <span class="stat">⭐ 178.7K</span>
+    <span class="stat">🍴 15871</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#f1e05a"></span>
+    <span class="repo-name">affaan-m/everything-claude-code</span>
+  </div>
+  <div class="repo-desc">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</div>
+  <div class="topics"><span class="topic-tag">ai-agents</span><span class="topic-tag">anthropic</span><span class="topic-tag">claude</span></div>
+  <div class="bottom-row">
+    <span class="stat">JavaScript</span>
+    <span class="stat">⭐ 173.5K</span>
+    <span class="stat">🍴 26885</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#b07219"></span>
+    <span class="repo-name">Snailclimb/JavaGuide</span>
+  </div>
+  <div class="repo-desc">Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发</div>
+  <div class="topics"><span class="topic-tag">agent</span><span class="topic-tag">context-engineering</span><span class="topic-tag">interview</span></div>
+  <div class="bottom-row">
+    <span class="stat">Java</span>
+    <span class="stat">⭐ 155.4K</span>
+    <span class="stat">🍴 46156</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3572A5"></span>
+    <span class="repo-name">langflow-ai/langflow</span>
+  </div>
+  <div class="repo-desc">Langflow is a powerful tool for building and deploying AI-powered agents and workflows.</div>
+  <div class="topics"><span class="topic-tag">agents</span><span class="topic-tag">chatgpt</span><span class="topic-tag">generative-ai</span></div>
+  <div class="bottom-row">
+    <span class="stat">Python</span>
+    <span class="stat">⭐ 147.7K</span>
+    <span class="stat">🍴 8905</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3178c6"></span>
+    <span class="repo-name">langgenius/dify</span>
+  </div>
+  <div class="repo-desc">Production-ready platform for agentic workflow development.</div>
+  <div class="topics"><span class="topic-tag">agent</span><span class="topic-tag">agentic-ai</span><span class="topic-tag">agentic-framework</span></div>
+  <div class="bottom-row">
+    <span class="stat">TypeScript</span>
+    <span class="stat">⭐ 140.1K</span>
+    <span class="stat">🍴 21967</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#60a5fa"></span>
+    <span class="repo-name">x1xhlol/system-prompts-and-models-of-ai-tools</span>
+  </div>
+  <div class="repo-desc">FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models</div>
+  <div class="topics"><span class="topic-tag">ai</span><span class="topic-tag">bolt</span><span class="topic-tag">cluely</span></div>
+  <div class="bottom-row">
+    <span class="stat">N/A</span>
+    <span class="stat">⭐ 136.7K</span>
+    <span class="stat">🍴 34134</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3572A5"></span>
+    <span class="repo-name">langchain-ai/langchain</span>
+  </div>
+  <div class="repo-desc">The agent engineering platform. Available in TypeScript!</div>
+  <div class="topics"><span class="topic-tag">agents</span><span class="topic-tag">ai</span><span class="topic-tag">ai-agents</span></div>
+  <div class="bottom-row">
+    <span class="stat">Python</span>
+    <span class="stat">⭐ 135.8K</span>
+    <span class="stat">🍴 22448</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3572A5"></span>
+    <span class="repo-name">NousResearch/hermes-agent</span>
+  </div>
+  <div class="repo-desc">The agent that grows with you</div>
+  <div class="topics"><span class="topic-tag">ai</span><span class="topic-tag">ai-agent</span><span class="topic-tag">ai-agents</span></div>
+  <div class="bottom-row">
+    <span class="stat">Python</span>
+    <span class="stat">⭐ 133.3K</span>
+    <span class="stat">🍴 20310</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3572A5"></span>
+    <span class="repo-name">Shubhamsaboo/awesome-llm-apps</span>
+  </div>
+  <div class="repo-desc">100+ AI Agent & RAG apps you can actually run — clone, customize, ship.</div>
+  <div class="topics"><span class="topic-tag">agents</span><span class="topic-tag">llms</span><span class="topic-tag">python</span></div>
+  <div class="bottom-row">
+    <span class="stat">Python</span>
+    <span class="stat">⭐ 108.8K</span>
+    <span class="stat">🍴 16076</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#3178c6"></span>
+    <span class="repo-name">google-gemini/gemini-cli</span>
+  </div>
+  <div class="repo-desc">An open-source AI agent that brings the power of Gemini directly into your terminal.</div>
+  <div class="topics"><span class="topic-tag">ai</span><span class="topic-tag">ai-agents</span><span class="topic-tag">cli</span></div>
+  <div class="bottom-row">
+    <span class="stat">TypeScript</span>
+    <span class="stat">⭐ 103.2K</span>
+    <span class="stat">🍴 13481</span>
+  </div>
+</div>
+
+<div class="repo-card">
+  <div class="top-row">
+    <span class="lang-dot" style="background:#89e051"></span>
+    <span class="repo-name">msitarzewski/agency-agents</span>
+  </div>
+  <div class="repo-desc">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.</div>
+  <div class="topics"></div>
+  <div class="bottom-row">
+    <span class="stat">Shell</span>
+    <span class="stat">⭐ 93.1K</span>
+    <span class="stat">🍴 15310</span>
+  </div>
+</div></div>
+  </div>
+  <div class="footer">由 leapord/agent 自动生成</div>
 </div>
 </body>
 </html>

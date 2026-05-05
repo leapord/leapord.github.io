@@ -2,17 +2,292 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>2026-05-05 AI 报告</title>
+  <title>2026-05-05 AI Agent 每日简报</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <meta name="description" content="AI Agent 领域每日动态 — 2026-05-05 GitHub 热门项目追踪">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.6}
+    .container{max-width:1100px;margin:0 auto;padding:32px 24px}
+    .page-header{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px}
+    .page-header h1{font-size:28px;font-weight:700;margin-bottom:8px}
+    .page-header p{color:#7a8ba8;font-size:14px}
+    .stats-row{display:flex;gap:24px;margin-top:24px;flex-wrap:wrap}
+    .stat-box{background:rgba(64,158,255,.1);border:1px solid rgba(64,158,255,.2);border-radius:10px;padding:16px 24px;text-align:center;min-width:120px}
+    .stat-num{font-size:24px;font-weight:700;color:#409EFF}
+    .stat-label{font-size:11px;color:#7a8ba8;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+    .section{margin-bottom:32px}
+    .section-title{font-size:18px;font-weight:600;margin-bottom:16px;color:#1a1a2e;border-left:4px solid #409EFF;padding-left:12px}
+    .proj-card{background:#fff;border-radius:10px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0;transition:border-color .2s}
+    .proj-card:hover{border-color:#409EFF}
+    .proj-name{font-size:15px;font-weight:600;color:#1a1a2e;margin-bottom:4px}
+    .proj-name a{color:#409EFF;text-decoration:none}
+    .proj-desc{font-size:13px;color:#7a8ba8;margin-bottom:8px;line-height:1.5}
+    .proj-meta{display:flex;gap:12px;font-size:12px;color:#b0c4de;flex-wrap:wrap;align-items:center}
+    .proj-lang{color:#409EFF;font-weight:500}
+    .proj-tag{padding:2px 8px;background:#ecf5ff;color:#409EFF;border-radius:4px;font-size:11px;margin-left:4px}
+    .rank{font-size:20px;font-weight:700;color:#dcdfe6;width:30px;display:inline-block;text-align:center}
+    .rank.top1{color:#f5a623}.rank.top2{color:#909399}.rank.top3{color:#cd7f32}
+    table{width:100%;border-collapse:collapse}
+    th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:13px}
+    th{background:#fafafa;font-weight:600;color:#606266;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+    tr:hover{background:#f5f7fa}
+    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px;border-top:1px solid #f0f0f0}
+    .footer a{color:#409EFF}
+  </style>
 </head>
 <body>
-<div id="app" style="padding:24px;max-width:1100px;margin:auto;">
-  <h2>2026-05-05 AI 每日简报</h2>
-  <p>本报告展示了当天最热的 GitHub 项目、Arxiv 论文以及趋势排行，页面样式与 Element Plus 保持一致。</p>
-  <!-- 内容可自行扩展 -->
+<div id="app" class="container">
+  <div class="page-header">
+    <h1>🤖 2026-05-05 AI Agent 每日简报</h1>
+    <p>GitHub 热门 AI Agent 项目追踪 · 涵盖自主代理、多智能体、工具调用等前沿方向</p>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-num">20</div>
+        <div class="stat-label">收录项目</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">1284.5k</div>
+        <div class="stat-label">总 Stars</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">4</div>
+        <div class="stat-label">编程语言</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">29</div>
+        <div class="stat-label">分类领域</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="section">
+    <div class="section-title">📊 分类分布</div>
+    <table>
+      <tr><th>#</th><th>分类</th><th>项目数</th><th>占比</th></tr>
+      <tr><td>1</td><td><b>Agents</b></td><td>9</td><td>█████████░░░░░░░░░░░ 45%</td></tr>
+      <tr><td>2</td><td><b>RAG+Agent</b></td><td>7</td><td>███████░░░░░░░░░░░░░ 35%</td></tr>
+      <tr><td>3</td><td><b>Dev Agent</b></td><td>6</td><td>██████░░░░░░░░░░░░░░ 30%</td></tr>
+      <tr><td>4</td><td><b>Ai</b></td><td>6</td><td>██████░░░░░░░░░░░░░░ 30%</td></tr>
+      <tr><td>5</td><td><b>Code Agent</b></td><td>6</td><td>██████░░░░░░░░░░░░░░ 30%</td></tr>
+      <tr><td>6</td><td><b>Agent</b></td><td>4</td><td>████░░░░░░░░░░░░░░░░ 20%</td></tr>
+      <tr><td>7</td><td><b>Memory</b></td><td>4</td><td>████░░░░░░░░░░░░░░░░ 20%</td></tr>
+      <tr><td>8</td><td><b>Framework</b></td><td>3</td><td>███░░░░░░░░░░░░░░░░░ 15%</td></tr>
+      <tr><td>9</td><td><b>Multi-Agent</b></td><td>3</td><td>███░░░░░░░░░░░░░░░░░ 15%</td></tr>
+      <tr><td>10</td><td><b>Agentic Ai</b></td><td>2</td><td>██░░░░░░░░░░░░░░░░░░ 10%</td></tr>
+    </table>
+  </div>
+
+  <!-- Top Projects -->
+  <div class="section">
+    <div class="section-title">🔥 Top 20 热门项目</div>
+    <div class="proj-card">
+      <span class="rank top1">#1</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/langgenius/dify" target="_blank">langgenius/dify</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Agent</span><span class="proj-tag">Agentic Ai</span></div>
+        <div class="proj-desc">Production-ready platform for agentic workflow development.</div>
+        <div class="proj-meta">
+          <span class="proj-lang">TypeScript</span>
+          <span>⭐ 140.1k</span>
+          <span>🍴 22.0k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank top2">#2</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/langchain-ai/langchain" target="_blank">langchain-ai/langchain</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Framework</span><span class="proj-tag">Agents</span></div>
+        <div class="proj-desc">The agent engineering platform. Available in TypeScript!</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 135.8k</span>
+          <span>🍴 22.4k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank top3">#3</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" target="_blank">Shubhamsaboo/awesome-llm-apps</a> <span class="proj-tag">RAG+Agent</span><span class="proj-tag">Agents</span><span class="proj-tag">Llms</span></div>
+        <div class="proj-desc">100+ AI Agent & RAG apps you can actually run — clone, customize, ship.</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 108.8k</span>
+          <span>🍴 16.1k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#4</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/infiniflow/ragflow" target="_blank">infiniflow/ragflow</a> <span class="proj-tag">Memory</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Llm App</span></div>
+        <div class="proj-desc">RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 79.7k</span>
+          <span>🍴 9.1k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#5</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/dair-ai/Prompt-Engineering-Guide" target="_blank">dair-ai/Prompt-Engineering-Guide</a> <span class="proj-tag">Memory</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Research Agent</span></div>
+        <div class="proj-desc">🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.</div>
+        <div class="proj-meta">
+          <span class="proj-lang">MDX</span>
+          <span>⭐ 74.2k</span>
+          <span>🍴 8.0k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#6</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/thedotmack/claude-mem" target="_blank">thedotmack/claude-mem</a> <span class="proj-tag">Tool Calling</span><span class="proj-tag">Memory</span><span class="proj-tag">Code Agent</span></div>
+        <div class="proj-desc">A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.</div>
+        <div class="proj-meta">
+          <span class="proj-lang">TypeScript</span>
+          <span>⭐ 72.2k</span>
+          <span>🍴 6.2k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#7</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/FoundationAgents/MetaGPT" target="_blank">FoundationAgents/MetaGPT</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">Code Agent</span><span class="proj-tag">Dev Agent</span></div>
+        <div class="proj-desc">🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 67.7k</span>
+          <span>🍴 8.6k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#8</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/bytedance/deer-flow" target="_blank">bytedance/deer-flow</a> <span class="proj-tag">Tool Calling</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Code Agent</span></div>
+        <div class="proj-desc">An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 65.0k</span>
+          <span>🍴 8.6k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#9</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/microsoft/autogen" target="_blank">microsoft/autogen</a> <span class="proj-tag">Code Agent</span><span class="proj-tag">Agentic</span><span class="proj-tag">Agentic Agi</span></div>
+        <div class="proj-desc">A programming framework for agentic AI</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 57.7k</span>
+          <span>🍴 8.7k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#10</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/mem0ai/mem0" target="_blank">mem0ai/mem0</a> <span class="proj-tag">Memory</span><span class="proj-tag">Agents</span><span class="proj-tag">Ai</span></div>
+        <div class="proj-desc">Universal memory layer for AI Agents</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 54.8k</span>
+          <span>🍴 6.2k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#11</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/FlowiseAI/Flowise" target="_blank">FlowiseAI/Flowise</a> <span class="proj-tag">Dev Agent</span><span class="proj-tag">Agentic Ai</span><span class="proj-tag">Agentic Workflow</span></div>
+        <div class="proj-desc">Build AI Agents, Visually</div>
+        <div class="proj-meta">
+          <span class="proj-lang">TypeScript</span>
+          <span>⭐ 52.5k</span>
+          <span>🍴 24.3k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#12</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/crewAIInc/crewAI" target="_blank">crewAIInc/crewAI</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">Agents</span><span class="proj-tag">Ai</span></div>
+        <div class="proj-desc">Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 50.6k</span>
+          <span>🍴 7.0k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#13</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/run-llama/llama_index" target="_blank">run-llama/llama_index</a> <span class="proj-tag">Framework</span><span class="proj-tag">Agents</span><span class="proj-tag">Llamaindex</span></div>
+        <div class="proj-desc">LlamaIndex is the leading document agent and OCR platform</div>
+        <div class="proj-meta">
+          <span class="proj-lang">Python</span>
+          <span>⭐ 49.1k</span>
+          <span>🍴 7.4k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#14</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/CherryHQ/cherry-studio" target="_blank">CherryHQ/cherry-studio</a> <span class="proj-tag">Agency Agents</span><span class="proj-tag">Ai Agent</span></div>
+        <div class="proj-desc">AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs</div>
+        <div class="proj-meta">
+          <span class="proj-lang">TypeScript</span>
+          <span>⭐ 45.0k</span>
+          <span>🍴 4.3k</span>
+        </div>
+      </div>
+    </div>
+    <div class="proj-card">
+      <span class="rank ">#15</span>
+      <div style="display:inline-block;vertical-align:top;width:calc(100% - 40px);padding-left:8px;">
+        <div class="proj-name"><a href="https://github.com/ruvnet/ruflo" target="_blank">ruvnet/ruflo</a> <span class="proj-tag">Multi-Agent</span><span class="proj-tag">RAG+Agent</span><span class="proj-tag">Code Agent</span></div>
+        <div class="proj-desc">🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features    enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration</div>
+        <div class="proj-meta">
+          <span class="proj-lang">TypeScript</span>
+          <span>⭐ 42.3k</span>
+          <span>🍴 4.7k</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Distribution -->
+  <div class="section">
+    <div class="section-title">💻 语言分布</div>
+    <table>
+      <tr><th>语言</th><th>项目数</th><th>占比</th></tr>
+      <tr><td><b>Python</b></td><td>11</td><td>55%</td></tr>
+      <tr><td><b>TypeScript</b></td><td>7</td><td>35%</td></tr>
+      <tr><td><b>MDX</b></td><td>1</td><td>5%</td></tr>
+      <tr><td><b>Go</b></td><td>1</td><td>5%</td></tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
+    报告生成时间: 2026-05-05 18:10:52 ·
+    <a href="/agent/index.html">← Dashboard</a>
+  </div>
 </div>
+<script>
+const { createApp, ref } = Vue
+createApp({}).use(ElementPlus).mount('#app')
+</script>
 </body>
 </html>

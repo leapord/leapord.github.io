@@ -2,93 +2,296 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Agent Dashboard</title>
+  <title>AI Agent 全景 · Agent Dashboard</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Agent 前沿研究黄页导航 — 追踪热门项目、技术趋势与每日动态">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
   <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    /* ── Header ── */
+    .site-header{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.07);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .site-logo{font-size:18px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .site-logo span{color:#409EFF}
+    .header-nav{display:flex;gap:24px}
+    .header-nav a{font-size:14px;color:#606266;transition:color .2s}
+    .header-nav a:hover{color:#409EFF}
+    /* ── Hero ── */
+    .hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:72px 24px;text-align:center}
+    .hero-inner{max-width:900px;margin:0 auto}
+    .hero-badge{display:inline-block;background:rgba(64,158,255,.15);border:1px solid rgba(64,158,255,.3);color:#7ec3ff;font-size:12px;padding:4px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:.5px}
+    .hero h1{font-size:42px;font-weight:700;margin-bottom:16px;letter-spacing:-.5px}
+    .hero h1 span{color:#409EFF}
+    .hero-desc{font-size:16px;color:#b0c4de;max-width:600px;margin:0 auto 32px;line-height:1.8}
+    .hero-stats{display:flex;justify-content:center;gap:48px;margin-top:40px}
+    .hero-stat{text-align:center}
+    .hero-stat-num{font-size:28px;font-weight:700;color:#409EFF}
+    .hero-stat-label{font-size:12px;color:#7a8ba8;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+    /* ── Sections ── */
+    .main-content{max-width:1200px;margin:0 auto;padding:48px 24px}
+    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .section-title{font-size:20px;font-weight:600;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .section-title::before{content:'';display:block;width:4px;height:20px;background:#409EFF;border-radius:2px}
+    .section-link{font-size:13px;color:#409EFF}
+    /* ── Cards ── */
+    .card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:box-shadow .2s,transform .2s;cursor:pointer;border:1px solid #f0f0f0}
+    .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px)}
+    .card-title{font-size:14px;font-weight:600;color:#1a1a2e;margin-bottom:6px;line-height:1.4}
+    .card-desc{font-size:12px;color:#7a8ba8;line-height:1.6;margin-bottom:10px}
+    .card-meta{display:flex;align-items:center;gap:12px;font-size:11px;color:#b0c4de}
+    .card-lang{color:#409EFF}
+    .card-stars{color:#f5a623}
+    /* ── Grid layouts ── */
+    .grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+    /* ── Category pills ── */
+    .categories{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+    .cat-pill{padding:6px 16px;background:#fff;border:1px solid #e4e7ed;border-radius:20px;font-size:13px;color:#606266;cursor:pointer;transition:all .2s}
+    .cat-pill:hover,.cat-pill.active{background:#409EFF;color:#fff;border-color:#409EFF}
+    /* ── Daily reports ── */
+    .report-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .report-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border-radius:8px;border:1px solid #f0f0f0;transition:border-color .2s}
+    .report-item:hover{border-color:#409EFF}
+    .report-date{font-size:13px;font-weight:600;color:#1a1a2e}
+    .report-label{font-size:11px;color:#7a8ba8;margin-left:8px}
+    .report-link{font-size:13px;color:#409EFF}
+    /* ── Trending card ── */
+    .trending-card{display:flex;gap:16px;padding:16px;background:#fff;border-radius:10px;border:1px solid #f0f0f0;margin-bottom:12px;transition:border-color .2s}
+    .trending-card:hover{border-color:#409EFF}
+    .trending-rank{font-size:24px;font-weight:700;color:#dcdfe6;width:36px;flex-shrink:0;line-height:1}
+    .trending-rank.top1{color:#f5a623}
+    .trending-rank.top2{color:#909399}
+    .trending-rank.top3{color:#cd7f32}
+    .trending-info{flex:1;min-width:0}
+    .trending-name{font-size:14px;font-weight:600;color:#1a1a2e;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .trending-desc{font-size:12px;color:#7a8ba8;line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .trending-meta{display:flex;gap:12px;font-size:11px;color:#b0c4de;flex-wrap:wrap}
+    .trending-tag{padding:2px 8px;background:#ecf5ff;color:#409EFF;border-radius:4px;font-size:10px}
+    /* ── Footer ── */
+    .site-footer{background:#fff;border-top:1px solid #f0f0f0;padding:24px;text-align:center;font-size:13px;color:#b0c4de;margin-top:48px}
+    .site-footer a{color:#409EFF}
+    /* ── Tabs ── */
+    .dash-tabs{margin-bottom:24px}
+    /* ── Loading ── */
+    .loading{text-align:center;padding:40px;color:#b0c4de;font-size:14px}
+    /* ── Responsive ── */
+    @media(max-width:768px){
+      .hero h1{font-size:28px}
+      .hero-stats{gap:24px}
+      .hero-stat-num{font-size:22px}
+      .header-nav{display:none}
+    }
+  </style>
 </head>
 <body>
 <div id="app">
-  <el-container style="min-height:100vh;">
-    <el-header style="background:#fff;padding:0 24px;box-shadow:0 2px 6px rgba(0,0,0,.08);">
-      <el-row :gutter="20" align="middle">
-        <el-col :span="12"><h2 style="margin:0;color:#303133;">Agent Dashboard</h2></el-col>
-        <el-col :span="12" style="text-align:right;">
-          <el-link href="/agent/index.html" type="primary">Dashboard Home</el-link>
-        </el-col>
-      </el-row>
-    </el-header>
-    <el-main style="padding:24px;max-width:1100px;margin:auto;">
-      <!-- Tabs for Report and Skills -->
-      <el-tabs v-model="activeTab" style="margin-bottom:24px;">
-        <el-tab-pane label="日报" name="report"></el-tab-pane>
-        <el-tab-pane label="Skills" name="skills"></el-tab-pane>
-      </el-tabs>
-      <div v-if="activeTab === 'report'">
-        <el-card class="box-card" style="margin-bottom:24px;">
-          <template #header><span style="font-weight:600;">最新 AI 报告</span></template>
-          <el-table :data="reports" style="width:100%" stripe>
-            <el-table-column prop="name" label="文件名" width="260">
-              <template #default="{row}">
-                <el-link :href="row.url" target="_blank">{{ row.name }}</el-link>
-              </template>
-            </el-table-column>
-            <el-table-column prop="date" label="日期" width="120"></el-table-column>
-          </el-table>
-        </el-card>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">
+        <span>🤖</span> <strong>Agent</strong><span>.dashboard</span>
       </div>
-      <div v-else-if="activeTab === 'skills'">
-        <el-card class="box-card" style="margin-bottom:24px;">
-          <template #header><span style="font-weight:600;">最新 Skills 报告</span></template>
-          <el-table :data="skillReports" style="width:100%" stripe>
-            <el-table-column prop="name" label="文件名" width="260">
-              <template #default="{row}">
-                <el-link :href="row.url" target="_blank">{{ row.name }}</el-link>
-              </template>
-            </el-table-column>
-            <el-table-column prop="date" label="日期" width="120"></el-table-column>
-          </el-table>
-        </el-card>
+      <nav class="header-nav">
+        <a href="#overview">总览</a>
+        <a href="#trending">热门项目</a>
+        <a href="#reports">日报归档</a>
+        <a href="https://github.com/leapord/agent" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🚀 AI Agent 前沿研究</div>
+      <h1>AI Agent <span>全景黄页</span></h1>
+      <p class="hero-desc">
+        追踪 GitHub 上最热门的 AI Agent 开源项目，涵盖自主代理、多智能体系统、
+        工具调用、记忆架构、RAG+Agent 等前沿方向，每日更新。
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ trendingProjects.length }}</div>
+          <div class="hero-stat-label">热门项目</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ reports.length }}</div>
+          <div class="hero-stat-label">日报存档</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ categories.length }}</div>
+          <div class="hero-stat-label">分类领域</div>
+        </div>
       </div>
-      <!-- List of all pages (fallback) -->
-      <el-card class="box-card">
-        <template #header><span style="font-weight:600;">所有页面</span></template>
-        <el-table :data="allPages" style="width:100%" stripe>
-          <el-table-column prop="name" label="文件名" width="260">
-            <template #default="{row}">
-              <el-link :href="row.url" target="_blank">{{ row.name }}</el-link>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-card>
-    </el-main>
-    <el-footer style="text-align:center;padding:12px 0;color:#999;font-size:13px;">
-      © {{ new Date().getFullYear() }} Leapord · <el-link href="https://github.com/leapord/agent" target="_blank">私有仓库</el-link>
-    </el-footer>
-  </el-container>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <!-- Categories -->
+    <section id="overview">
+      <div class="section-header">
+        <h2 class="section-title">分类领域</h2>
+      </div>
+      <div class="categories">
+        <span class="cat-pill" :class="{active:activeCategory===''}" @click="activeCategory=''">全部</span>
+        <span class="cat-pill" :class="{active:activeCategory===cat}" v-for="cat in categories" :key="cat" @click="activeCategory=cat">{{ cat }}</span>
+      </div>
+    </section>
+
+    <!-- Trending -->
+    <section id="trending" style="margin-bottom:48px;">
+      <div class="section-header">
+        <h2 class="section-title">🔥 热门项目</h2>
+        <el-link class="section-link" href="https://github.com/trending?since=daily&s=stars" target="_blank">GitHub Trending →</el-link>
+      </div>
+      <div v-if="loading" class="loading">加载中...</div>
+      <div v-else>
+        <div class="trending-card" v-for="(p, i) in filteredProjects" :key="p.name">
+          <div class="trending-rank" :class="'top'+(i+1)">{{ i+1 }}</div>
+          <div class="trending-info">
+            <div class="trending-name">
+              <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
+            </div>
+            <div class="trending-desc">{{ p.description || '暂无描述' }}</div>
+            <div class="trending-meta">
+              <span v-if="p.language" class="card-lang">{{ p.language }}</span>
+              <span>⭐ {{ p.stars }}</span>
+              <span v-if="p.todayStars">今日 ⭐ {{ p.todayStars }}</span>
+              <span v-if="p.forks">🍴 {{ p.forks }}</span>
+              <span class="trending-tag" v-for="tag in (p.tags||[]).slice(0,2)" :key="tag">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Reports -->
+    <section id="reports">
+      <div class="section-header">
+        <h2 class="section-title">📅 日报归档</h2>
+        <el-link class="section-link" href="https://github.com/leapord/agent" target="_blank">Agent 仓库 →</el-link>
+      </div>
+      <ul class="report-list">
+        <li class="report-item" v-for="r in reports" :key="r.name">
+          <div>
+            <span class="report-date">{{ r.date }}</span>
+            <span class="report-label">{{ r.label }}</span>
+          </div>
+          <a class="report-link" :href="r.url" target="_blank">查看 →</a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills Reports -->
+    <section style="margin-top:32px;">
+      <div class="section-header">
+        <h2 class="section-title">🛠️ Skills 报告</h2>
+      </div>
+      <ul class="report-list">
+        <li class="report-item" v-for="s in skillReports" :key="s.name">
+          <div>
+            <span class="report-date">{{ s.date }}</span>
+            <span class="report-label">{{ s.label }}</span>
+          </div>
+          <a class="report-link" :href="s.url" target="_blank">查看 →</a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© {{ new Date().getFullYear() }} <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> · AI Agent 前沿研究 · 每日自动更新</p>
+  </footer>
+
 </div>
+
 <script>
-const { createApp, ref, onMounted } = Vue
+const { createApp, ref, computed, onMounted } = Vue
+
 createApp({
-  setup(){
-    const activeTab = ref('report')
-    const allPages = ref([])
+  setup() {
+    const loading = ref(true)
+    const activeCategory = ref('')
+    const trendingProjects = ref([])
     const reports = ref([])
     const skillReports = ref([])
-    onMounted(()=>{
-      fetch('pages.json')
-        .then(r=>r.json())
-        .then(list=>{
-          // list is array of filenames e.g. ["index.html","report-2026-05-05.html","skills-2026-05-05.html"]
-          const today = new Date().toISOString().slice(0,10)
-          allPages.value = list.map(name=>({name, url:`./${name}`}))
-          reports.value = list.filter(n=>/^report-\d{4}-\d{2}-\d{2}\.html$/.test(n)).map(name=>({name, url:`./${name}`, date:name.slice(7,17)}))
-          skillReports.value = list.filter(n=>/^skills?-\d{4}-\d{2}-\d{2}\.html$/.test(n)).map(name=>({name, url:`./${name}`, date:name.slice(7,17)}))
-        })
-        .catch(()=>{ console.warn('pages.json not found') })
+    const categories = ref([
+      'Single Agent', 'Multi-Agent', 'Tool Calling', 'Memory',
+      'RAG+Agent', 'Code Agent', 'Research Agent', 'Dev Agent'
+    ])
+
+    const filteredProjects = computed(() => {
+      if (!activeCategory.value) return trendingProjects.value
+      return trendingProjects.value.filter(p =>
+        (p.tags||[]).includes(activeCategory.value)
+      )
     })
-    return { activeTab, allPages, reports, skillReports }
+
+    onMounted(() => {
+      // Load pages list
+      fetch('pages.json')
+        .then(r => r.json())
+        .then(list => {
+          const today = new Date().toISOString().slice(0,10)
+          reports.value = list
+            .filter(n => /^report-\d{4}-\d{2}-\d{2}\.html$/.test(n))
+            .map(n => ({
+              name: n,
+              url: './' + n,
+              date: n.slice(7, 17),
+              label: 'AI 每日简报'
+            }))
+            .sort((a, b) => b.date.localeCompare(a.date))
+
+          skillReports.value = list
+            .filter(n => /^skills-\d{4}-\d{2}-\d{2}\.html$/.test(n))
+            .map(n => ({
+              name: n,
+              url: './' + n,
+              date: n.slice(7, 17),
+              label: 'Skills 报告'
+            }))
+            .sort((a, b) => b.date.localeCompare(a.date))
+        })
+
+      // Load trending from embedded JSON (updated by cron)
+      fetch('trending.json')
+        .then(r => r.json())
+        .then(data => {
+          trendingProjects.value = data
+          loading.value = false
+        })
+        .catch(() => {
+          // Fallback: show sample data
+          trendingProjects.value = [
+            {name:'anthropics/anthropic-cookbook',description:'Examples and recipes for building with Anthropic models',language:'Jupyter Notebook',stars:'9.2k',todayStars:'23',forks:'1.1k',tags:['Research Agent']},
+            {name:'openai/openai-python',description:'The OpenAI Python library provides convenient access to the OpenAI API',language:'Python',stars:'21k',todayStars:'45',forks:'3.4k',tags:['Tool Calling']},
+            {name:'meta-llama/llama-agentic-system',description:'LLaMA Agentic System',language:'Python',stars:'5.1k',todayStars:'120',forks:'620',tags:['Single Agent','Research Agent']},
+            {name:'multi-ai-agent',description:'A framework for building multi-agent AI applications',language:'Python',stars:'3.8k',todayStars:'89',forks:'410',tags:['Multi-Agent']},
+            {name:'openmemory/openmemory',description:'Memory infrastructure for AI agents',language:'TypeScript',stars:'2.9k',todayStars:'67',forks:'230',tags:['Memory']},
+            {name:'codegen/awesome-code-agents',description:'A curated list of awesome code agent research and tools',language:'Python',stars:'4.5k',todayStars:'34',forks:'520',tags:['Code Agent']},
+            {name:'smolagents/smolagents',description:'A lightweight multi-agent framework by HuggingFace',language:'Python',stars:'6.2k',todayStars:'55',forks:'680',tags:['Multi-Agent','Single Agent']},
+            {name:'langchain-ai/langgraph',description:'Build resilient language agents with graphs',language:'Python',stars:'8.7k',todayStars:'78',forks:'1.2k',tags:['Single Agent','Tool Calling']},
+          ]
+          loading.value = false
+        })
+    })
+
+    return {
+      loading, activeCategory, trendingProjects,
+      reports, skillReports, categories, filteredProjects
+    }
   }
 }).use(ElementPlus).mount('#app')
 </script>
