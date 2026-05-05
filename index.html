@@ -1,330 +1,331 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Leapord - 生活就是一场精彩的话剧</title><meta name="keywords" content="blog, leapord"><meta name="author" content="Leapord"><meta name="copyright" content="Leapord"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="生活就是一场精彩的话剧">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Leapord">
-<meta property="og:url" content="https://leapord.github.io/index.html">
-<meta property="og:site_name" content="Leapord">
-<meta property="og:description" content="生活就是一场精彩的话剧">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
-<meta property="article:author" content="Leapord">
-<meta property="article:tag" content="blog, leapord">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://leapord.github.io/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Agent 全景 · Agent Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Agent 前沿研究黄页导航 — 追踪热门项目、技术趋势与每日动态">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    /* ── Header ── */
+    .site-header{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.07);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
+    .site-logo{font-size:18px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .site-logo span{color:#409EFF}
+    .header-nav{display:flex;gap:24px}
+    .header-nav a{font-size:14px;color:#606266;transition:color .2s}
+    .header-nav a:hover{color:#409EFF}
+    /* ── Hero ── */
+    .hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:72px 24px;text-align:center}
+    .hero-inner{max-width:900px;margin:0 auto}
+    .hero-badge{display:inline-block;background:rgba(64,158,255,.15);border:1px solid rgba(64,158,255,.3);color:#7ec3ff;font-size:12px;padding:4px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:.5px}
+    .hero h1{font-size:42px;font-weight:700;margin-bottom:16px;letter-spacing:-.5px}
+    .hero h1 span{color:#409EFF}
+    .hero-desc{font-size:16px;color:#b0c4de;max-width:600px;margin:0 auto 32px;line-height:1.8}
+    .hero-stats{display:flex;justify-content:center;gap:48px;margin-top:40px}
+    .hero-stat{text-align:center}
+    .hero-stat-num{font-size:28px;font-weight:700;color:#409EFF}
+    .hero-stat-label{font-size:12px;color:#7a8ba8;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+    /* ── Sections ── */
+    .main-content{max-width:1200px;margin:0 auto;padding:48px 24px}
+    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .section-title{font-size:20px;font-weight:600;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .section-title::before{content:'';display:block;width:4px;height:20px;background:#409EFF;border-radius:2px}
+    .section-link{font-size:13px;color:#409EFF}
+    /* ── Cards ── */
+    .card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);transition:box-shadow .2s,transform .2s;cursor:pointer;border:1px solid #f0f0f0}
+    .card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px)}
+    .card-title{font-size:14px;font-weight:600;color:#1a1a2e;margin-bottom:6px;line-height:1.4}
+    .card-desc{font-size:12px;color:#7a8ba8;line-height:1.6;margin-bottom:10px}
+    .card-meta{display:flex;align-items:center;gap:12px;font-size:11px;color:#b0c4de}
+    .card-lang{color:#409EFF}
+    .card-stars{color:#f5a623}
+    /* ── Grid layouts ── */
+    .grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+    /* ── Category pills ── */
+    .categories{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+    .cat-pill{padding:6px 16px;background:#fff;border:1px solid #e4e7ed;border-radius:20px;font-size:13px;color:#606266;cursor:pointer;transition:all .2s}
+    .cat-pill:hover,.cat-pill.active{background:#409EFF;color:#fff;border-color:#409EFF}
+    /* ── Daily reports ── */
+    .report-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .report-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border-radius:8px;border:1px solid #f0f0f0;transition:border-color .2s}
+    .report-item:hover{border-color:#409EFF}
+    .report-date{font-size:13px;font-weight:600;color:#1a1a2e}
+    .report-label{font-size:11px;color:#7a8ba8;margin-left:8px}
+    .report-link{font-size:13px;color:#409EFF}
+    /* ── Trending card ── */
+    .trending-card{display:flex;gap:16px;padding:16px;background:#fff;border-radius:10px;border:1px solid #f0f0f0;margin-bottom:12px;transition:border-color .2s}
+    .trending-card:hover{border-color:#409EFF}
+    .trending-rank{font-size:24px;font-weight:700;color:#dcdfe6;width:36px;flex-shrink:0;line-height:1}
+    .trending-rank.top1{color:#f5a623}
+    .trending-rank.top2{color:#909399}
+    .trending-rank.top3{color:#cd7f32}
+    .trending-info{flex:1;min-width:0}
+    .trending-name{font-size:14px;font-weight:600;color:#1a1a2e;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .trending-desc{font-size:12px;color:#7a8ba8;line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .trending-meta{display:flex;gap:12px;font-size:11px;color:#b0c4de;flex-wrap:wrap}
+    .trending-tag{padding:2px 8px;background:#ecf5ff;color:#409EFF;border-radius:4px;font-size:10px}
+    /* ── Footer ── */
+    .site-footer{background:#fff;border-top:1px solid #f0f0f0;padding:24px;text-align:center;font-size:13px;color:#b0c4de;margin-top:48px}
+    .site-footer a{color:#409EFF}
+    /* ── Tabs ── */
+    .dash-tabs{margin-bottom:24px}
+    /* ── Loading ── */
+    .loading{text-align:center;padding:40px;color:#b0c4de;font-size:14px}
+    /* ── Responsive ── */
+    @media(max-width:768px){
+      .hero h1{font-size:28px}
+      .hero-stats{gap:24px}
+      .hero-stat-num{font-size:22px}
+      .header-nav{display:none}
     }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Leapord',
-  isPost: false,
-  isHome: true,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2026-05-05 16:57:26'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/backgroud.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Leapord</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Leapord</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/leapord" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:leapord@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2026/05/05/2026-05-05-%E6%9E%B6%E6%9E%84%E4%BD%BF%E7%94%A8%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E4%BD%93/" title="架构师构建智能体"><img class="post_bg" src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="架构师构建智能体"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/05/05/2026-05-05-%E6%9E%B6%E6%9E%84%E4%BD%BF%E7%94%A8%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E4%BD%93/" title="架构师构建智能体">架构师构建智能体</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-05-05T08:22:48.541Z" title="发表于 2026-05-05 16:22:48">2026-05-05</time></span></div><div class="content">架构师 AI Agent 构建能力标准与执行手册
-定位：架构师 L3 达标核心能力项 —— Agent 搭建与自动化闭环目标：从顶层设计到落地执行，完成一个可交付、可复用的 Agent 构建方案
-
-
-一、架构师为什么要会建 Agent传统架构师解决的是「系统怎么搭」的问题。AI 时代的架构师还要解决「效率系统怎么搭」的问题。
-Agent 不是聊天机器人。Agent 是一个能感知上下文 → 自主决策 → 调用工具 → 输出结果 → 反馈迭代的自动化闭环系统。架构师搭 Agent，本质上是在搭一个数字员工，替代自己的重复劳动。
-核心思维转变：
-
-
-
-传统思维
-Agent 思维
-
-
-
-我来写代码
-我来定义意图，Agent 来写代码
-
-
-我来做 Code Review
-我来定规则，Agent 来审
-
-
-我来排查问题
-我来搭排查流水线，Agent 来跑
-
-
-我来写文档
-我来搭知识工作流，文档即产出
-
-
-
-二、架构师 Agent 构建能力标准（L3 必达）2.1 四层能力模型1234567891011L3-架构师Agent能力金字塔     ┌─────────────┐     │  L4 自主 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2024/08/30/docker-build/" title="docker构建软件包"><img class="post_bg" src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker构建软件包"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/30/docker-build/" title="docker构建软件包">docker构建软件包</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-30T00:32:45.000Z" title="发表于 2024-08-30 08:32:45">2024-08-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/linux/">linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/linux/ops/">ops</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/linux/ops/note/">note</a></span></div><div class="content">使用docker环境打包镜像
-在linux系统中，经常会出现编译安装软件；然而linux发行版不同编译软件的过程也大不相同，构建出来的二进制软件也不能随意复制使用。使用docker可以很好的解决问题，并且实现一次构建多处使用。
-
-
-dockerfile构建软件
-
-
-以下使用 ZLMediaKit软件构建为案例说明 dockerfile 编译并且打包镜像
-
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192# 标记此处构建使用容器内构建镜像体 AS build关键词FROM dockerpull.com/ubuntu:20.04 AS build#shell,rtmp,rtsp,rtsps,http,https,rtpEXPOSE 9000/tcpEXPOSE 8000/tcpEXPOSE 8 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2024/08/29/ops-linux-md/" title="Linux常用配置命令（持续更新）"><img class="post_bg" src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用配置命令（持续更新）"></a></div><div class="recent-post-info"><a class="article-title" href="/2024/08/29/ops-linux-md/" title="Linux常用配置命令（持续更新）">Linux常用配置命令（持续更新）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-29T00:47:27.000Z" title="发表于 2024-08-29 08:47:27">2024-08-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/linux/">linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/linux/ops/">ops</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/linux/ops/note/">note</a></span></div><div class="content">Ubuntu常用命令，环境配置
-Ubuntu操作系统使用 gcc cmake make 等套件编译软件；Ubuntu操作系统拥有较为完整的软件依赖仓库；本文介绍常见镜像依赖处理方法。
-
-
-国内镜像配置
-
-12345678# 阿里云镜像sudo sed -i &quot;s@http://.*archive.ubuntu.com@http://mirrors.aliyun.com/ubuntu@g&quot; /etc/apt/sources.listsudo sed -i &quot;s@http://.*security.ubuntu.com@http://mirrors.aliyun.com/ubuntu@g&quot; /etc/apt/sources.listapt update# 华为云镜像sudo sed -i &quot;s@http://.*archive.ubuntu.com@http://mirrors.huaweicloud.com@g&quot; /etc/apt/sources.listsudo sed -i &quot;s@http://.*security ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/08/SpEL/" title="SpEL"><img class="post_bg" src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpEL"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/08/SpEL/" title="SpEL">SpEL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-02-08T13:25:01.000Z" title="发表于 2023-02-08 21:25:01">2023-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Java/Spring/">Spring</a></span></div><div class="content">Spring EL 表示使用</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/09/29/thingsboard/" title="thingsboad踩坑记 -- 源码编译"><img class="post_bg" src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thingsboad踩坑记 -- 源码编译"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/29/thingsboard/" title="thingsboad踩坑记 -- 源码编译">thingsboad踩坑记 -- 源码编译</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-29T06:56:34.000Z" title="发表于 2022-09-29 14:56:34">2022-09-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/iot/">iot</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/iot/thingsboard/">thingsboard</a></span></div><div class="content">    由于中所周知的原因，国内访问gitlab和maven中央仓库都会出现问题；thingsboard源码涉及maven，gradle和前端等编译问题，本文将从零开始全套构建本地开发环境
-
-本次环境搭建采用 thingsboard 3.4.1 源码，此版本基本要求
-jdk 11 （必须是jdk11）
-postgresql 9.6+ （本次使用使用pgsql13，安装方法自行参考官方介绍搭建）
-ideaCE（社区版） 2022.2，有条件可直接使用 旗舰收费版
-maven 3.6.x 
-nodejs 16.x
-
-工具配置
-maven配置
-
-无论国内任何maven镜像，都建议您直接代理 * ; 但是直接代理全部内容thingsboard编译一定会出错，常见问题 gradle 找不到异常；先看常见配置
-1234567&lt;!-- 在maven中settings.xml 文件中的mirrors节点添加阿里云maven代理 --&gt;&lt;mirror&gt;  &lt;id&gt;aliyunmaven&lt;/id&gt;  &lt;mirrorOf&gt;*&lt;/mirrorO ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/09/23/prometheus-01/" title="Prometheus基本使用及介绍(一)"><img class="post_bg" src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Prometheus基本使用及介绍(一)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/23/prometheus-01/" title="Prometheus基本使用及介绍(一)">Prometheus基本使用及介绍(一)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-23T03:30:47.000Z" title="发表于 2022-09-23 11:30:47">2022-09-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Linux/%E7%9B%91%E6%8E%A7/">监控</a></span></div><div class="content">Prometheus是一款开源监控告警系统，自2012年开源以来，许多公司和组织都使用Prometheus，并且他拥有众多开发者和活跃的社区。
-Prometheus拥有许多特性
-
-由时序数据kv标识组成的多维度数据模型
-
-PromQL 灵活的查询语句
-
-不依赖分布式存储;单个服务器节点是自治的
-
-HTTP拉取方式收集时序数据
-
-同时支持时序数据推送 pushGateway
-
-通过服务发现或静态配置发现监控目标
-
-支持多种图形和仪表板模式
-
-
-Prometheus架构图
-
-核心组件
-
-Prometheus server 收集和存储时序数据核心组件
-
-client libaries 应用集成的核心库
-
-push gateway 支撑短存活的监控项
-
-exporters 特殊类型的监控
-
-alertmanager 处理告警信息
-
-
-prometheus安装
-prometheus版本迭代比较快，建议采用2.21以上版本，prometheus有着良好的向下兼容性；新版本的功能页比较丰富，同时支撑快速升级
-
-1234567891011121314151617# 下载prometheus，此处以Li ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/09/14/wsl/" title="WSL2安装及优化"><img class="post_bg" src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="WSL2安装及优化"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/14/wsl/" title="WSL2安装及优化">WSL2安装及优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-14T05:47:35.000Z" title="发表于 2022-09-14 13:47:35">2022-09-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Linux/WSL2/">WSL2</a></span></div><div class="content">日常开发中难免一些Linux常用应用例如 redis 等必须在Linux或者macOS系统才能运行的软件；部分软件也有对应的Windows版本，不过体验或者资源消耗难免有些不友好，好在Windows中有WSL（Windows-Subsystem-Linux）。本文将根据微软官方提供的安装方式详细介绍WSL2安装并且介绍如何将WSL2放到C盘之外的位置
-安装WSL
-官方提供自动安装和手动安装
-
-官方安装方式
-WSL 的手动安装步骤 | Microsoft Docs
-安装 WSL | Microsoft Docs
-确保windows虚拟平台正常开启    需要注意：
-        如果您自己的电脑中有vmware或者VMbox等虚拟机软件需要自行删除，VMware和vmbox都有自己的虚拟机内核与Windows中的Hyper-V不能兼容共存。打开控制面板 –&gt; 程序卸载 –&gt; 启用或者关闭Windows功能
-        勾选 “虚拟机” 相关选项
-
-配置Windows Powershell权限Windows11或者Windows10都默认使用powershell作为本机终 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/09/01/redis-lock/" title="Redis分布式锁最佳实践"><img class="post_bg" src="/img/pexelsmaldives.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis分布式锁最佳实践"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/01/redis-lock/" title="Redis分布式锁最佳实践">Redis分布式锁最佳实践</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-09-01T01:34:42.000Z" title="发表于 2022-09-01 09:34:42">2022-09-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Java/">Java</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Java/Redis/">Redis</a></span></div><div class="content">    redis作为当今市场上常用的组件，在分布式应用系统中有着比较常见的应用，例如缓存，简单队列，分布式锁等。本文对Redis分布式锁做出简单实践。
-实现锁的核心技术点
-互斥性
-保证同一时刻只能有一个客户端可以成功拿到锁。
-
-安全性
-只有加锁的客户端才有权限释放锁，也就是不能让A加锁，B或者C可以解锁。
-
-避免死锁
-死锁在多线程中变成非常常见，要破会产生死锁（互斥性，请求保持，不可剥夺，循环等待）必要条件，互斥性是在多线程中不可破坏，破会其余三个条件也是可以有效避免死锁问题。
-
-原子操作
-redis的每个指令都是一个原子操作，而且由于redis的单进程单线程特点，指令在后台队列中逐个等待执行，同一时刻只能有一个指令被成功执行；好在redis支持lua脚本将多个指令合并成一个原子指令执行
-
-
-上锁1SET key value NX EX timeout
-
-
-set指令 用于设置 KV
-key value是存入redis键值对信息
-NX 只有这个可以存在时才会进行操作
-EX 设置这个键的过期时间，单位为秒；具体是多少由 timeout 数值决定
-timeout 过期时间，这是避免死锁的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/08/30/mysql/" title="MySQL 8.0手动安装"><img class="post_bg" src="/img/thunderstorm.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL 8.0手动安装"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/08/30/mysql/" title="MySQL 8.0手动安装">MySQL 8.0手动安装</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-30T07:21:19.000Z" title="发表于 2022-08-30 15:21:19">2022-08-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Linux/MySQL/">MySQL</a></span></div><div class="content">    最近开发SAAS系统，遇到公司的云数据库到期，需要搭建自用开发数据库；参考官方的源安装模式，但是卓所周知，网速极慢，手动下载官方rpm包，又出现各种依赖缺失；醉了，装个数据各种坑，最后还是决定直接使用离线全包的方式直接解压缩安装配置。
-下载MySQL8.0最新的程序
-oracle官网提供mysql相关下载地址，网速快可以直接使用；
-    MySQL :: Download MySQL Community Server
-阿里云镜像站MySQL，直接下载最新的安装包
-    mysql-MySQL-8.0安装包下载_开源镜像站-阿里云 (aliyun.com)
-
-
-注意下载完整的tar文件，不要下载 minimal压缩包，minimal压缩包中不包含innodb引擎
-
-推荐使用 阿里云镜像站下载
-.fxeoxhlylrfc{}
-
-解压到自己的安装目录
-
-本文将以 /opt/mysql作为mysql安装包的根目录
-配置MySQL
-首先创建MySQL用户
-
-    MySQL数据库不建议采用root账号直接启动安装
-1useradd mysql # ubuntu 使用 adduser ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/08/29/nginx-https/" title="Nginx 配置全局https"><img class="post_bg" src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nginx 配置全局https"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/08/29/nginx-https/" title="Nginx 配置全局https">Nginx 配置全局https</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-08-29T01:49:21.000Z" title="发表于 2022-08-29 09:49:21">2022-08-29</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Linux/nginx/">nginx</a></span></div><div class="content">    最近在开发微信小程序后台服务时碰到http协议被限制的问题，微信小程序强制所有内部访问的接口必须是https协议否则无法请求，然而我们内部配置的开发和线上运行环境均采用http；必须将协议全部配置https才能使微信小程序正常访问
-生成对应域名的证书文件    公司统一使用阿里云dns，可以在阿里云域名解析上生成免费ssl证书，具体参考 2022阿里云免费SSL证书申请全过程（图文详解）-阿里云开发者社区 (aliyun.com)
-    各大云厂商也有自己ssl证书 SSL证书_免费SSL证书-付费SSL证书_服务器证书-腾讯云 (tencent.com) 等等。
-    如果不想使用云厂商的ssl证书 可以使用 Let’s Encrypt 开源官方 ssl证书 Let’s Encrypt - 免费的SSL/TLS证书 (letsencrypt.org)
-    也可以使用 certbot Certbot Instructions | Certbot (eff.org) 工具快速配置https
-    
-检查nginx    开始配置前需要检查nginx运行状态和版本
-
-首先 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Leapord</div><div class="author-info__description">生活就是一场精彩的话剧</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/leapord"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/leapord" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:leapord@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">记录点滴生活</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/05/05/2026-05-05-%E6%9E%B6%E6%9E%84%E4%BD%BF%E7%94%A8%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E4%BD%93/" title="架构师构建智能体"><img src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="架构师构建智能体"/></a><div class="content"><a class="title" href="/2026/05/05/2026-05-05-%E6%9E%B6%E6%9E%84%E4%BD%BF%E7%94%A8%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E4%BD%93/" title="架构师构建智能体">架构师构建智能体</a><time datetime="2026-05-05T08:22:48.541Z" title="发表于 2026-05-05 16:22:48">2026-05-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/30/docker-build/" title="docker构建软件包"><img src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker构建软件包"/></a><div class="content"><a class="title" href="/2024/08/30/docker-build/" title="docker构建软件包">docker构建软件包</a><time datetime="2024-08-30T00:32:45.000Z" title="发表于 2024-08-30 08:32:45">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/29/ops-linux-md/" title="Linux常用配置命令（持续更新）"><img src="/img/backgroud.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用配置命令（持续更新）"/></a><div class="content"><a class="title" href="/2024/08/29/ops-linux-md/" title="Linux常用配置命令（持续更新）">Linux常用配置命令（持续更新）</a><time datetime="2024-08-29T00:47:27.000Z" title="发表于 2024-08-29 08:47:27">2024-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/02/08/SpEL/" title="SpEL"><img src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpEL"/></a><div class="content"><a class="title" href="/2023/02/08/SpEL/" title="SpEL">SpEL</a><time datetime="2023-02-08T13:25:01.000Z" title="发表于 2023-02-08 21:25:01">2023-02-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/29/thingsboard/" title="thingsboad踩坑记 -- 源码编译"><img src="/img/backgroud1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="thingsboad踩坑记 -- 源码编译"/></a><div class="content"><a class="title" href="/2022/09/29/thingsboard/" title="thingsboad踩坑记 -- 源码编译">thingsboad踩坑记 -- 源码编译</a><time datetime="2022-09-29T06:56:34.000Z" title="发表于 2022-09-29 14:56:34">2022-09-29</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            <a class="card-more-btn" href="/categories/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a>
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">
+        <span>🤖</span> <strong>Agent</strong><span>.dashboard</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#overview">总览</a>
+        <a href="#trending">热门项目</a>
+        <a href="#reports">日报归档</a>
+        <a href="https://github.com/leapord/agent" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🚀 AI Agent 前沿研究</div>
+      <h1>AI Agent <span>全景黄页</span></h1>
+      <p class="hero-desc">
+        追踪 GitHub 上最热门的 AI Agent 开源项目，涵盖自主代理、多智能体系统、
+        工具调用、记忆架构、RAG+Agent 等前沿方向，每日更新。
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ trendingProjects.length }}</div>
+          <div class="hero-stat-label">热门项目</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ reports.length }}</div>
+          <div class="hero-stat-label">日报存档</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ arxivPapers.length }}</div>
+          <div class="hero-stat-label">论文收录</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">{{ categories.length }}</div>
+          <div class="hero-stat-label">分类领域</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <!-- Categories -->
+    <section id="overview">
+      <div class="section-header">
+        <h2 class="section-title">分类领域</h2>
+      </div>
+      <div class="categories">
+        <span class="cat-pill" :class="{active:activeCategory===''}" @click="activeCategory=''">全部</span>
+        <span class="cat-pill" :class="{active:activeCategory===cat}" v-for="cat in categories" :key="cat" @click="activeCategory=cat">{{ cat }}</span>
+      </div>
+    </section>
+
+    <!-- Trending -->
+    <section id="trending" style="margin-bottom:48px;">
+      <div class="section-header">
+        <h2 class="section-title">🔥 热门项目</h2>
+        <el-link class="section-link" href="https://github.com/trending?since=daily&s=stars" target="_blank">GitHub Trending →</el-link>
+      </div>
+      <div v-if="loading" class="loading">加载中...</div>
+      <div v-else>
+        <div class="trending-card" v-for="(p, i) in filteredProjects" :key="p.name">
+          <div class="trending-rank" :class="'top'+(i+1)">{{ i+1 }}</div>
+          <div class="trending-info">
+            <div class="trending-name">
+              <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
             </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">4</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/Redis/"><span class="card-category-list-name">Redis</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/Spring/"><span class="card-category-list-name">Spring</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Java/jvm/"><span class="card-category-list-name">jvm</span><span class="card-category-list-count">2</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">5</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/WSL2/"><span class="card-category-list-name">WSL2</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/nginx/"><span class="card-category-list-name">nginx</span><span class="card-category-list-count">1</span></a></li></ul></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Agent/" style="font-size: 1.1em; color: #999">Agent</a> <a href="/tags/Java/" style="font-size: 1.1em; color: #999">Java</a> <a href="/tags/LVM2/" style="font-size: 1.1em; color: #999">LVM2</a> <a href="/tags/Linux/" style="font-size: 1.5em; color: #99a9bf">Linux</a> <a href="/tags/MySQL/" style="font-size: 1.1em; color: #999">MySQL</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/Step/" style="font-size: 1.1em; color: #999">Step</a> <a href="/tags/WSL2/" style="font-size: 1.1em; color: #999">WSL2</a> <a href="/tags/classloader/" style="font-size: 1.1em; color: #999">classloader</a> <a href="/tags/docker/" style="font-size: 1.1em; color: #999">docker</a> <a href="/tags/dockerfile/" style="font-size: 1.1em; color: #999">dockerfile</a> <a href="/tags/github/" style="font-size: 1.1em; color: #999">github</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a> <a href="/tags/https/" style="font-size: 1.1em; color: #999">https</a> <a href="/tags/iot/" style="font-size: 1.1em; color: #999">iot</a> <a href="/tags/java/" style="font-size: 1.37em; color: #99a4b2">java</a> <a href="/tags/jvm/" style="font-size: 1.23em; color: #999ea6">jvm</a> <a href="/tags/linux/" style="font-size: 1.23em; color: #999ea6">linux</a> <a href="/tags/md/" style="font-size: 1.1em; color: #999">md</a> <a href="/tags/nginx/" style="font-size: 1.1em; color: #999">nginx</a> <a href="/tags/ops/" style="font-size: 1.1em; color: #999">ops</a> <a href="/tags/prometheus/" style="font-size: 1.1em; color: #999">prometheus</a> <a href="/tags/thingsboard/" style="font-size: 1.1em; color: #999">thingsboard</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" style="font-size: 1.1em; color: #999">分布式锁</a> <a href="/tags/%E6%8C%82%E7%9B%98/" style="font-size: 1.1em; color: #999">挂盘</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 1.1em; color: #999">监控</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 1.23em; color: #999ea6">笔记</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">15</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-05-05T08:57:25.852Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By Leapord</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
-  if (true) { 
-    window.typed = new Typed("#subtitle", {
-      strings: ["生活就是一场话剧","nerver give up","记录成长每一天"],
-      startDelay: 300,
-      typeSpeed: 150,
-      loop: true,
-      backSpeed: 50
-    })
-  } else {
-    document.getElementById("subtitle").innerHTML = '生活就是一场话剧'
-  }
-}
+            <div class="trending-desc">{{ p.description || '暂无描述' }}</div>
+            <div class="trending-meta">
+              <span v-if="p.language" class="card-lang">{{ p.language }}</span>
+              <span>⭐ {{ p.stars }}</span>
+              <span v-if="p.todayStars">今日 ⭐ {{ p.todayStars }}</span>
+              <span v-if="p.forks">🍴 {{ p.forks }}</span>
+              <span class="trending-tag" v-for="tag in (p.tags||[]).slice(0,2)" :key="tag">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-if (true) {
-  if (typeof Typed === 'function') {
-    subtitleType()
-  } else {
-    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+    <!-- ArXiv Papers -->
+    <section id="papers" style="margin-bottom:48px;">
+      <div class="section-header">
+        <h2 class="section-title">📚 ArXiv 最新论文</h2>
+        <el-link class="section-link" href="https://arxiv.org/search/?searchfor=cs.AI&query=AI+agent" target="_blank">ArXiv AI →</el-link>
+      </div>
+      <div class="grid-3">
+        <div class="card" v-for="p in arxivPapers.slice(0,6)" :key="p.id">
+          <div class="card-title" style="font-size:13px;line-height:1.5;">{{ p.title }}</div>
+          <div class="card-desc">{{ p.authors }} · {{ p.published }}</div>
+          <div class="card-meta" style="flex-wrap:wrap;gap:6px;">
+            <span class="trending-tag" v-for="tag in (p.tags||[]).slice(0,2)" :key="tag">{{ tag }}</span>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:10px;">
+            <a :href="p.url" target="_blank" style="font-size:12px;color:#409EFF;">📄 论文</a>
+            <a :href="p.pdf" target="_blank" style="font-size:12px;color:#409EFF;">📕 PDF</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Reports -->
+    <section id="reports">
+      <div class="section-header">
+        <h2 class="section-title">📅 日报归档</h2>
+        <el-link class="section-link" href="https://github.com/leapord/agent" target="_blank">Agent 仓库 →</el-link>
+      </div>
+      <ul class="report-list">
+        <li class="report-item" v-for="r in reports" :key="r.name">
+          <div>
+            <span class="report-date">{{ r.date }}</span>
+            <span class="report-label">{{ r.label }}</span>
+          </div>
+          <a class="report-link" :href="r.url" target="_blank">查看 →</a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills Reports -->
+    <section style="margin-top:32px;">
+      <div class="section-header">
+        <h2 class="section-title">🛠️ Skills 报告</h2>
+      </div>
+      <ul class="report-list">
+        <li class="report-item" v-for="s in skillReports" :key="s.name">
+          <div>
+            <span class="report-date">{{ s.date }}</span>
+            <span class="report-label">{{ s.label }}</span>
+          </div>
+          <a class="report-link" :href="s.url" target="_blank">查看 →</a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>© {{ new Date().getFullYear() }} <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> · AI Agent 前沿研究 · 每日自动更新</p>
+  </footer>
+
+</div>
+
+<script>
+const { createApp, ref, computed, onMounted } = Vue
+
+createApp({
+  setup() {
+    const loading = ref(true)
+    const activeCategory = ref('')
+    const trendingProjects = ref([])
+    const reports = ref([])
+    const arxivPapers = ref([])
+    const skillReports = ref([])
+    const categories = ref([
+      'Single Agent', 'Multi-Agent', 'Tool Calling', 'Memory',
+      'RAG+Agent', 'Code Agent', 'Research Agent', 'Dev Agent'
+    ])
+
+    const filteredProjects = computed(() => {
+      if (!activeCategory.value) return trendingProjects.value
+      return trendingProjects.value.filter(p =>
+        (p.tags||[]).includes(activeCategory.value)
+      )
+    })
+
+    onMounted(() => {
+      // Load arxiv papers
+      fetch('arxiv.json')
+        .then(r => r.json())
+        .then(data => { arxivPapers.value = data })
+        .catch(() => {})
+
+      // Load pages list
+      fetch('pages.json')
+        .then(r => r.json())
+        .then(list => {
+          const today = new Date().toISOString().slice(0,10)
+          reports.value = list
+            .filter(n => /^report-\d{4}-\d{2}-\d{2}\.html$/.test(n))
+            .map(n => ({
+              name: n,
+              url: './' + n,
+              date: n.slice(7, 17),
+              label: 'AI 每日简报'
+            }))
+            .sort((a, b) => b.date.localeCompare(a.date))
+
+          skillReports.value = list
+            .filter(n => /^skills-\d{4}-\d{2}-\d{2}\.html$/.test(n))
+            .map(n => ({
+              name: n,
+              url: './' + n,
+              date: n.slice(7, 17),
+              label: 'Skills 报告'
+            }))
+            .sort((a, b) => b.date.localeCompare(a.date))
+        })
+
+      // Load trending from embedded JSON (updated by cron)
+      fetch('trending.json')
+        .then(r => r.json())
+        .then(data => {
+          trendingProjects.value = data
+          loading.value = false
+        })
+        .catch(() => {
+          // Fallback: show sample data
+          trendingProjects.value = [
+            {name:'anthropics/anthropic-cookbook',description:'Examples and recipes for building with Anthropic models',language:'Jupyter Notebook',stars:'9.2k',todayStars:'23',forks:'1.1k',tags:['Research Agent']},
+            {name:'openai/openai-python',description:'The OpenAI Python library provides convenient access to the OpenAI API',language:'Python',stars:'21k',todayStars:'45',forks:'3.4k',tags:['Tool Calling']},
+            {name:'meta-llama/llama-agentic-system',description:'LLaMA Agentic System',language:'Python',stars:'5.1k',todayStars:'120',forks:'620',tags:['Single Agent','Research Agent']},
+            {name:'multi-ai-agent',description:'A framework for building multi-agent AI applications',language:'Python',stars:'3.8k',todayStars:'89',forks:'410',tags:['Multi-Agent']},
+            {name:'openmemory/openmemory',description:'Memory infrastructure for AI agents',language:'TypeScript',stars:'2.9k',todayStars:'67',forks:'230',tags:['Memory']},
+            {name:'codegen/awesome-code-agents',description:'A curated list of awesome code agent research and tools',language:'Python',stars:'4.5k',todayStars:'34',forks:'520',tags:['Code Agent']},
+            {name:'smolagents/smolagents',description:'A lightweight multi-agent framework by HuggingFace',language:'Python',stars:'6.2k',todayStars:'55',forks:'680',tags:['Multi-Agent','Single Agent']},
+            {name:'langchain-ai/langgraph',description:'Build resilient language agents with graphs',language:'Python',stars:'8.7k',todayStars:'78',forks:'1.2k',tags:['Single Agent','Tool Calling']},
+          ]
+          loading.value = false
+        })
+    })
+
+    return {
+      loading, activeCategory, trendingProjects,
+      reports, skillReports, arxivPapers, categories, filteredProjects
+    }
   }
-} else {
-  subtitleType()
-}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+}).use(ElementPlus).mount('#app')
+</script>
+</body>
+</html>
