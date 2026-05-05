@@ -1,10 +1,11 @@
 [
   {
     "date": "2026-05-05",
+    "file": "deploy-2026-05-05.log",
     "started": "—",
     "github": 20,
     "arxiv": 0,
-    "pushed": "Y",
-    "status": "OK"
+    "pushed": "✅",
+    "status": "✅成功"
   }
 ]
