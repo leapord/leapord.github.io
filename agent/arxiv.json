@@ -1,1 +1,178 @@
-{"papers": []}
+[
+  {
+    "id": "2605.02859v1",
+    "title": "From Sensors to Insight: Rapid, Edge-to-Core Application Development for Sensor-Driven Applications",
+    "summary": "Scientists increasingly rely on sensor-based data, yet transforming raw streams into insights across the edge-to-cloud continuum remains difficult. Provisioning heterogeneous infrastructure and managing execution on emerging platforms like Data Proce",
+    "authors": "Komal Thareja, Anirban Mandal, Ewa Deelman",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02859v1",
+    "pdf": "https://arxiv.org/pdf/2605.02859v1.pdf",
+    "tags": [
+      "Dev Agent",
+      "Multimodal"
+    ]
+  },
+  {
+    "id": "2605.02852v1",
+    "title": "Inferring Active Neural Circuits Using Diffusion Scores",
+    "summary": "In biological systems, neural circuits compute through directed, short-latency interactions whose effects unfold across multiple time scales and behavioral contexts. We address the problem of inferring these local, lag-specific interactions from samp",
+    "authors": "Savik Kinger, Johannes Bertram, Luciano Dyballa et al.",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02852v1",
+    "pdf": "https://arxiv.org/pdf/2605.02852v1.pdf",
+    "tags": [
+      "Memory"
+    ]
+  },
+  {
+    "id": "2605.02844v1",
+    "title": "(POSTER) From Sensors to Insight: Rapid, Edge-to-Core Application Development for Sensor-Driven Applications",
+    "summary": "Scientists increasingly rely on sensor-based data; however transforming raw streams into insights across the edge-to-cloud continuum remains difficult due to the breadth of expertise required to coordinate the necessary data and computation flow. Thi",
+    "authors": "Komal Thareja, Anirban Mandal, Ewa Deelman",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02844v1",
+    "pdf": "https://arxiv.org/pdf/2605.02844v1.pdf",
+    "tags": [
+      "Dev Agent"
+    ]
+  },
+  {
+    "id": "2605.02832v1",
+    "title": "HAAS: A Policy-Aware Framework for Adaptive Task Allocation Between Humans and Artificial Intelligence Systems",
+    "summary": "Deciding how to distribute work between humans and AI systems is a central challenge in organisational design. Most approaches treat this as a binary choice, yet the operational reality is richer: humans and AI routinely share tasks or take complemen",
+    "authors": "Vicente Pelechanoa, Antoni Mestre, Manoli Albert et al.",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02832v1",
+    "pdf": "https://arxiv.org/pdf/2605.02832v1.pdf",
+    "tags": [
+      "AI Agent"
+    ]
+  },
+  {
+    "id": "2605.02825v1",
+    "title": "The Bayesian Reflex: Online Learning as the Autonomic Nervous System of Modern and Future AI",
+    "summary": "This chapter introduces the Bayesian reflex -- an analogy with the autonomic nervous system -- as a unifying framework for online learning in AI. Bayesian online algorithms automatically maintain equilibrium in dynamic environments via three mechanis",
+    "authors": "Durba Bhattacharya, Sucharita Roy, Sourabh Bhattacharya",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02825v1",
+    "pdf": "https://arxiv.org/pdf/2605.02825v1.pdf",
+    "tags": [
+      "AI Agent"
+    ]
+  },
+  {
+    "id": "2605.02888v1",
+    "title": "SpecKV: Adaptive Speculative Decoding with Compression-Aware Gamma Selection",
+    "summary": "Speculative decoding accelerates large language model (LLM) inference by using a small draft model to propose candidate tokens that a larger target model verifies. A critical hyperparameter in this process is the speculation length~$γ$, which determi",
+    "authors": "Shikhar Shukla",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02888v1",
+    "pdf": "https://arxiv.org/pdf/2605.02888v1.pdf",
+    "tags": [
+      "AI Agent"
+    ]
+  },
+  {
+    "id": "2605.02868v1",
+    "title": "EvoPoC: Automated Exploit Synthesis for DeFi Smart Contracts via Hierarchical Knowledge Graphs",
+    "summary": "Smart contract vulnerabilities in Decentralized Finance caused over billions of dollars losses every year, yet the security community faces a critical bottleneck: identifying a vulnerability is not the same as proving it is exploitable. Manual PoC co",
+    "authors": "Ruichao Liang, Jing Chen, Xianglong Li et al.",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02868v1",
+    "pdf": "https://arxiv.org/pdf/2605.02868v1.pdf",
+    "tags": [
+      "AI Agent"
+    ]
+  },
+  {
+    "id": "2605.02862v1",
+    "title": "Semantic Risk-Aware Heuristic Planning for Robotic Navigation in Dynamic Environments: An LLM-Inspired Approach",
+    "summary": "The integration of Large Language Model (LLM) reasoning principles into classical robot path planning represents a rapidly emerging research direction. In this paper, we propose a Semantic Risk-Aware Heuristic (SRAH) planner that encodes LLM-inspired",
+    "authors": "Hamza Ahmed Durrani, Rafay Suleman Durrani",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02862v1",
+    "pdf": "https://arxiv.org/pdf/2605.02862v1.pdf",
+    "tags": [
+      "Code Agent",
+      "Research Agent"
+    ]
+  },
+  {
+    "id": "2605.02860v1",
+    "title": "Standing on the Shoulders of Giants: Stabilized Knowledge Distillation for Cross--Language Code Clone Detection",
+    "summary": "Cross-language code clone detection (X-CCD) is challenging because semantically equivalent programs written in different languages often share little surface similarity. Although large language models (LLMs) have shown promise for semantic clone dete",
+    "authors": "Mohamad Khajezade, Fatemeh H. Fard, Mohamed Sami Shehata",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02860v1",
+    "pdf": "https://arxiv.org/pdf/2605.02860v1.pdf",
+    "tags": [
+      "Code Agent"
+    ]
+  },
+  {
+    "id": "2605.02821v1",
+    "title": "When Is the Same Model Not the Same Service? A Measurement Study of Hosted Open-Weight LLM APIs",
+    "summary": "Open-weight large language models (LLMs) are often described as downloadable model artifacts, but in production they are increasingly consumed as hosted APIs. This paper studies the intermediary service layer that turns a model release into an operat",
+    "authors": "Haorui Li, Zhenghui He, Xuanzi Liu et al.",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02821v1",
+    "pdf": "https://arxiv.org/pdf/2605.02821v1.pdf",
+    "tags": [
+      "Research Agent",
+      "Evaluation"
+    ]
+  },
+  {
+    "id": "2605.02812v1",
+    "title": "Autonomous LLM Agent Worms: Cross-Platform Propagation, Automated Discovery and Temporal Re-Entry Defense",
+    "summary": "Autonomous LLM agents operate as long-running processes with persistent workspaces, memory files, scheduled task state, and messaging integrations. These features create a new propagation risk: attacker-influenced content can be written into persiste",
+    "authors": "Mingming Zha, Xiaofeng Wang",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02812v1",
+    "pdf": "https://arxiv.org/pdf/2605.02812v1.pdf",
+    "tags": [
+      "Memory"
+    ]
+  },
+  {
+    "id": "2605.02801v1",
+    "title": "Reinforcement Learning for LLM-based Multi-Agent Systems through Orchestration Traces",
+    "summary": "As large language model (LLM) agents evolve from isolated tool users into coordinated teams, reinforcement learning (RL) must optimize not only individual actions but also how work is spawned, delegated, communicated, aggregated, and stopped. This pa",
+    "authors": "Chenchen Zhang",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02801v1",
+    "pdf": "https://arxiv.org/pdf/2605.02801v1.pdf",
+    "tags": [
+      "Multi-Agent",
+      "Tool Calling"
+    ]
+  },
+  {
+    "id": "2605.02751v1",
+    "title": "Mitigating Misalignment Contagion by Steering with Implicit Traits",
+    "summary": "Language models (LMs) are increasingly used in high-stakes, multi-agent settings, where following instructions and maintaining value alignment are critical. Most alignment research focuses on interactions between a single LM and a single user, failin",
+    "authors": "Maria Chang, Ronny Luss, Miao Lui et al.",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02751v1",
+    "pdf": "https://arxiv.org/pdf/2605.02751v1.pdf",
+    "tags": [
+      "Multi-Agent",
+      "Research Agent"
+    ]
+  },
+  {
+    "id": "2605.02741v1",
+    "title": "AI-Generated Smells: An Analysis of Code and Architecture in LLM and Agent-Driven Development",
+    "summary": "The promise of Large Language Models in automated software engineering is often measured by functional correctness, overlooking the critical issue of long term maintainability. This paper presents a systematic audit of technical debt in AI-generated ",
+    "authors": "Yuecai Zhu, Nikolaos Tsantalis, Peter C. Rigby",
+    "published": "2026-05-04",
+    "url": "https://arxiv.org/abs/2605.02741v1",
+    "pdf": "https://arxiv.org/pdf/2605.02741v1.pdf",
+    "tags": [
+      "Memory",
+      "Code Agent",
+      "Research Agent",
+      "Dev Agent"
+    ]
+  }
+]
