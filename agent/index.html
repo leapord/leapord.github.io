@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>AI Agent 前沿追踪 · Agent Dashboard</title>
+  <title>AI Agent 前沿追踪 · 每日热榜</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="AI Agent 前沿研究黄页导航 — 追踪热门项目、技术趋势与每日动态">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -67,7 +67,7 @@
     .stat-card .sc-label{font-size:10px;color:#999;margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
     .stat-card .sc-bar{height:3px;background:#ecf5ff;border-radius:2px;margin-top:8px;overflow:hidden}
     .stat-card .sc-bar-fill{height:100%;background:#409EFF;border-radius:2px;transition:width .6s ease}
-    /* ── New Projects (Latest) ── */
+    /* ── New Badge ── */
     .new-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;letter-spacing:.5px;text-transform:uppercase}
     /* ── Trending Cards ── */
     .trending-card{display:flex;gap:14px;padding:14px;background:#fff;border-radius:10px;border:1px solid #f0f0f0;margin-bottom:10px;transition:border-color .2s,transform .2s}
@@ -89,6 +89,16 @@
     .sort-tab{padding:5px 12px;background:#fff;border:1px solid #e4e7ed;border-radius:6px;font-size:12px;color:#606266;cursor:pointer;transition:all .2s}
     .sort-tab.active{background:#409EFF;color:#fff;border-color:#409EFF}
     .sort-tab:hover:not(.active){border-color:#409EFF;color:#409EFF}
+    /* ── ArXiv Cards ── */
+    .arxiv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:32px}
+    .arxiv-card{background:#fff;border-radius:10px;padding:14px;border:1px solid #f0f0f0;transition:border-color .2s;display:flex;flex-direction:column}
+    .arxiv-card:hover{border-color:#409EFF}
+    .arxiv-title{font-size:12px;font-weight:600;color:#1a1a2e;line-height:1.5;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .arxiv-meta{font-size:10px;color:#b0c4de;margin-bottom:6px}
+    .arxiv-digest{font-size:11px;color:#606266;line-height:1.7;flex:1;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:8px;background:#f8fafc;border-radius:6px;border-left:3px solid #409EFF}
+    .arxiv-footer{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .arxiv-links{display:flex;gap:8px;margin-left:auto}
+    .arxiv-links a{font-size:11px;color:#409EFF}
     /* ── Report List ── */
     .report-list{list-style:none;display:flex;flex-direction:column;gap:6px}
     .report-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border-radius:8px;border:1px solid #f0f0f0;transition:border-color .2s}
@@ -96,7 +106,7 @@
     .report-date{font-size:13px;font-weight:600;color:#1a1a2e}
     .report-label{font-size:10px;color:#999;margin-left:8px}
     .report-link{font-size:12px;color:#409EFF}
-    /* ── Weekly badge ── */
+    /* ── Weekly Badge ── */
     .weekly-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;text-transform:uppercase}
     /* ── Footer ── */
     .site-footer{background:#fff;border-top:1px solid #f0f0f0;padding:20px;text-align:center;font-size:12px;color:#b0c4de}
@@ -104,7 +114,6 @@
     /* ── Misc ── */
     .loading{text-align:center;padding:32px;color:#b0c4de}
     .empty{text-align:center;padding:28px;color:#b0c4de;font-size:13px}
-    /* ── Responsive ── */
     @media(max-width:768px){
       .hero h1{font-size:24px}
       .header-nav{display:none}
@@ -120,10 +129,10 @@
     <div class="header-inner">
       <div class="site-logo"><span>🤖</span><strong>Agent</strong><span style="color:#409EFF;font-weight:400">.dashboard</span></div>
       <nav class="header-nav">
-        <a href="#projects">热门项目</a>
-        <a href="#reports">日报归档</a>
-        <a href="#stats">数据统计</a>
-        <a href="https://github.com/leapord/agent" target="_blank" class="nav-btn">GitHub</a>
+        <a href="#projects">🔥 热门项目</a>
+        <a href="#papers">📚 前沿论文</a>
+        <a href="#reports">📅 报告归档</a>
+        <a href="https://github.com/leapord/agent" target="_blank" class="nav-btn">📦 源码</a>
       </nav>
     </div>
   </header>
@@ -143,11 +152,11 @@
         </div>
         <div class="hero-stat">
           <div class="hero-stat-num">{{ arxivPapers.length }}</div>
-          <div class="hero-stat-label">论文收录</div>
+          <div class="hero-stat-label">前沿论文</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-num">{{ reports.length }}</div>
-          <div class="hero-stat-label">日报存档</div>
+          <div class="hero-stat-label">报告存档</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-num">{{ catStats.length }}</div>
@@ -160,7 +169,6 @@
           <div class="hero-report-info">
             <div class="hero-report-type">今日日报</div>
             <div class="hero-report-name">{{ todayReport.date }}</div>
-            <div class="hero-report-meta">🔥 {{ todayReport.count }} 个热门项目</div>
           </div>
         </a>
         <a class="hero-report-card" :href="weeklyReport.url" v-if="weeklyReport">
@@ -168,7 +176,6 @@
           <div class="hero-report-info">
             <div class="hero-report-type">本周周报</div>
             <div class="hero-report-name">{{ weeklyReport.label }}</div>
-            <div class="hero-report-meta">📝 {{ weeklyReport.count }} 份日报</div>
           </div>
         </a>
         <a class="hero-report-card" href="https://github.com/leapord/agent" target="_blank">
@@ -176,7 +183,7 @@
           <div class="hero-report-info">
             <div class="hero-report-type">源码仓库</div>
             <div class="hero-report-name">leapord/agent</div>
-            <div class="hero-report-meta">GitHub · 每日自动同步</div>
+            <div class="hero-report-meta">每日自动同步</div>
           </div>
         </a>
       </div>
@@ -204,7 +211,7 @@
     <div style="margin-bottom:24px;">
       <div class="search-bar">
         <input class="search-input" v-model="searchQuery" placeholder="🔍 搜索项目名称、描述或标签..." />
-        <el-select v-model="langFilter" placeholder="语言" clearable style="width:130px" size="large">
+        <el-select v-model="langFilter" placeholder="编程语言" clearable style="width:130px" size="large">
           <el-option v-for="l in allLangs" :key="l" :label="l" :value="l"></el-option>
         </el-select>
       </div>
@@ -216,11 +223,11 @@
       </div>
     </div>
 
-    <!-- Categories Filter -->
+    <!-- Trending Projects -->
     <section id="projects" style="margin-bottom:32px;">
       <div class="section-header">
         <h2 class="section-title">🔥 热门 AI Agent 项目</h2>
-        <el-link class="section-link" href="https://github.com/trending?since=daily" target="_blank">GitHub Trending →</el-link>
+        <el-link class="section-link" href="https://github.com/trending?since=daily" target="_blank">GitHub 趋势 →</el-link>
       </div>
       <div class="categories">
         <span class="cat-pill" :class="{active:activeCat===''}" @click="activeCat=''">
@@ -257,20 +264,21 @@
     </section>
 
     <!-- ArXiv Papers -->
-    <section id="papers" style="margin-bottom:32px;" v-if="arxivPapers.length > 0">
+    <section id="papers" style="margin-bottom:32px;">
       <div class="section-header">
-        <h2 class="section-title">📚 ArXiv 最新论文</h2>
-        <el-link class="section-link" href="https://arxiv.org/search/?searchfor=cs.AI&query=AI+agent" target="_blank">ArXiv AI →</el-link>
+        <h2 class="section-title">📚 AI Agent 前沿论文</h2>
+        <el-link class="section-link" href="https://arxiv.org/search/?searchfor=cs.AI&query=AI+agent" target="_blank">查看更多 →</el-link>
       </div>
-      <div class="arxiv-grid">
+      <div v-if="arxivPapers.length === 0" class="empty">暂无论文数据（ArXiv 查询可能暂时受限）</div>
+      <div class="arxiv-grid" v-else>
         <div class="arxiv-card" v-for="p in arxivPapers" :key="p.id">
           <div class="arxiv-title">{{ p.title }}</div>
           <div class="arxiv-meta">{{ p.authors }} · {{ p.published }}</div>
-          <div class="arxiv-desc">{{ p.summary }}</div>
+          <div class="arxiv-digest" v-if="p.digest">{{ p.digest }}</div>
           <div class="arxiv-footer">
             <span class="meta-tag" v-for="tag in (p.tags||[]).slice(0,2)" :key="tag">{{ tag }}</span>
             <div class="arxiv-links">
-              <a :href="p.url" target="_blank">📄 论文</a>
+              <a :href="p.url" target="_blank">📄 摘要</a>
               <a :href="p.pdf" target="_blank">📕 PDF</a>
             </div>
           </div>
@@ -278,17 +286,17 @@
       </div>
     </section>
 
-    <!-- Daily Reports -->
+    <!-- Reports -->
     <section id="reports">
       <div class="section-header">
         <h2 class="section-title">📅 报告归档</h2>
-        <span style="font-size:12px;color:#999">共 {{ reports.length }} 份日报 · {{ weeklyReport ? 1 : 0 }} 份周报</span>
+        <span style="font-size:12px;color:#999">{{ reports.filter(r=>!r.isWeekly).length }} 份日报 · {{ reports.filter(r=>r.isWeekly).length }} 份周报</span>
       </div>
       <ul class="report-list">
         <li class="report-item" v-for="r in reports" :key="r.name">
           <div>
-            <span class="report-date">{{ r.date }}</span>
-            <span class="report-label">{{ r.label }}</span>
+            <span class="report-date">{{ r.date || r.label }}</span>
+            <span class="report-label" v-if="!r.isWeekly">每日简报</span>
             <span class="weekly-badge" v-if="r.isWeekly">周报</span>
           </div>
           <a class="report-link" :href="r.url" target="_blank">查看 →</a>
@@ -305,18 +313,6 @@
 
 </div>
 
-<style>
-.arxiv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:32px}
-.arxiv-card{background:#fff;border-radius:10px;padding:14px;border:1px solid #f0f0f0;transition:border-color .2s;display:flex;flex-direction:column}
-.arxiv-card:hover{border-color:#409EFF}
-.arxiv-title{font-size:12px;font-weight:600;color:#1a1a2e;line-height:1.5;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.arxiv-meta{font-size:10px;color:#b0c4de;margin-bottom:6px}
-.arxiv-desc{font-size:11px;color:#7a8ba8;line-height:1.6;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
-.arxiv-footer{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.arxiv-links{display:flex;gap:8px;margin-left:auto}
-.arxiv-links a{font-size:11px;color:#409EFF}
-</style>
-
 <script>
 const { createApp, ref, computed, onMounted } = Vue
 createApp({
@@ -332,7 +328,6 @@ createApp({
 
     const slugify = (name) => name.replace(/\//g, '-')
 
-    // ── Computed: today's report & weekly report ────────────────────────────
     const todayReport = computed(() => {
       const today = new Date().toISOString().slice(0, 10)
       return reports.value.find(r => r.date === today && !r.isWeekly) || null
@@ -342,7 +337,6 @@ createApp({
       return w.length > 0 ? w[0] : null
     })
 
-    // ── Computed: category stats ─────────────────────────────────────────────
     const catStats = computed(() => {
       const map = {}
       for (const p of trendingProjects.value) {
@@ -360,15 +354,11 @@ createApp({
       return [...s].sort()
     })
 
-    // ── Computed: filtered & sorted projects ─────────────────────────────────
     const displayProjects = computed(() => {
       let list = trendingProjects.value
-
-      // category filter
       if (activeCat.value) {
         list = list.filter(p => (p.tags||[]).includes(activeCat.value))
       }
-      // search
       const q = searchQuery.value.trim().toLowerCase()
       if (q) {
         list = list.filter(p =>
@@ -377,11 +367,9 @@ createApp({
           (p.tags||[]).some(t=>t.toLowerCase().includes(q))
         )
       }
-      // lang filter
       if (langFilter.value) {
         list = list.filter(p => p.language === langFilter.value)
       }
-      // sort
       if (sortBy.value === 'stars') {
         list = [...list].sort((a,b) => parseFloat(b.stars||0)*1000 - parseFloat(a.stars||0)*1000)
       } else if (sortBy.value === 'today') {
@@ -395,21 +383,16 @@ createApp({
     })
 
     onMounted(() => {
-      // Load trending
       fetch('trending.json').then(r=>r.json()).then(d=>{
-        // Mark first-time projects as "new" (top 5 by rank)
-        const today = new Date().toISOString().slice(0, 10)
         d.forEach((p, i) => { p.isNew = i < 5 })
         trendingProjects.value = d
         loading.value = false
       }).catch(()=>{ loading.value=false })
 
-      // Load arxiv
       fetch('arxiv.json').then(r=>r.json()).then(d=>{
         arxivPapers.value = Array.isArray(d) ? d : (d.papers||[])
       }).catch(()=>{})
 
-      // Load pages list
       fetch('pages.json').then(r=>r.json()).then(list=>{
         const daily = list
           .filter(n=>/^daily-\d{4}-\d{2}-\d{2}\.html$/.test(n))
