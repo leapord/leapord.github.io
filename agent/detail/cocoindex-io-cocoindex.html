@@ -4,94 +4,154 @@
   <meta charset="UTF-8">
   <title>cocoindex-io/cocoindex | AI Agent 每日精选</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Incremental engine for long horizon agents 🌟 Star if you like it!">
+  <meta name="description" content="CocoIndex 是一个面向 AI Agent 的增量数据索引框架，核心能力是保持 AI 的上下文始终是最新的数据——代码库、Slack、Notion、PDF、视频等任何数据源变化后，只增量同步变化的 delta 部分，而不是全量重新索引">
   <style>
-   *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
-    .container{max-width:900px;margin:0 auto;padding:32px 24px}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
-    .back-btn:hover{background:#409EFF;color:#fff}
-    .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
-    .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
-    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
-    .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
-    .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
-    .hero .stat{text-align:center}
-    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
-    .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
-    .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
-    .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
-    .section h2 .icon{font-size:20px}
-    .section p,.section li{color:#555;font-size:14px}
-    .section ul{padding-left:20px}
-    .section li{margin-bottom:8px}
-    .highlight-box{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
-    .highlight-box p{color:#1a1a2e;font-size:14px}
-    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .tag{padding:4px 12px;background:#ecf5ff;color:#409EFF;border-radius:20px;font-size:12px}
-    .compare-table{width:100%;border-collapse:collapse;font-size:13px}
-    .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
-    .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-    .compare-table tr:hover{background:#f5f7fa}
-    .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
-    .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
-    .who-card .text{color:#7a8ba8;font-size:13px}
-    .cta-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:24px;text-align:center;margin-top:24px}
-    .cta-box a{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
-    .cta-box a:hover{transform:scale(1.05)}
-    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}
-    .footer a{color:#409EFF}
+   *{{box-sizing:border-box;margin:0;padding:0}}
+    body{{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}}
+    .container{{max-width:900px;margin:0 auto;padding:32px 24px}}
+    .back-link{{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}}
+    .back-btn{{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}}
+    .back-btn:hover{{background:#409EFF;color:#fff}}
+    .hero{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}}
+    .hero::before{{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}}
+    .hero .badge{{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}}
+    .hero h1{{font-size:26px;font-weight:700;margin-bottom:8px}}
+    .hero .desc{{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px;line-height:1.6}}
+    .tag-list{{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}}
+    .tag{{padding:4px 12px;background:rgba(64,158,255,.2);color:#93c5fd;border-radius:20px;font-size:12px}}
+    .hero .stats{{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}}
+    .hero .stat{{text-align:center}}
+    .hero .stat .num{{font-size:20px;font-weight:700;color:#60a5fa}}
+    .hero .stat .label{{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}}
+    .hero .meta{{margin-top:16px;font-size:13px;color:rgba(255,255,255,.4)}}
+    .hero .meta span{{margin-right:16px}}
+    .section{{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}}
+    .section h2{{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}}
+    .section h2 .icon{{font-size:20px}}
+    .section p,.section li{{color:#555;font-size:14px;line-height:1.9}}
+    .section ul{{padding-left:20px}}
+    .section li{{margin-bottom:10px}}
+    .highlight-box{{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:20px 24px;border-radius:0 8px 8px 0;margin:16px 0}}
+    .highlight-box p{{color:#1a1a2e;font-size:15px;line-height:1.8}}
+    .pro-con{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}}
+    .pro-item,.con-item{{padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.6}}
+    .pro-item{{background:#f0fdf4;border-left:3px solid #22c55e;color:#166534}}
+    .con-item{{background:#fef2f2;border-left:3px solid #ef4444;color:#991b1b}}
+    .pro-item strong,.con-item strong{{display:block;margin-bottom:4px}}
+    pre{{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.7;margin:16px 0}}
+    code{{font-family:'Fira Code','Cascadia Code',monospace}}
+    .doc-links{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
+    .doc-link{{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ecf5ff;color:#409EFF;border-radius:8px;text-decoration:none;font-size:13px;transition:all .2s}}
+    .doc-link:hover{{background:#409EFF;color:#fff}}
+    .cta-box{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:24px}}
+    .cta-box a{{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}}
+    .cta-box a:hover{{transform:scale(1.05)}}
+    .footer{{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}}
+    .footer a{{color:#409EFF}}
+    @media(max-width:640px){{
+      .pro-con{{grid-template-columns:1fr}}
+      .hero{{padding:24px}}
+      .hero h1{{font-size:20px}}
+    }}
   </style>
 </head>
 <body>
-<div id="app" class="container">
-  <a class="back-btn" href="/agent/index.html">← Dashboard</a>
-  <a class="back-btn" href="/agent/curated.html" style="margin-left:12px">← 每日精选</a>
+<div class="container">
+  <div class="back-link">
+    <a class="back-btn" href="/agent/index.html">← Dashboard</a>
+    <a class="back-btn" href="/agent/curated.html">← 每日精选</a>
+  </div>
 
   <div class="hero">
     <div class="badge">⭐ AI Agent 精选</div>
     <h1>cocoindex-io/cocoindex</h1>
-    <p class="desc">Incremental engine for long horizon agents 🌟 Star if you like it!</p>
-    <div class="tag-list"><span class='tag'>AI Agent</span></div>
+    <p class="desc">CocoIndex 是一个面向 AI Agent 的增量数据索引框架，核心能力是保持 AI 的上下文始终是最新的数据——代码库、Slack、Notion、PDF、视频等任何数据源变化后，只增量同步变化的 delta 部分，而不是全量重新索引，10 分钟即可接入生产环境。</p>
+    <div class="tag-list"><span class='tag'>增量索引</span><span class='tag'>RAG</span><span class='tag'>Agent 记忆</span><span class='tag'>数据管道</span><span class='tag'>企业知识库</span></div>
     <div class="stats">
-      <div class="stat"><div class="num">⭐ 8,403</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">⭐ 8,409</div><div class="label">Stars</div></div>
       <div class="stat"><div class="num">619</div><div class="label">Forks</div></div>
       <div class="stat"><div class="num">Python</div><div class="label">语言</div></div>
+      <div class="stat"><div class="num">Apache-2.0</div><div class="label">协议</div></div>
+    </div>
+    <div class="meta">
+      <span>📅 创建于 2025-03-03</span><br><span>🏷️ RAG, agentic-data-framework, context-engineering, data-indexing</span>
     </div>
   </div>
 
   <div class="section">
-    <h2><span class="icon">💡</span> 一句话评价</h2>
+    <h2><span class="icon">🔍</span> 项目详解</h2>
     <div class="highlight-box">
-      <p>Incremental engine for long horizon agents 🌟 Star if you like it!</p>
-    </div>
-  </div>
+      <p>CocoIndex 解决的是**AI Agent 数据老化问题**：RAG 系统中的数据是"快照"而非"实时流"，数据更新后需要全量重新处理，效率低下。
 
-  <div class="section">
-    <h2><span class="icon">🔍</span> 是什么</h2>
-    <p>Incremental engine for long horizon agents 🌟 Star if you like it!</p>
+**核心能力：**
+- 🌊 **Incremental Sync（增量同步）**：只处理数据源的变化部分（delta），而不是全量重新索引
+- 📦 **多数据源连接器**：代码库（Git）、Slack、Notion、Confluence、Gmail、PDF、视频（带字幕）等
+- 🔄 **声明式管道**：用 Python 定义数据处理管道，5 分钟可上线
+- 📊 **Any Scale**：并行处理，默认支持大规模数据
+
+**应用场景：**
+1. **企业知识库问答**：员工手册、产品文档、代码库变更 — 始终基于最新版本回答
+2. **代码库智能助手**：分析最新代码变更，主动发现潜在 Bug 和安全问题
+3. **会议记录助手**：会议录音/视频 → 自动转录 → 增量更新 → AI 总结
+4. **CRM + AI**：客户数据、邮件、聊天记录实时打通，销售 AI 随时获取最新客户信息
+
+**技术架构：**
+```
+数据源 → Connector → Transform → Target (Vector DB / KG) → AI Agent
+              ↑
+         Incremental Sync（只同步 delta）
+```</p>
+    </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">📈</span> 为什么值得关注</h2>
-    <ul><li>值得关注</li></ul>
+    <ul><li>增量索引而非全量重建：数据量越大优势越明显（10GB 代码库全量 vs 几十KB delta）</li><li>10 分钟接入生产：声明式 Python，门槛低，效果快</li><li>多数据源开箱即用：20+ 连接器，不需要自己写 ETL</li><li>支持向量数据库和知识图谱双Target：灵活适配不同 RAG 架构</li><li>企业级特性：增量同步、变更追踪、权限感知</li></ul>
   </div>
 
   <div class="section">
-    <h2><span class="icon">👥</span> 适合谁用</h2>
-    <div class="who-card">
-      <div class="title">✅ 推荐</div>
-      <div class="text">AI 开发者和研究者</div>
+    <h2><span class="icon">⚡</span> 优缺点分析</h2>
+    <div class="pro-con">
+      <div>
+        <div class="pro-item" v-for="p in pros" :key="p">
+          <strong>✅ 优势</strong>· 增量索引而非全量重建：数据量越大优势越明显（10GB 代码库全量 vs 几十KB delta）<br>· 10 分钟接入生产：声明式 Python，门槛低，效果快<br>· 多数据源开箱即用：20+ 连接器，不需要自己写 ETL<br>· 支持向量数据库和知识图谱双Target：灵活适配不同 RAG 架构<br>· 企业级特性：增量同步、变更追踪、权限感知
+        </div>
+      </div>
+      <div>
+        <div class="con-item">
+          <strong>⚠️ 局限</strong>· Python GIL 限制：大规模并行处理可能需要多进程方案<br>· 企业数据源（Slack/Notion 等）需要相应 API 权限<br>· 向量数据库依赖（Milvus/Pinecone 等）需要额外运维
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
+    <h2><span class="icon">👥</span> 适合谁用</h2>
+    <p>需要为 AI Agent 提供实时企业数据的企业团队、RAG 应用开发者、以及数据管道工程师</p>
+  </div>
+
+  <div class="section">
     <h2><span class="icon">🚀</span> 快速上手</h2>
-    <ul>
-      <li><a href="https://github.com/cocoindex-io/cocoindex" target="_blank" style="color:#409EFF">GitHub 仓库</a></li>
-      
-    </ul>
+    <pre>```bash
+# pip 安装
+pip install cocoindex
+
+# 快速开始
+cocoindex init
+
+# Python 管道示例
+from cocoindex import Pipeline, GitHubSource, VectorStoreTarget
+
+pipeline = Pipeline(
+    source=GitHubSource(repo="org/repo", token="ghp_xxx"),
+    transforms=[...],
+    target=VectorStoreTarget(index="my-index")
+)
+pipeline.run()  # 增量同步
+```</pre>
+    <div class="doc-links">
+      <a class='doc-link' href='https://cocoindex.io' target='_blank'>• 官网</a><a class='doc-link' href='https://github.com/cocoindex-io/cocoindex' target='_blank'>• GitHub 仓库</a><a class='doc-link' href='https://cocoindex.io/docs' target='_blank'>• 快速开始</a><a class='doc-link' href='https://discord.com/invite/zpA9S2DR7s' target='_blank'>• Discord 社区</a>
+    </div>
   </div>
 
   <div class="cta-box">
@@ -102,7 +162,7 @@
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
     <a href="/agent/index.html">Dashboard</a> ·
     <a href="/agent/curated.html">每日精选</a> ·
-    报告生成时间: 2026-05-06 09:49:50
+    报告生成时间: 2026-05-06 10:01:14
   </div>
 </div>
 </body>

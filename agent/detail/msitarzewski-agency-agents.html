@@ -4,94 +4,153 @@
   <meta charset="UTF-8">
   <title>msitarzewski/agency-agents | AI Agent 每日精选</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whi">
+  <meta name="description" content="一个独特的 AI Agent 人格化框架，把不同专长的 AI Agent 包装成有「人格」的专家角色（前端巫师、Reddit 运营、数据分析师等），可无缝集成到 Claude Code 等主流 AI 编码工具中，让 AI 协作从单兵作战升级">
   <style>
-   *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
-    .container{max-width:900px;margin:0 auto;padding:32px 24px}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
-    .back-btn:hover{background:#409EFF;color:#fff}
-    .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
-    .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
-    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
-    .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
-    .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
-    .hero .stat{text-align:center}
-    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
-    .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
-    .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
-    .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
-    .section h2 .icon{font-size:20px}
-    .section p,.section li{color:#555;font-size:14px}
-    .section ul{padding-left:20px}
-    .section li{margin-bottom:8px}
-    .highlight-box{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
-    .highlight-box p{color:#1a1a2e;font-size:14px}
-    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .tag{padding:4px 12px;background:#ecf5ff;color:#409EFF;border-radius:20px;font-size:12px}
-    .compare-table{width:100%;border-collapse:collapse;font-size:13px}
-    .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
-    .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-    .compare-table tr:hover{background:#f5f7fa}
-    .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
-    .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
-    .who-card .text{color:#7a8ba8;font-size:13px}
-    .cta-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:24px;text-align:center;margin-top:24px}
-    .cta-box a{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
-    .cta-box a:hover{transform:scale(1.05)}
-    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}
-    .footer a{color:#409EFF}
+   *{{box-sizing:border-box;margin:0;padding:0}}
+    body{{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}}
+    .container{{max-width:900px;margin:0 auto;padding:32px 24px}}
+    .back-link{{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}}
+    .back-btn{{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}}
+    .back-btn:hover{{background:#409EFF;color:#fff}}
+    .hero{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}}
+    .hero::before{{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}}
+    .hero .badge{{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}}
+    .hero h1{{font-size:26px;font-weight:700;margin-bottom:8px}}
+    .hero .desc{{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px;line-height:1.6}}
+    .tag-list{{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}}
+    .tag{{padding:4px 12px;background:rgba(64,158,255,.2);color:#93c5fd;border-radius:20px;font-size:12px}}
+    .hero .stats{{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}}
+    .hero .stat{{text-align:center}}
+    .hero .stat .num{{font-size:20px;font-weight:700;color:#60a5fa}}
+    .hero .stat .label{{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}}
+    .hero .meta{{margin-top:16px;font-size:13px;color:rgba(255,255,255,.4)}}
+    .hero .meta span{{margin-right:16px}}
+    .section{{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}}
+    .section h2{{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}}
+    .section h2 .icon{{font-size:20px}}
+    .section p,.section li{{color:#555;font-size:14px;line-height:1.9}}
+    .section ul{{padding-left:20px}}
+    .section li{{margin-bottom:10px}}
+    .highlight-box{{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:20px 24px;border-radius:0 8px 8px 0;margin:16px 0}}
+    .highlight-box p{{color:#1a1a2e;font-size:15px;line-height:1.8}}
+    .pro-con{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}}
+    .pro-item,.con-item{{padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.6}}
+    .pro-item{{background:#f0fdf4;border-left:3px solid #22c55e;color:#166534}}
+    .con-item{{background:#fef2f2;border-left:3px solid #ef4444;color:#991b1b}}
+    .pro-item strong,.con-item strong{{display:block;margin-bottom:4px}}
+    pre{{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.7;margin:16px 0}}
+    code{{font-family:'Fira Code','Cascadia Code',monospace}}
+    .doc-links{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
+    .doc-link{{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ecf5ff;color:#409EFF;border-radius:8px;text-decoration:none;font-size:13px;transition:all .2s}}
+    .doc-link:hover{{background:#409EFF;color:#fff}}
+    .cta-box{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:24px}}
+    .cta-box a{{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}}
+    .cta-box a:hover{{transform:scale(1.05)}}
+    .footer{{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}}
+    .footer a{{color:#409EFF}}
+    @media(max-width:640px){{
+      .pro-con{{grid-template-columns:1fr}}
+      .hero{{padding:24px}}
+      .hero h1{{font-size:20px}}
+    }}
   </style>
 </head>
 <body>
-<div id="app" class="container">
-  <a class="back-btn" href="/agent/index.html">← Dashboard</a>
-  <a class="back-btn" href="/agent/curated.html" style="margin-left:12px">← 每日精选</a>
+<div class="container">
+  <div class="back-link">
+    <a class="back-btn" href="/agent/index.html">← Dashboard</a>
+    <a class="back-btn" href="/agent/curated.html">← 每日精选</a>
+  </div>
 
   <div class="hero">
     <div class="badge">⭐ AI Agent 精选</div>
     <h1>msitarzewski/agency-agents</h1>
-    <p class="desc">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.</p>
-    <div class="tag-list"><span class='tag'>Multi-Agent</span><span class='tag'>Agent 协作</span><span class='tag'>框架</span></div>
+    <p class="desc">一个独特的 AI Agent 人格化框架，把不同专长的 AI Agent 包装成有「人格」的专家角色（前端巫师、Reddit 运营、数据分析师等），可无缝集成到 Claude Code 等主流 AI 编码工具中，让 AI 协作从单兵作战升级为团队配合。</p>
+    <div class="tag-list"><span class='tag'>Multi-Agent</span><span class='tag'>Claude Code</span><span class='tag'>Agent 团队</span><span class='tag'>工作流编排</span></div>
     <div class="stats">
-      <div class="stat"><div class="num">⭐ 93,658</div><div class="label">Stars</div></div>
-      <div class="stat"><div class="num">15,414</div><div class="label">Forks</div></div>
+      <div class="stat"><div class="num">⭐ 93,682</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">15,417</div><div class="label">Forks</div></div>
       <div class="stat"><div class="num">Shell</div><div class="label">语言</div></div>
+      <div class="stat"><div class="num">MIT</div><div class="label">协议</div></div>
+    </div>
+    <div class="meta">
+      <span>📅 创建于 2025-10-13</span><br><span>🏷️ AI agents, claude-code, multi-agent</span>
     </div>
   </div>
 
   <div class="section">
-    <h2><span class="icon">💡</span> 一句话评价</h2>
+    <h2><span class="icon">🔍</span> 项目详解</h2>
     <div class="highlight-box">
-      <p>agency-agents 是一个多 Agent 协作框架，可以让多个 AI Agent 分工合作完成复杂任务，适合研究多 Agent 系统的开发者。</p>
-    </div>
-  </div>
+      <p>**The Agency** 源自一个 Reddit 帖子，历经数月迭代打磨，是一个精心设计的 AI Agent 人格化集合。它的核心思想是：不要通用型 AI 助手，而是给每个 Agent 赋予专业领域深度、人格特征和明确的交付物。
 
-  <div class="section">
-    <h2><span class="icon">🔍</span> 是什么</h2>
-    <p>agency-agents 是一个轻量级多 Agent 协作框架，核心是让多个专业化 Agent 通过消息传递协作完成任务。支持自定义 Agent 角色、工具调用和长程记忆。</p>
+**工程部门（Engineering Division）** 包括：
+- 🐛 Bug Hunter — 自动定位并复现 Bug，给出修复步骤
+- ⚡ Performance Pro — 性能分析、瓶颈定位、优化建议
+- 🔒 Security Scout — 安全审计、漏洞扫描、合规检查
+- 📝 Doc Writer — 自动生成 API 文档、README、Changelog
+- 🧪 Test Engineer — 单元测试、集成测试、E2E 测试生成
+
+**增长部门（Growth Division）** 包括：
+- 📊 Marketing Strategist — 内容营销、社交媒体策略
+- 🔍 SEO Specialist — 关键词分析、SEO 优化建议
+- 📧 Cold Email Writer — 外贸邮件、个性化推广文案
+- 💼 B2B Copywriter — 商业提案、案例研究撰写
+
+**社区部门（Community Division）** 包括：
+- 🐦 Twitter Growth — 推特运营增长策略
+- Reddit 运营（帖子撰写、评论区互动）
+- Discord 社区建设
+
+**核心特性：**
+- 每个 Agent 都有独立的人设（persona）、工作流程（workflow）和交付标准（deliverables）
+- 支持 Claude Code、Copilot、Cursor、Aider、Windsurf 等主流工具
+- 安装简单：`./scripts/install.sh --tool claude-code`
+- Agent 之间可以协作，形成完整的项目团队</p>
+    </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">📈</span> 为什么值得关注</h2>
-    <ul><li>轻量简单</li><li>多 Agent 协作</li><li>可自定义角色</li></ul>
+    <ul><li>角色专业化而非泛化：每个 Agent 只做一个方向，但做得深入，不是通用 prompt 而是真正可交付的专业能力</li><li>开箱即用的团队感：传统 AI 助手是单打独斗，Agency 把多个专长 Agent 组织成团队，各司其职</li><li>兼容所有主流 AI 编码工具：Claude Code、Copilot、Cursor、Aider 等都可以用，真正做到工具无关</li><li>交付物导向：不是泛泛给建议，而是输出真实代码、测试、文档、报告，有可衡量的结果</li><li>Shell 脚本实现，零依赖：不需要 Node.js 或 Python 环境，直接在终端运行</li></ul>
   </div>
 
   <div class="section">
-    <h2><span class="icon">👥</span> 适合谁用</h2>
-    <div class="who-card">
-      <div class="title">✅ 推荐</div>
-      <div class="text">AI 研究者、多 Agent 系统探索者</div>
+    <h2><span class="icon">⚡</span> 优缺点分析</h2>
+    <div class="pro-con">
+      <div>
+        <div class="pro-item" v-for="p in pros" :key="p">
+          <strong>✅ 优势</strong>· 角色专业化而非泛化：每个 Agent 只做一个方向，但做得深入，不是通用 prompt 而是真正可交付的专业能力<br>· 开箱即用的团队感：传统 AI 助手是单打独斗，Agency 把多个专长 Agent 组织成团队，各司其职<br>· 兼容所有主流 AI 编码工具：Claude Code、Copilot、Cursor、Aider 等都可以用，真正做到工具无关<br>· 交付物导向：不是泛泛给建议，而是输出真实代码、测试、文档、报告，有可衡量的结果<br>· Shell 脚本实现，零依赖：不需要 Node.js 或 Python 环境，直接在终端运行
+        </div>
+      </div>
+      <div>
+        <div class="con-item">
+          <strong>⚠️ 局限</strong>· Shell 脚本实现，复杂 Agent 逻辑表达能力有限<br>· 人格化 prompt 需要手动维护和调优<br>· Agent 之间协调需要人工介入，不是完全自动化
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
+    <h2><span class="icon">👥</span> 适合谁用</h2>
+    <p>需要 AI 辅助完成多维度工作的团队（工程+市场+社区），以及想让 AI 编程助手更具专业深度的个人开发者</p>
+  </div>
+
+  <div class="section">
     <h2><span class="icon">🚀</span> 快速上手</h2>
-    <ul>
-      <li><a href="https://github.com/msitarzewski/agency-agents" target="_blank" style="color:#409EFF">GitHub 仓库</a></li>
-      
-    </ul>
+    <pre>```bash
+# 推荐：安装到 Claude Code
+./scripts/install.sh --tool claude-code
+
+# 或安装到其他工具
+./scripts/install.sh --tool copilot
+./scripts/install.sh --tool cursor
+
+# 手动安装单个 Agent
+cp engineering/bug-hunter.md ~/.claude/agents/
+```</pre>
+    <div class="doc-links">
+      <a class='doc-link' href='https://github.com/msitarzewski/agency-agents' target='_blank'>• GitHub 仓库</a><a class='doc-link' href='https://docs.claude.com/en/docs/claude-code' target='_blank'>• Claude Code 集成文档</a>
+    </div>
   </div>
 
   <div class="cta-box">
@@ -102,7 +161,7 @@
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
     <a href="/agent/index.html">Dashboard</a> ·
     <a href="/agent/curated.html">每日精选</a> ·
-    报告生成时间: 2026-05-06 09:49:50
+    报告生成时间: 2026-05-06 10:01:14
   </div>
 </div>
 </body>

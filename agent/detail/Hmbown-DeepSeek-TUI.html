@@ -4,94 +4,154 @@
   <meta charset="UTF-8">
   <title>Hmbown/DeepSeek-TUI | AI Agent 每日精选</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Coding agent for DeepSeek models that runs in your terminal">
+  <meta name="description" content="DeepSeek 官方出品的终端编程助手，用 Rust 编写无需任何运行时依赖，直接调用 DeepSeek V4（1M token 上下文窗口），支持思维链流式输出、MCP 工具调用、持久化任务队列，是目前最适合中国开发者的本地 AI 编程">
   <style>
-   *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
-    .container{max-width:900px;margin:0 auto;padding:32px 24px}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
-    .back-btn:hover{background:#409EFF;color:#fff}
-    .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
-    .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
-    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
-    .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
-    .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
-    .hero .stat{text-align:center}
-    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
-    .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
-    .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
-    .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
-    .section h2 .icon{font-size:20px}
-    .section p,.section li{color:#555;font-size:14px}
-    .section ul{padding-left:20px}
-    .section li{margin-bottom:8px}
-    .highlight-box{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
-    .highlight-box p{color:#1a1a2e;font-size:14px}
-    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .tag{padding:4px 12px;background:#ecf5ff;color:#409EFF;border-radius:20px;font-size:12px}
-    .compare-table{width:100%;border-collapse:collapse;font-size:13px}
-    .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
-    .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-    .compare-table tr:hover{background:#f5f7fa}
-    .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
-    .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
-    .who-card .text{color:#7a8ba8;font-size:13px}
-    .cta-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:24px;text-align:center;margin-top:24px}
-    .cta-box a{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
-    .cta-box a:hover{transform:scale(1.05)}
-    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}
-    .footer a{color:#409EFF}
+   *{{box-sizing:border-box;margin:0;padding:0}}
+    body{{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}}
+    .container{{max-width:900px;margin:0 auto;padding:32px 24px}}
+    .back-link{{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}}
+    .back-btn{{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}}
+    .back-btn:hover{{background:#409EFF;color:#fff}}
+    .hero{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}}
+    .hero::before{{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}}
+    .hero .badge{{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}}
+    .hero h1{{font-size:26px;font-weight:700;margin-bottom:8px}}
+    .hero .desc{{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px;line-height:1.6}}
+    .tag-list{{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}}
+    .tag{{padding:4px 12px;background:rgba(64,158,255,.2);color:#93c5fd;border-radius:20px;font-size:12px}}
+    .hero .stats{{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}}
+    .hero .stat{{text-align:center}}
+    .hero .stat .num{{font-size:20px;font-weight:700;color:#60a5fa}}
+    .hero .stat .label{{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}}
+    .hero .meta{{margin-top:16px;font-size:13px;color:rgba(255,255,255,.4)}}
+    .hero .meta span{{margin-right:16px}}
+    .section{{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}}
+    .section h2{{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}}
+    .section h2 .icon{{font-size:20px}}
+    .section p,.section li{{color:#555;font-size:14px;line-height:1.9}}
+    .section ul{{padding-left:20px}}
+    .section li{{margin-bottom:10px}}
+    .highlight-box{{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:20px 24px;border-radius:0 8px 8px 0;margin:16px 0}}
+    .highlight-box p{{color:#1a1a2e;font-size:15px;line-height:1.8}}
+    .pro-con{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}}
+    .pro-item,.con-item{{padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.6}}
+    .pro-item{{background:#f0fdf4;border-left:3px solid #22c55e;color:#166534}}
+    .con-item{{background:#fef2f2;border-left:3px solid #ef4444;color:#991b1b}}
+    .pro-item strong,.con-item strong{{display:block;margin-bottom:4px}}
+    pre{{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.7;margin:16px 0}}
+    code{{font-family:'Fira Code','Cascadia Code',monospace}}
+    .doc-links{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
+    .doc-link{{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ecf5ff;color:#409EFF;border-radius:8px;text-decoration:none;font-size:13px;transition:all .2s}}
+    .doc-link:hover{{background:#409EFF;color:#fff}}
+    .cta-box{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:24px}}
+    .cta-box a{{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}}
+    .cta-box a:hover{{transform:scale(1.05)}}
+    .footer{{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}}
+    .footer a{{color:#409EFF}}
+    @media(max-width:640px){{
+      .pro-con{{grid-template-columns:1fr}}
+      .hero{{padding:24px}}
+      .hero h1{{font-size:20px}}
+    }}
   </style>
 </head>
 <body>
-<div id="app" class="container">
-  <a class="back-btn" href="/agent/index.html">← Dashboard</a>
-  <a class="back-btn" href="/agent/curated.html" style="margin-left:12px">← 每日精选</a>
+<div class="container">
+  <div class="back-link">
+    <a class="back-btn" href="/agent/index.html">← Dashboard</a>
+    <a class="back-btn" href="/agent/curated.html">← 每日精选</a>
+  </div>
 
   <div class="hero">
     <div class="badge">⭐ AI Agent 精选</div>
     <h1>Hmbown/DeepSeek-TUI</h1>
-    <p class="desc">Coding agent for DeepSeek models that runs in your terminal</p>
-    <div class="tag-list"><span class='tag'>LLM Chat</span><span class='tag'>TUI</span><span class='tag'>DeepSeek</span><span class='tag'>CLI</span></div>
+    <p class="desc">DeepSeek 官方出品的终端编程助手，用 Rust 编写无需任何运行时依赖，直接调用 DeepSeek V4（1M token 上下文窗口），支持思维链流式输出、MCP 工具调用、持久化任务队列，是目前最适合中国开发者的本地 AI 编程工具之一。</p>
+    <div class="tag-list"><span class='tag'>DeepSeek</span><span class='tag'>TUI</span><span class='tag'>终端 AI</span><span class='tag'>Coding Agent</span><span class='tag'>Rust</span><span class='tag'>1M Context</span></div>
     <div class="stats">
-      <div class="stat"><div class="num">⭐ 7,695</div><div class="label">Stars</div></div>
-      <div class="stat"><div class="num">593</div><div class="label">Forks</div></div>
+      <div class="stat"><div class="num">⭐ 7,866</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">605</div><div class="label">Forks</div></div>
       <div class="stat"><div class="num">Rust</div><div class="label">语言</div></div>
+      <div class="stat"><div class="num">MIT</div><div class="label">协议</div></div>
+    </div>
+    <div class="meta">
+      <span>📅 创建于 2026-01-19</span><br><span>🏷️ cli, deepseek, llm, rust, terminal</span>
     </div>
   </div>
 
   <div class="section">
-    <h2><span class="icon">💡</span> 一句话评价</h2>
+    <h2><span class="icon">🔍</span> 项目详解</h2>
     <div class="highlight-box">
-      <p>DeepSeek 官方出品的大模型终端界面，通过 TUI 方式让你在命令行里直接和 DeepSeek 聊天，支持多轮对话、代码高亮、Markdown 渲染，体验接近 ChatGPT 但完全本地运行。</p>
-    </div>
-  </div>
+      <p>DeepSeek TUI 是一个完全运行在终端的编程 Agent，专为 DeepSeek V4 模型打造。
 
-  <div class="section">
-    <h2><span class="icon">🔍</span> 是什么</h2>
-    <p>DeepSeek 官方推出的终端聊天界面，基于 Rich TUI 框架构建，提供沉浸式命令行 AI 对话体验。支持 DeepSeek-V3/R1 等模型，多轮对话、代码块高亮、Markdown 格式渲染是核心亮点。</p>
+**核心亮点：**
+
+⚡ **零运行时依赖**：打包成单一 Rust 二进制文件，安装后不需要 Node.js 或 Python，非常适合服务器环境。
+
+🔮 **1M Token 上下文窗口**：DeepSeek V4 提供百万级上下文，可以一次性分析整个代码库、整本书籍或长篇文档，无需分段处理。
+
+🧠 **原生思维链（Chain-of-Thought）**：内置 RLM（Reasoning Language Model）支持，思维过程流式输出，你可以看到 AI 的完整推理过程。
+
+🔧 **MCP 工具调用**：支持 Model Context Protocol，可以调用文件系统、Shell 命令、Git、网络搜索等多种工具。
+
+📊 **Prefix Cache 感知**：利用 DeepSeek 的前缀缓存优化，重复上下文只计一次费用，降低使用成本。
+
+**安装方式（国内加速）：**
+```bash
+# npm（推荐，可配国内镜像）
+npm install -g deepseek-tui --registry=https://registry.npmmirror.com
+
+# Cargo（Rust 原生安装）
+cargo install deepseek-tui-cli --locked
+
+# Homebrew（macOS）
+brew tap Hmbown/deepseek-tui
+brew install deepseek-tui
+```</p>
+    </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">📈</span> 为什么值得关注</h2>
-    <ul><li>轻量快速</li><li>无需浏览器</li><li>支持 DeepSeek 全系模型</li><li>Markdown 渲染</li></ul>
+    <ul><li>Rust 编写，零依赖：任何环境都能跑，服务器、容器、轻量 VPS 都没问题</li><li>1M 超长上下文：直接分析整个代码库，不需要反复切换文件</li><li>DeepSeek 性价比极高：相比 GPT-4 和 Claude，DeepSeek V4 成本低得多</li><li>思维链可见：可以看到 AI 的推理过程，增加信任度，也方便调试</li><li>Prefix Cache 降低费用：重复内容不重复计费</li><li>国内开发者友好：有中文 README，国内安装有镜像加速</li></ul>
   </div>
 
   <div class="section">
-    <h2><span class="icon">👥</span> 适合谁用</h2>
-    <div class="who-card">
-      <div class="title">✅ 推荐</div>
-      <div class="text">开发者、数据科学家、喜欢终端操作的极客用户</div>
+    <h2><span class="icon">⚡</span> 优缺点分析</h2>
+    <div class="pro-con">
+      <div>
+        <div class="pro-item" v-for="p in pros" :key="p">
+          <strong>✅ 优势</strong>· Rust 编写，零依赖：任何环境都能跑，服务器、容器、轻量 VPS 都没问题<br>· 1M 超长上下文：直接分析整个代码库，不需要反复切换文件<br>· DeepSeek 性价比极高：相比 GPT-4 和 Claude，DeepSeek V4 成本低得多<br>· 思维链可见：可以看到 AI 的推理过程，增加信任度，也方便调试<br>· Prefix Cache 降低费用：重复内容不重复计费
+        </div>
+      </div>
+      <div>
+        <div class="con-item">
+          <strong>⚠️ 局限</strong>· 只能使用 DeepSeek 模型，不能切换其他 LLM 提供商<br>· 纯命令行界面，对不熟悉终端的用户有门槛<br>· Rust 源码编译较慢，预编译二进制体积较大（约 100MB+）
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
+    <h2><span class="icon">👥</span> 适合谁用</h2>
+    <p>中国开发者（特别是服务器端/后端工程师）、需要本地离线 AI 编程能力的技术团队、以及追求性价比的 AI 编程用户</p>
+  </div>
+
+  <div class="section">
     <h2><span class="icon">🚀</span> 快速上手</h2>
-    <ul>
-      <li><a href="https://github.com/Hmbown/DeepSeek-TUI" target="_blank" style="color:#409EFF">GitHub 仓库</a></li>
-      
-    </ul>
+    <pre>```bash
+# npm（最简单）
+npm install -g deepseek-tui --registry=https://registry.npmmirror.com
+
+# Cargo（无需 Node.js）
+cargo install deepseek-tui-cli --locked
+
+# 安装后直接运行
+deepseek                   # TUI 交互界面
+deepseek "帮我写一个快排"   # 单次命令模式
+```</pre>
+    <div class="doc-links">
+      <a class='doc-link' href='https://github.com/Hmbown/DeepSeek-TUI' target='_blank'>• GitHub 仓库</a><a class='doc-link' href='https://crates.io/crates/deepseek-tui-cli' target='_blank'>• crates.io</a><a class='doc-link' href='https://deepwiki.com/Hmbown/DeepSeek-TUI' target='_blank'>• DeepWiki 分析</a>
+    </div>
   </div>
 
   <div class="cta-box">
@@ -102,7 +162,7 @@
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
     <a href="/agent/index.html">Dashboard</a> ·
     <a href="/agent/curated.html">每日精选</a> ·
-    报告生成时间: 2026-05-06 09:49:50
+    报告生成时间: 2026-05-06 10:01:14
   </div>
 </div>
 </body>

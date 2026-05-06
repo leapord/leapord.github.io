@@ -4,94 +4,151 @@
   <meta charset="UTF-8">
   <title>ruvnet/ruflo | AI Agent 每日精选</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordi">
+  <meta name="description" content="Ruflo 是面向 Claude Code 的多 Agent 编排平台，通过 `npx ruflo init` 一条命令给 Claude Code 装上「神经系统」：Agent 自动组队执行任务、从成功模式中自学习、跨会话记忆持久化，还支持">
   <style>
-   *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
-    .container{max-width:900px;margin:0 auto;padding:32px 24px}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
-    .back-btn:hover{background:#409EFF;color:#fff}
-    .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
-    .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
-    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
-    .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
-    .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
-    .hero .stat{text-align:center}
-    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
-    .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
-    .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
-    .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
-    .section h2 .icon{font-size:20px}
-    .section p,.section li{color:#555;font-size:14px}
-    .section ul{padding-left:20px}
-    .section li{margin-bottom:8px}
-    .highlight-box{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
-    .highlight-box p{color:#1a1a2e;font-size:14px}
-    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .tag{padding:4px 12px;background:#ecf5ff;color:#409EFF;border-radius:20px;font-size:12px}
-    .compare-table{width:100%;border-collapse:collapse;font-size:13px}
-    .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
-    .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-    .compare-table tr:hover{background:#f5f7fa}
-    .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
-    .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
-    .who-card .text{color:#7a8ba8;font-size:13px}
-    .cta-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:24px;text-align:center;margin-top:24px}
-    .cta-box a{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
-    .cta-box a:hover{transform:scale(1.05)}
-    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}
-    .footer a{color:#409EFF}
+   *{{box-sizing:border-box;margin:0;padding:0}}
+    body{{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}}
+    .container{{max-width:900px;margin:0 auto;padding:32px 24px}}
+    .back-link{{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}}
+    .back-btn{{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}}
+    .back-btn:hover{{background:#409EFF;color:#fff}}
+    .hero{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}}
+    .hero::before{{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}}
+    .hero .badge{{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}}
+    .hero h1{{font-size:26px;font-weight:700;margin-bottom:8px}}
+    .hero .desc{{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px;line-height:1.6}}
+    .tag-list{{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}}
+    .tag{{padding:4px 12px;background:rgba(64,158,255,.2);color:#93c5fd;border-radius:20px;font-size:12px}}
+    .hero .stats{{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}}
+    .hero .stat{{text-align:center}}
+    .hero .stat .num{{font-size:20px;font-weight:700;color:#60a5fa}}
+    .hero .stat .label{{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}}
+    .hero .meta{{margin-top:16px;font-size:13px;color:rgba(255,255,255,.4)}}
+    .hero .meta span{{margin-right:16px}}
+    .section{{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}}
+    .section h2{{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}}
+    .section h2 .icon{{font-size:20px}}
+    .section p,.section li{{color:#555;font-size:14px;line-height:1.9}}
+    .section ul{{padding-left:20px}}
+    .section li{{margin-bottom:10px}}
+    .highlight-box{{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:20px 24px;border-radius:0 8px 8px 0;margin:16px 0}}
+    .highlight-box p{{color:#1a1a2e;font-size:15px;line-height:1.8}}
+    .pro-con{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}}
+    .pro-item,.con-item{{padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.6}}
+    .pro-item{{background:#f0fdf4;border-left:3px solid #22c55e;color:#166534}}
+    .con-item{{background:#fef2f2;border-left:3px solid #ef4444;color:#991b1b}}
+    .pro-item strong,.con-item strong{{display:block;margin-bottom:4px}}
+    pre{{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.7;margin:16px 0}}
+    code{{font-family:'Fira Code','Cascadia Code',monospace}}
+    .doc-links{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
+    .doc-link{{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ecf5ff;color:#409EFF;border-radius:8px;text-decoration:none;font-size:13px;transition:all .2s}}
+    .doc-link:hover{{background:#409EFF;color:#fff}}
+    .cta-box{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:24px}}
+    .cta-box a{{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}}
+    .cta-box a:hover{{transform:scale(1.05)}}
+    .footer{{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}}
+    .footer a{{color:#409EFF}}
+    @media(max-width:640px){{
+      .pro-con{{grid-template-columns:1fr}}
+      .hero{{padding:24px}}
+      .hero h1{{font-size:20px}}
+    }}
   </style>
 </head>
 <body>
-<div id="app" class="container">
-  <a class="back-btn" href="/agent/index.html">← Dashboard</a>
-  <a class="back-btn" href="/agent/curated.html" style="margin-left:12px">← 每日精选</a>
+<div class="container">
+  <div class="back-link">
+    <a class="back-btn" href="/agent/index.html">← Dashboard</a>
+    <a class="back-btn" href="/agent/curated.html">← 每日精选</a>
+  </div>
 
   <div class="hero">
     <div class="badge">⭐ AI Agent 精选</div>
     <h1>ruvnet/ruflo</h1>
-    <p class="desc">🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration</p>
-    <div class="tag-list"><span class='tag'>Code Agent</span><span class='tag'>CLI</span><span class='tag'>AI Coding</span><span class='tag'>开源 Copilot</span></div>
+    <p class="desc">Ruflo 是面向 Claude Code 的多 Agent 编排平台，通过 `npx ruflo init` 一条命令给 Claude Code 装上「神经系统」：Agent 自动组队执行任务、从成功模式中自学习、跨会话记忆持久化，还支持联邦通信让不同机器上的 Agent 安全协作不泄露数据。</p>
+    <div class="tag-list"><span class='tag'>Multi-Agent编排</span><span class='tag'>Claude Code</span><span class='tag'>Agent 记忆</span><span class='tag'>自优化</span><span class='tag'>MCP</span></div>
     <div class="stats">
-      <div class="stat"><div class="num">⭐ 43,710</div><div class="label">Stars</div></div>
-      <div class="stat"><div class="num">4,864</div><div class="label">Forks</div></div>
+      <div class="stat"><div class="num">⭐ 43,758</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">4,869</div><div class="label">Forks</div></div>
       <div class="stat"><div class="num">TypeScript</div><div class="label">语言</div></div>
+      <div class="stat"><div class="num">MIT</div><div class="label">协议</div></div>
+    </div>
+    <div class="meta">
+      <span>📅 创建于 2025-06-02</span><br><span>🏷️ agentic-ai, agentic-framework, multi-agent, claude-code</span>
     </div>
   </div>
 
   <div class="section">
-    <h2><span class="icon">💡</span> 一句话评价</h2>
+    <h2><span class="icon">🔍</span> 项目详解</h2>
     <div class="highlight-box">
-      <p>ruflo 是一个开源的 AI 代码助手 CLI 工具，可以无缝对接 Code Agent，帮助你自动补全、代码审查、Bug 修复，适合追求高效编码体验的开发者。</p>
-    </div>
-  </div>
+      <p>Ruflo（ 前身是 claude-flow）是一个专为 Claude Code 打造的多 Agent 编排平台。它的核心定位是**给 AI 编码助手增加协调层**，让多个专业 Agent 能像团队一样协作。
 
-  <div class="section">
-    <h2><span class="icon">🔍</span> 是什么</h2>
-    <p>ruflo 是一个面向 AI 原生开发的命令行工具，集成 Code Agent 能力，支持代码补全、审查、重构、多语言切换。定位类似 GitHub Copilot CLI 但是完全开源可自托管。</p>
+**核心架构：**
+```
+User --> Ruflo (CLI/MCP) --> Router --> Swarm --> Agents --> Memory --> LLM Providers
+                          ^                           |
+                          +---- Learning Loop <-------+
+```
+用户正常写代码，Ruflo 在后台自动完成：任务路由、Agent 编排、学习记忆、联邦通信。
+
+**两大安装路径：**
+
+| | Claude Code 插件（轻量） | CLI 完整安装 |
+|---|---|---|
+| 安装后文件 | 零文件侵入 | `.claude/`、`.claude-flow/` 等 |
+| MCP Server | 不注册 | 注册到系统 |
+| Hooks | 无 | 完整安装 |
+| Agent 数量 | 几个 | 98 个 Agent、60+ 命令、30+ 技能 |
+| 适合场景 | 试用体验 | 正式生产 |
+
+**核心能力：**
+- **Self-Learning（自学习）**：从成功执行的任务中提取模式，下次自动复用
+- **Multi-Agent Swarm（多 Agent 蜂群）**：任务自动拆解分配给最合适的 Agent
+- **Federated Memory（联邦记忆）**：跨机器安全共享记忆，不泄露数据
+- **Plugin 生态（32 个插件）**：ruflo-core、ruflo-swarm、ruflo-autopilot、ruflo-federation 等</p>
+    </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">📈</span> 为什么值得关注</h2>
-    <ul><li>完全开源</li><li>自托管</li><li>多模型</li><li>CI/CD 集成</li></ul>
+    <ul><li>零学习成本：安装后正常用 Claude Code，Ruflo 在后台自动协调，不需要改工作流</li><li>98 个专业化 Agent：从代码生成到安全审计，从文档到部署，覆盖全流程</li><li>自优化能力：Ruflo 会从成功案例中学习，不断优化下次任务分配策略</li><li>联邦安全：不同机器上的 Agent 可以协作，但数据不会跨边界泄露，适合企业</li><li>插件生态丰富：32 个插件按需安装，不像 LangChain 那样全量引入</li></ul>
   </div>
 
   <div class="section">
-    <h2><span class="icon">👥</span> 适合谁用</h2>
-    <div class="who-card">
-      <div class="title">✅ 推荐</div>
-      <div class="text">追求代码隐私和可控性的开发团队</div>
+    <h2><span class="icon">⚡</span> 优缺点分析</h2>
+    <div class="pro-con">
+      <div>
+        <div class="pro-item" v-for="p in pros" :key="p">
+          <strong>✅ 优势</strong>· 零学习成本：安装后正常用 Claude Code，Ruflo 在后台自动协调，不需要改工作流<br>· 98 个专业化 Agent：从代码生成到安全审计，从文档到部署，覆盖全流程<br>· 自优化能力：Ruflo 会从成功案例中学习，不断优化下次任务分配策略<br>· 联邦安全：不同机器上的 Agent 可以协作，但数据不会跨边界泄露，适合企业<br>· 插件生态丰富：32 个插件按需安装，不像 LangChain 那样全量引入
+        </div>
+      </div>
+      <div>
+        <div class="con-item">
+          <strong>⚠️ 局限</strong>· 强依赖 Claude Code，非 Claude 用户无法使用<br>· 完整安装对工作区有文件侵入（.claude/ 等目录）<br>· 国内网络安装 npm 包可能较慢
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
+    <h2><span class="icon">👥</span> 适合谁用</h2>
+    <p>重度使用 Claude Code 的开发者/团队，以及希望 AI 编程助手能自主协作、持续学习进化的企业</p>
+  </div>
+
+  <div class="section">
     <h2><span class="icon">🚀</span> 快速上手</h2>
-    <ul>
-      <li><a href="https://github.com/ruvnet/ruflo" target="_blank" style="color:#409EFF">GitHub 仓库</a></li>
-      
-    </ul>
+    <pre>```bash
+# 完整安装（推荐生产环境）
+npx ruflo init
+
+# Claude Code 插件模式（轻量体验）
+/plugin marketplace add ruvnet/ruflo
+/plugin install ruflo-core@ruflo
+/plugin install ruflo-swarm@ruflo
+```</pre>
+    <div class="doc-links">
+      <a class='doc-link' href='https://github.com/ruvnet/claude-flow' target='_blank'>• GitHub 仓库</a><a class='doc-link' href='https://flo.ruv.io' target='_blank'>• Ruflo 在线体验</a><a class='doc-link' href='https://goal.ruv.io' target='_blank'>• Goal Planner</a>
+    </div>
   </div>
 
   <div class="cta-box">
@@ -102,7 +159,7 @@
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
     <a href="/agent/index.html">Dashboard</a> ·
     <a href="/agent/curated.html">每日精选</a> ·
-    报告生成时间: 2026-05-06 09:49:50
+    报告生成时间: 2026-05-06 10:01:14
   </div>
 </div>
 </body>

@@ -4,94 +4,153 @@
   <meta charset="UTF-8">
   <title>virattt/dexter | AI Agent 每日精选</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="An autonomous agent for deep financial research">
+  <meta name="description" content="Dexter 是一个专注于金融研究的多 Agent 系统，能自动拆解复杂金融问题、执行研究计划、实时获取市场数据、验证结果并迭代优化。相当于给投资分析师配备了一个永不停歇的 AI 研究助手，可以处理财务报表分析、估值建模、宏观研究等任务。">
   <style>
-   *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}
-    .container{max-width:900px;margin:0 auto;padding:32px 24px}
-    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;margin-bottom:24px;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}
-    .back-btn:hover{background:#409EFF;color:#fff}
-    .hero{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}
-    .hero .badge{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}
-    .hero h1{font-size:26px;font-weight:700;margin-bottom:8px}
-    .hero .desc{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px}
-    .hero .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
-    .hero .stat{text-align:center}
-    .hero .stat .num{font-size:20px;font-weight:700;color:#409EFF}
-    .hero .stat .label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}
-    .section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}
-    .section h2{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}
-    .section h2 .icon{font-size:20px}
-    .section p,.section li{color:#555;font-size:14px}
-    .section ul{padding-left:20px}
-    .section li{margin-bottom:8px}
-    .highlight-box{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
-    .highlight-box p{color:#1a1a2e;font-size:14px}
-    .tag-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-    .tag{padding:4px 12px;background:#ecf5ff;color:#409EFF;border-radius:20px;font-size:12px}
-    .compare-table{width:100%;border-collapse:collapse;font-size:13px}
-    .compare-table th{background:#f5f7fa;padding:10px 12px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
-    .compare-table td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-    .compare-table tr:hover{background:#f5f7fa}
-    .who-card{background:#fafafa;border-radius:8px;padding:16px;margin-bottom:12px;border:1px solid #f0f0f0}
-    .who-card .title{font-weight:600;color:#1a1a2e;margin-bottom:4px;font-size:14px}
-    .who-card .text{color:#7a8ba8;font-size:13px}
-    .cta-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:24px;text-align:center;margin-top:24px}
-    .cta-box a{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
-    .cta-box a:hover{transform:scale(1.05)}
-    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}
-    .footer a{color:#409EFF}
+   *{{box-sizing:border-box;margin:0;padding:0}}
+    body{{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}}
+    .container{{max-width:900px;margin:0 auto;padding:32px 24px}}
+    .back-link{{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}}
+    .back-btn{{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}}
+    .back-btn:hover{{background:#409EFF;color:#fff}}
+    .hero{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}}
+    .hero::before{{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}}
+    .hero .badge{{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}}
+    .hero h1{{font-size:26px;font-weight:700;margin-bottom:8px}}
+    .hero .desc{{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px;line-height:1.6}}
+    .tag-list{{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}}
+    .tag{{padding:4px 12px;background:rgba(64,158,255,.2);color:#93c5fd;border-radius:20px;font-size:12px}}
+    .hero .stats{{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}}
+    .hero .stat{{text-align:center}}
+    .hero .stat .num{{font-size:20px;font-weight:700;color:#60a5fa}}
+    .hero .stat .label{{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}}
+    .hero .meta{{margin-top:16px;font-size:13px;color:rgba(255,255,255,.4)}}
+    .hero .meta span{{margin-right:16px}}
+    .section{{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}}
+    .section h2{{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}}
+    .section h2 .icon{{font-size:20px}}
+    .section p,.section li{{color:#555;font-size:14px;line-height:1.9}}
+    .section ul{{padding-left:20px}}
+    .section li{{margin-bottom:10px}}
+    .highlight-box{{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:20px 24px;border-radius:0 8px 8px 0;margin:16px 0}}
+    .highlight-box p{{color:#1a1a2e;font-size:15px;line-height:1.8}}
+    .pro-con{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}}
+    .pro-item,.con-item{{padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.6}}
+    .pro-item{{background:#f0fdf4;border-left:3px solid #22c55e;color:#166534}}
+    .con-item{{background:#fef2f2;border-left:3px solid #ef4444;color:#991b1b}}
+    .pro-item strong,.con-item strong{{display:block;margin-bottom:4px}}
+    pre{{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.7;margin:16px 0}}
+    code{{font-family:'Fira Code','Cascadia Code',monospace}}
+    .doc-links{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
+    .doc-link{{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ecf5ff;color:#409EFF;border-radius:8px;text-decoration:none;font-size:13px;transition:all .2s}}
+    .doc-link:hover{{background:#409EFF;color:#fff}}
+    .cta-box{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:24px}}
+    .cta-box a{{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}}
+    .cta-box a:hover{{transform:scale(1.05)}}
+    .footer{{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}}
+    .footer a{{color:#409EFF}}
+    @media(max-width:640px){{
+      .pro-con{{grid-template-columns:1fr}}
+      .hero{{padding:24px}}
+      .hero h1{{font-size:20px}}
+    }}
   </style>
 </head>
 <body>
-<div id="app" class="container">
-  <a class="back-btn" href="/agent/index.html">← Dashboard</a>
-  <a class="back-btn" href="/agent/curated.html" style="margin-left:12px">← 每日精选</a>
+<div class="container">
+  <div class="back-link">
+    <a class="back-btn" href="/agent/index.html">← Dashboard</a>
+    <a class="back-btn" href="/agent/curated.html">← 每日精选</a>
+  </div>
 
   <div class="hero">
     <div class="badge">⭐ AI Agent 精选</div>
     <h1>virattt/dexter</h1>
-    <p class="desc">An autonomous agent for deep financial research</p>
-    <div class="tag-list"><span class='tag'>Code Agent</span><span class='tag'>代码审查</span><span class='tag'>Bug 检测</span><span class='tag'>测试生成</span></div>
+    <p class="desc">Dexter 是一个专注于金融研究的多 Agent 系统，能自动拆解复杂金融问题、执行研究计划、实时获取市场数据、验证结果并迭代优化。相当于给投资分析师配备了一个永不停歇的 AI 研究助手，可以处理财务报表分析、估值建模、宏观研究等任务。</p>
+    <div class="tag-list"><span class='tag'>金融研究</span><span class='tag'>Autonomous Agent</span><span class='tag'>市场分析</span><span class='tag'>投资决策</span></div>
     <div class="stats">
-      <div class="stat"><div class="num">⭐ 23,802</div><div class="label">Stars</div></div>
-      <div class="stat"><div class="num">2,900</div><div class="label">Forks</div></div>
+      <div class="stat"><div class="num">⭐ 23,818</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num">2,901</div><div class="label">Forks</div></div>
       <div class="stat"><div class="num">TypeScript</div><div class="label">语言</div></div>
+      <div class="stat"><div class="num"></div><div class="label">协议</div></div>
+    </div>
+    <div class="meta">
+      <span>🏷️ financial-research, AI agent, autonomous-research</span>
     </div>
   </div>
 
   <div class="section">
-    <h2><span class="icon">💡</span> 一句话评价</h2>
+    <h2><span class="icon">🔍</span> 项目详解</h2>
     <div class="highlight-box">
-      <p>Dexter 是一个 AI Agent 框架，专注于自动化测试和代码质量分析，可以自动发现 Bug、性能瓶颈，并给出修复建议，是工程团队提升代码质量的好帮手。</p>
-    </div>
-  </div>
+      <p>Dexter 是一个**自主金融研究 Agent**，核心理念是"像资深分析师一样思考，像程序一样高效执行"。
 
-  <div class="section">
-    <h2><span class="icon">🔍</span> 是什么</h2>
-    <p>Dexter 是一个 AI Agent 开发框架，重点应用于自动化代码审查、测试生成和 Bug 检测。核心基于 LangChain + Claude API，支持多 Agent 协作处理复杂代码分析任务。</p>
+**工作流程：**
+1. **任务规划（Task Planning）**：接收复杂金融问题，自动拆解为结构化研究步骤
+2. **自主执行（Autonomous Execution）**：调用正确的工具获取金融数据（财报、现金流、宏观经济）
+3. **自我验证（Self-Validation）**：检查结果质量，迭代直到满意
+4. **报告生成**：输出结构化研究报告，包含数据支撑和结论
+
+**技术栈：**
+- 运行时：Bun（需要 v1.0+）
+- 支持多模型：OpenAI、Anthropic、Google、xAI、Ollama（本地）、OpenRouter
+- 金融数据：Financial Datasets API（机构级市场数据）
+- 网络搜索：Exa（首选）/ Tavily（备选）
+- 评估框架：LangSmith + LLM-as-Judge
+
+**核心特性：**
+- 支持 WhatsApp 操控（手机对话完成金融研究）
+- 内置评估套件，可量化 Agent 研究质量
+- 循环检测和步骤限制，防止失控执行
+- 实时 UI 显示研究进度、当前问题、运行状态</p>
+    </div>
   </div>
 
   <div class="section">
     <h2><span class="icon">📈</span> 为什么值得关注</h2>
-    <ul><li>自动化测试生成</li><li>Bug 检测</li><li>GitHub Actions 集成</li></ul>
+    <ul><li>专注金融领域：不是通用 AI，而是专门为投资研究场景优化的 Agent 系统</li><li>自我纠错机制：执行中会自我验证，发现错误自动回退重试，输出质量有保障</li><li>多数据源融合：财务报表 + 实时市场数据 + 网络搜索，不是单一数据来源</li><li>WhatsApp 集成：手机对话即可触发研究，分析师随时随地获取信息</li><li>评估框架内置：可以用标准数据集测试 Agent 表现，持续改进</li></ul>
   </div>
 
   <div class="section">
-    <h2><span class="icon">👥</span> 适合谁用</h2>
-    <div class="who-card">
-      <div class="title">✅ 推荐</div>
-      <div class="text">软件工程团队、DevOps 工程师</div>
+    <h2><span class="icon">⚡</span> 优缺点分析</h2>
+    <div class="pro-con">
+      <div>
+        <div class="pro-item" v-for="p in pros" :key="p">
+          <strong>✅ 优势</strong>· 专注金融领域：不是通用 AI，而是专门为投资研究场景优化的 Agent 系统<br>· 自我纠错机制：执行中会自我验证，发现错误自动回退重试，输出质量有保障<br>· 多数据源融合：财务报表 + 实时市场数据 + 网络搜索，不是单一数据来源<br>· WhatsApp 集成：手机对话即可触发研究，分析师随时随地获取信息<br>· 评估框架内置：可以用标准数据集测试 Agent 表现，持续改进
+        </div>
+      </div>
+      <div>
+        <div class="con-item">
+          <strong>⚠️ 局限</strong>· 依赖外部 API（OpenAI/Anthropic 收费，Financial Datasets API 也收费）<br>· 配置相对复杂（需要多个 API key）<br>· 面向金融专业人士，个人投资者门槛较高
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="section">
+    <h2><span class="icon">👥</span> 适合谁用</h2>
+    <p>投资机构分析师、量化交易团队、金融科技产品经理，以及需要 AI 辅助进行股票/公司研究的专业人士</p>
+  </div>
+
+  <div class="section">
     <h2><span class="icon">🚀</span> 快速上手</h2>
-    <ul>
-      <li><a href="https://github.com/virattt/dexter" target="_blank" style="color:#409EFF">GitHub 仓库</a></li>
-      
-    </ul>
+    <pre>```bash
+# 1. 克隆仓库
+git clone https://github.com/virattt/dexter.git
+cd dexter
+
+# 2. 安装依赖（Bun）
+bun install
+
+# 3. 配置环境变量
+cp env.example .env
+# 编辑 .env 填入 API Key
+
+# 4. 运行
+bun start        # 交互模式
+bun dev          # 开发监视模式
+```</pre>
+    <div class="doc-links">
+      <a class='doc-link' href='https://github.com/virattt/dexter' target='_blank'>• GitHub 仓库</a><a class='doc-link' href='https://financialdatasets.ai' target='_blank'>• Financial Datasets API</a><a class='doc-link' href='https://exa.ai' target='_blank'>• Exa 搜索</a>
+    </div>
   </div>
 
   <div class="cta-box">
@@ -102,7 +161,7 @@
     © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
     <a href="/agent/index.html">Dashboard</a> ·
     <a href="/agent/curated.html">每日精选</a> ·
-    报告生成时间: 2026-05-06 09:49:50
+    报告生成时间: 2026-05-06 10:01:14
   </div>
 </div>
 </body>
