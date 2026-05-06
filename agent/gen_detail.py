@@ -816,7 +816,7 @@ createApp({{
 
     return {{
       activeTab, projectName, githubName, summary, stars, forks, language, license,
-      tags, topics, who, pros, cons, docLinks,
+      name: projectName, tags, topics, who, pros, cons, docLinks,
       renderedWhat, renderedWhy, renderedInstall,
     }}
   }}
