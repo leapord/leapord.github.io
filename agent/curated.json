@@ -1,0 +1,160 @@
+[
+  {
+    "date": "2026-05-06",
+    "name": "msitarzewski/agency-agents",
+    "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+    "language": "Shell",
+    "stars": "93,658",
+    "stars_num": 93658000,
+    "forks": "15,414",
+    "tags": [
+      "AI Agent"
+    ],
+    "url": "https://github.com/msitarzewski/agency-agents",
+    "digest": "GitHub Stars 93,658，AI Agent方向热门项目。A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "ruvnet/ruflo",
+    "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
+    "language": "TypeScript",
+    "stars": "43,710",
+    "stars_num": 43710000,
+    "forks": "4,864",
+    "tags": [
+      "多智能体",
+      "RAG检索",
+      "Dev Agent",
+      "自主代理"
+    ],
+    "url": "https://github.com/ruvnet/ruflo",
+    "digest": "GitHub Stars 43,710，多智能体、RAG检索、Dev Agent方向热门项目。🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "virattt/dexter",
+    "description": "An autonomous agent for deep financial research",
+    "language": "TypeScript",
+    "stars": "23,802",
+    "stars_num": 23802000,
+    "forks": "2,900",
+    "tags": [
+      "工具调用",
+      "自主代理"
+    ],
+    "url": "https://github.com/virattt/dexter",
+    "digest": "GitHub Stars 23,802，工具调用、自主代理方向热门项目。An autonomous agent for deep financial research",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "mksglu/context-mode",
+    "description": "Context window optimization for AI coding agents. Sandboxes tool output, 98% reduction. 14 platforms",
+    "language": "TypeScript",
+    "stars": "13,060",
+    "stars_num": 13060000,
+    "forks": "897",
+    "tags": [
+      "记忆架构",
+      "Dev Agent",
+      "工具调用"
+    ],
+    "url": "https://github.com/mksglu/context-mode",
+    "digest": "GitHub Stars 13,060，记忆架构、Dev Agent、工具调用方向热门项目。Context window optimization for AI coding agents. Sandboxes tool output, 98% reduction. 14 platforms",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "Arindam200/awesome-ai-apps",
+    "description": "A collection of projects showcasing RAG, agents, workflows, and other AI use cases",
+    "language": "Python",
+    "stars": "11,331",
+    "stars_num": 11331000,
+    "forks": "1,474",
+    "tags": [
+      "RAG检索"
+    ],
+    "url": "https://github.com/Arindam200/awesome-ai-apps",
+    "digest": "GitHub Stars 11,331，RAG检索方向热门项目。A collection of projects showcasing RAG, agents, workflows, and other AI use cases",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "cocoindex-io/cocoindex",
+    "description": "Incremental engine for long horizon agents 🌟 Star if you like it!",
+    "language": "Python",
+    "stars": "8,403",
+    "stars_num": 8403000,
+    "forks": "619",
+    "tags": [
+      "AI Agent"
+    ],
+    "url": "https://github.com/cocoindex-io/cocoindex",
+    "digest": "GitHub Stars 8,403，AI Agent方向热门项目。Incremental engine for long horizon agents 🌟 Star if you like it!",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "Hmbown/DeepSeek-TUI",
+    "description": "Coding agent for DeepSeek models that runs in your terminal",
+    "language": "Rust",
+    "stars": "7,695",
+    "stars_num": 7695000,
+    "forks": "593",
+    "tags": [
+      "Dev Agent"
+    ],
+    "url": "https://github.com/Hmbown/DeepSeek-TUI",
+    "digest": "GitHub Stars 7,695，Dev Agent方向热门项目。Coding agent for DeepSeek models that runs in your terminal",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  },
+  {
+    "date": "2026-05-06",
+    "name": "browserbase/skills",
+    "description": "Claude Agent SDK with a web browsing tool",
+    "language": "JavaScript",
+    "stars": "2,387",
+    "stars_num": 2387000,
+    "forks": "153",
+    "tags": [
+      "工具调用"
+    ],
+    "url": "https://github.com/browserbase/skills",
+    "digest": "GitHub Stars 2,387，工具调用方向热门项目。Claude Agent SDK with a web browsing tool",
+    "highlights": [],
+    "use_cases": [],
+    "vs_alternatives": "",
+    "trend": "快速上升",
+    "analysis_date": "2026-05-06"
+  }
+]

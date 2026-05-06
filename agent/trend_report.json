@@ -1,12 +1,150 @@
 {
   "date": "2026-05-06",
-  "generated_at": "2026-05-06T09:06:52.963845",
-  "total_projects": 0,
-  "total_stars": "0k+",
-  "top_categories": [],
-  "top_languages": [],
-  "insights": [],
-  "top_projects": [],
+  "generated_at": "2026-05-06T09:37:54.038805",
+  "total_projects": 8,
+  "total_stars": "204k+",
+  "top_categories": [
+    {
+      "name": "Dev Agent",
+      "count": 3
+    },
+    {
+      "name": "工具调用",
+      "count": 3
+    },
+    {
+      "name": "RAG检索",
+      "count": 2
+    },
+    {
+      "name": "自主代理",
+      "count": 2
+    },
+    {
+      "name": "AI Agent",
+      "count": 2
+    },
+    {
+      "name": "多智能体",
+      "count": 1
+    },
+    {
+      "name": "记忆架构",
+      "count": 1
+    }
+  ],
+  "top_languages": [
+    {
+      "name": "TypeScript",
+      "count": 3
+    },
+    {
+      "name": "Python",
+      "count": 2
+    },
+    {
+      "name": "Rust",
+      "count": 1
+    },
+    {
+      "name": "Shell",
+      "count": 1
+    },
+    {
+      "name": "JavaScript",
+      "count": 1
+    }
+  ],
+  "insights": [
+    {
+      "type": "技术方向",
+      "icon": "🔥",
+      "title": "当前最热方向：Dev Agent",
+      "content": "从今日 GitHub Trending 来看，Dev Agent（3个项目）、工具调用（3个项目）、RAG检索（2个项目），这三大方向持续吸引开发者关注。",
+      "projects": [
+        "Hmbown/DeepSeek-TUI",
+        "ruvnet/ruflo",
+        "virattt/dexter"
+      ]
+    },
+    {
+      "type": "语言趋势",
+      "icon": "💻",
+      "title": "主流语言：TypeScript 领先",
+      "content": "项目语言分布：TypeScript、Python、Rust等，其中 TypeScript 项目数量最多，TypeScript 生态正在快速追赶 Python。",
+      "projects": []
+    },
+    {
+      "type": "深度解读",
+      "icon": "⚡",
+      "title": "行业趋势：Dev Agent",
+      "content": "Dev Agent（AI 编程 Agent）今年大爆发。Dify 和 LangChain 分别代表两种路线：Dify 以可视化工作流让产品经理也能搭建 AI 流程；LangChain 以高度定制化满足复杂 AI 流水线的技术需求。在 GitHub Trending 上，Dev Agent 类项目长期占据高位，说明市场对「用 AI 提升开发效率」的需求极为旺盛。2025 年预计更多 Dev Agent 将整合代码审查、自动化测试、CI/CD 等环节。",
+      "projects": [
+        "Dify",
+        "LangChain",
+        "Devin",
+        "GitHub Copilot"
+      ]
+    }
+  ],
+  "top_projects": [
+    {
+      "name": "Hmbown/DeepSeek-TUI",
+      "description": "Coding agent for DeepSeek models that runs in your terminal",
+      "stars": "7,695",
+      "language": "Rust",
+      "tags": [
+        "Dev Agent"
+      ],
+      "why_hot": "GitHub Stars 7,695，在 Dev Agent 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "ruvnet/ruflo",
+      "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
+      "stars": "43,710",
+      "language": "TypeScript",
+      "tags": [
+        "多智能体",
+        "RAG检索",
+        "Dev Agent",
+        "自主代理"
+      ],
+      "why_hot": "GitHub Stars 43,710，在 多智能体/RAG检索 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "virattt/dexter",
+      "description": "An autonomous agent for deep financial research",
+      "stars": "23,802",
+      "language": "TypeScript",
+      "tags": [
+        "工具调用",
+        "自主代理"
+      ],
+      "why_hot": "GitHub Stars 23,802，在 工具调用/自主代理 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "mksglu/context-mode",
+      "description": "Context window optimization for AI coding agents. Sandboxes tool output, 98% reduction. 14 platforms",
+      "stars": "13,060",
+      "language": "TypeScript",
+      "tags": [
+        "记忆架构",
+        "Dev Agent",
+        "工具调用"
+      ],
+      "why_hot": "GitHub Stars 13,060，在 记忆架构/Dev Agent 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "cocoindex-io/cocoindex",
+      "description": "Incremental engine for long horizon agents 🌟 Star if you like it!",
+      "stars": "8,403",
+      "language": "Python",
+      "tags": [
+        "AI Agent"
+      ],
+      "why_hot": "GitHub Stars 8,403，在 AI Agent 方向近期热度较高，受到开发者关注。"
+    }
+  ],
   "trend_analysis": {
     "多智能体协作": {
       "icon": "🤝",
