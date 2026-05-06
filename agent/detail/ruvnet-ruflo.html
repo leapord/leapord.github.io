@@ -2,142 +2,338 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>ruvnet/ruflo | AI Agent 每日精选</title>
+  <title>ruvnet/ruflo | AI Agent 精选</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Ruflo 是面向 Claude Code 的多 Agent 编排平台，通过 `npx ruflo init` 一条命令给 Claude Code 装上「神经系统」：Agent 自动组队执行任务、从成功模式中自学习、跨会话记忆持久化，还支持">
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-   *{{box-sizing:border-box;margin:0;padding:0}}
-    body{{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.8}}
-    .container{{max-width:900px;margin:0 auto;padding:32px 24px}}
-    .back-link{{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}}
-    .back-btn{{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:14px;text-decoration:none;padding:8px 16px;background:#fff;border:1px solid #409EFF;border-radius:8px;transition:all .2s}}
-    .back-btn:hover{{background:#409EFF;color:#fff}}
-    .hero{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px;color:#fff;margin-bottom:32px;position:relative;overflow:hidden}}
-    .hero::before{{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(64,158,255,.15),transparent 70%);border-radius:50%}}
-    .hero .badge{{display:inline-block;padding:4px 12px;background:rgba(64,158,255,.2);border:1px solid rgba(64,158,255,.4);border-radius:20px;font-size:12px;margin-bottom:12px}}
-    .hero h1{{font-size:26px;font-weight:700;margin-bottom:8px}}
-    .hero .desc{{color:rgba(255,255,255,.7);font-size:15px;margin-bottom:16px;line-height:1.6}}
-    .tag-list{{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}}
-    .tag{{padding:4px 12px;background:rgba(64,158,255,.2);color:#93c5fd;border-radius:20px;font-size:12px}}
-    .hero .stats{{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}}
-    .hero .stat{{text-align:center}}
-    .hero .stat .num{{font-size:20px;font-weight:700;color:#60a5fa}}
-    .hero .stat .label{{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase}}
-    .hero .meta{{margin-top:16px;font-size:13px;color:rgba(255,255,255,.4)}}
-    .hero .meta span{{margin-right:16px}}
-    .section{{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;border:1px solid #f0f0f0}}
-    .section h2{{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #409EFF;display:flex;align-items:center;gap:8px}}
-    .section h2 .icon{{font-size:20px}}
-    .section p,.section li{{color:#555;font-size:14px;line-height:1.9}}
-    .section ul{{padding-left:20px}}
-    .section li{{margin-bottom:10px}}
-    .highlight-box{{background:linear-gradient(135deg,#ecf5ff,#f0f9ff);border-left:4px solid #409EFF;padding:20px 24px;border-radius:0 8px 8px 0;margin:16px 0}}
-    .highlight-box p{{color:#1a1a2e;font-size:15px;line-height:1.8}}
-    .pro-con{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}}
-    .pro-item,.con-item{{padding:12px 16px;border-radius:8px;font-size:13px;line-height:1.6}}
-    .pro-item{{background:#f0fdf4;border-left:3px solid #22c55e;color:#166534}}
-    .con-item{{background:#fef2f2;border-left:3px solid #ef4444;color:#991b1b}}
-    .pro-item strong,.con-item strong{{display:block;margin-bottom:4px}}
-    pre{{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.7;margin:16px 0}}
-    code{{font-family:'Fira Code','Cascadia Code',monospace}}
-    .doc-links{{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}}
-    .doc-link{{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#ecf5ff;color:#409EFF;border-radius:8px;text-decoration:none;font-size:13px;transition:all .2s}}
-    .doc-link:hover{{background:#409EFF;color:#fff}}
-    .cta-box{{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:24px}}
-    .cta-box a{{display:inline-block;padding:12px 32px;background:#409EFF;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}}
-    .cta-box a:hover{{transform:scale(1.05)}}
-    .footer{{text-align:center;padding:24px;color:#b0c4de;font-size:13px;margin-top:32px}}
-    .footer a{{color:#409EFF}}
-    @media(max-width:640px){{
-      .pro-con{{grid-template-columns:1fr}}
-      .hero{{padding:24px}}
-      .hero h1{{font-size:20px}}
-    }}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.7}
+
+    /* ── 顶部导航 ── */
+    .topbar{background:#fff;border-bottom:1px solid #e8e8e8;padding:0 24px;height:56px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+    .topbar-brand{font-size:16px;font-weight:700;color:#1a1a2e}
+    .topbar-brand span{color:#409EFF}
+    .topbar-path{display:flex;align-items:center;gap:6px;font-size:13px;color:#8c8c8c;margin-left:8px}
+    .topbar-path a{color:#409EFF;text-decoration:none}
+    .topbar-back{margin-left:auto;display:flex;gap:8px}
+    .topbar-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border-radius:6px;border:1px solid #d9d9d9;font-size:13px;color:#595959;cursor:pointer;transition:all .2s;text-decoration:none}
+    .topbar-btn:hover{color:#409EFF;border-color:#409EFF}
+
+    /* ── 主布局 ── */
+    .page-wrap{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* ── Hero 卡片 ── */
+    .hero-card{background:linear-gradient(135deg,#8B5CF6dd,#8B5CF6);border-radius:16px;padding:36px 40px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden}
+    .hero-card::before{content:'';position:absolute;top:-60px;right:-40px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 70%);border-radius:50%}
+    .hero-card::after{content:'';position:absolute;bottom:-80px;left:20%;width:400px;height:200px;background:radial-gradient(ellipse,rgba(255,255,255,.05),transparent 70%)}
+    .hero-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;font-size:12px;margin-bottom:14px}
+    .hero-title{font-size:28px;font-weight:700;margin-bottom:10px;letter-spacing:-.5px}
+    .hero-summary{color:rgba(255,255,255,.82);font-size:15px;line-height:1.7;margin-bottom:20px;max-width:680px}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .hero-tag{padding:4px 12px;background:rgba(255,255,255,.15);color:#fff;border-radius:20px;font-size:12px}
+    .hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+    .hero-stat{text-align:center}
+    .hero-stat .num{font-size:22px;font-weight:700;color:#fff}
+    .hero-stat .lbl{font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;margin-top:2px}
+    .hero-meta{margin-top:16px;font-size:13px;color:rgba(255,255,255,.5)}
+    .hero-meta span{margin-right:16px}
+
+    /* ── 导航标签 ── */
+    .nav-tabs{display:flex;gap:4px;background:#fff;border-radius:12px;padding:6px;margin-bottom:20px;overflow-x:auto}
+    .nav-tab{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;color:#595959;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .nav-tab.active{background:#8B5CF6;color:#fff}
+
+    /* ── 内容区 ── */
+    .content-area{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
+    .main-content{}
+
+    /* ── 内容卡片 ── */
+    .content-card{background:#fff;border-radius:12px;padding:28px 32px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .card-title{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #8B5CF6;display:flex;align-items:center;gap:8px}
+    .card-title .icon{font-size:20px}
+
+    /* ── 优缺点并排 ── */
+    .pro-con-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    .pro-box{background:#f0fdf4;border-radius:10px;padding:18px 20px;border-left:4px solid #22c55e}
+    .con-box{background:#fef2f2;border-radius:10px;padding:18px 20px;border-left:4px solid #ef4444}
+    .box-title{font-size:13px;font-weight:700;margin-bottom:10px}
+    .pro-box .box-title{color:#166534}
+    .con-box .box-title{color:#991b1b}
+    .box-title::before{content:'✅ ';margin-right:4px}
+    .con-box .box-title::before{content:'⚠️ ';margin-right:4px}
+    .box-list{list-style:none;padding:0}
+    .box-list li{font-size:13px;color:#444;margin-bottom:6px;padding-left:12px;position:relative}
+    .box-list li::before{content:'·';position:absolute;left:0;color:#999}
+
+    /* ── Markdown 内容渲染 ── */
+    .md-body{font-size:14px;color:#444;line-height:1.9}
+    .md-body h1,.md-body h2,.md-body h3,.md-body h4{font-weight:700;color:#1a1a2e;margin:24px 0 12px;line-height:1.4}
+    .md-body h1{font-size:22px}
+    .md-body h2{font-size:18px;padding-bottom:8px;border-bottom:1px solid #f0f0f0}
+    .md-body h3{font-size:15px}
+    .md-body p{margin-bottom:14px}
+    .md-body ul,.md-body ol{padding-left:22px;margin-bottom:14px}
+    .md-body li{margin-bottom:6px;line-height:1.7}
+    .md-body strong{color:#1a1a2e;font-weight:600}
+    .md-body code{font-family:'Fira Code','Cascadia Code',monospace;background:#f5f5f5;padding:2px 6px;border-radius:4px;font-size:12.5px;color:#c0392b}
+    .md-body pre{background:#1e293b;border-radius:10px;padding:20px;overflow-x:auto;margin:16px 0}
+    .md-body pre code{background:none;color:#e2e8f0;padding:0;font-size:13px;line-height:1.7}
+    .md-body blockquote{border-left:4px solid #8B5CF6;background:#f8f9ff;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;color:#555}
+    .md-body blockquote p{margin:0}
+    .md-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+    .md-body th{background:#f5f7fa;padding:10px 14px;text-align:left;font-weight:600;color:#606266;border-bottom:2px solid #e0e0e0}
+    .md-body td{padding:10px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+    .md-body tr:hover td{background:#fafafa}
+    .md-body a{color:#8B5CF6;text-decoration:none}
+    .md-body a:hover{text-decoration:underline}
+
+    /* ── 侧边栏 ── */
+    .sidebar{position:sticky;top:76px}
+    .side-card{background:#fff;border-radius:12px;padding:20px;margin-bottom:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .side-card-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #f0f0f0}
+    .side-meta{display:flex;flex-direction:column;gap:10px}
+    .side-meta-row{display:flex;align-items:center;gap:10px;font-size:13px}
+    .side-meta-label{color:#8c8c8c;min-width:56px}
+    .side-meta-val{font-weight:600;color:#1a1a2e}
+    .side-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .side-tag{padding:4px 10px;background:#f0f5ff;color:#409EFF;border-radius:20px;font-size:12px}
+    .doc-list{display:flex;flex-direction:column;gap:8px}
+    .doc-item{display:flex;align-items:center;gap:8px;font-size:13px;color:#409EFF;text-decoration:none;padding:8px 12px;background:#f8f9ff;border-radius:8px;transition:all .2s}
+    .doc-item:hover{background:#409EFF;color:#fff}
+    .doc-item .doc-icon{font-size:16px}
+
+    /* ── CTA ── */
+    .cta-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:12px;padding:28px;text-align:center;margin-top:8px}
+    .cta-card a{display:inline-flex;align-items:center;gap:6px;padding:12px 32px;background:#8B5CF6;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:transform .2s}
+    .cta-card a:hover{transform:scale(1.05)}
+
+    /* ── 底部 ── */
+    .page-footer{text-align:center;padding:24px;color:#b0c4de;font-size:13px}
+
+    /* ── 响应式 ── */
+    @media(max-width:900px){
+      .content-area{grid-template-columns:1fr}
+      .sidebar{position:static}
+      .pro-con-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:640px){
+      .hero-card{padding:24px}
+      .hero-title{font-size:22px}
+      .hero-stats{gap:20px}
+      .content-card{padding:20px}
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="back-link">
-    <a class="back-btn" href="/agent/index.html">← Dashboard</a>
-    <a class="back-btn" href="/agent/curated.html">← 每日精选</a>
-  </div>
-
-  <div class="hero">
-    <div class="badge">⭐ AI Agent 精选</div>
-    <h1>ruvnet/ruflo</h1>
-    <p class="desc">Ruflo 是面向 Claude Code 的多 Agent 编排平台，通过 `npx ruflo init` 一条命令给 Claude Code 装上「神经系统」：Agent 自动组队执行任务、从成功模式中自学习、跨会话记忆持久化，还支持联邦通信让不同机器上的 Agent 安全协作不泄露数据。</p>
-    <div class="tag-list"><span class='tag'>Multi-Agent编排</span><span class='tag'>Claude Code</span><span class='tag'>Agent 记忆</span><span class='tag'>自优化</span><span class='tag'>MCP</span></div>
-    <div class="stats">
-      <div class="stat"><div class="num">⭐ 43,758</div><div class="label">Stars</div></div>
-      <div class="stat"><div class="num">4,869</div><div class="label">Forks</div></div>
-      <div class="stat"><div class="num">TypeScript</div><div class="label">语言</div></div>
-      <div class="stat"><div class="num">MIT</div><div class="label">协议</div></div>
+<div id="app">
+  <!-- 顶部导航 -->
+  <div class="topbar">
+    <div class="topbar-brand">🤖 AI Agent <span>精选</span></div>
+    <div class="topbar-path">
+      <a href="/agent/index.html">首页</a>
+      <span>›</span>
+      <a href="/agent/curated.html">每日精选</a>
+      <span>›</span>
+      <span>{ projectName }</span>
     </div>
-    <div class="meta">
-      <span>📅 创建于 2025-06-02</span><br><span>🏷️ agentic-ai, agentic-framework, multi-agent, claude-code</span>
+    <div class="topbar-back">
+      <a class="topbar-btn" href="/agent/index.html">← Dashboard</a>
+      <a class="topbar-btn" href="/agent/curated.html">← 每日精选</a>
     </div>
   </div>
 
-  <div class="section">
-    <h2><span class="icon">🔍</span> 项目详解</h2>
-    <div class="highlight-box">
-      <p>Ruflo（ 前身是 claude-flow）是一个专为 Claude Code 打造的多 Agent 编排平台。它的核心定位是**给 AI 编码助手增加协调层**，让多个专业 Agent 能像团队一样协作。
+  <div class="page-wrap">
+    <!-- Hero -->
+    <div class="hero-card">
+      <div class="hero-badge">⭐ AI Agent 精选</div>
+      <h1 class="hero-title">{ projectName }</h1>
+      <p class="hero-summary">{ summary }</p>
+      <div class="hero-tags">
+        <span class="hero-tag" v-for="t in tags" :key="t">{ t }</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">⭐ { stars }</div><div class="lbl">Stars</div></div>
+        <div class="hero-stat"><div class="num">{ forks }</div><div class="lbl">Forks</div></div>
+        <div class="hero-stat"><div class="num">{ language }</div><div class="lbl">语言</div></div>
+        <div class="hero-stat"><div class="num">{ license }</div><div class="lbl">协议</div></div>
+      </div>
+      <div class="hero-meta" v-if="topics.length">
+        <span v-for="t in topics" :key="t">🏷️ { t }</span>
+      </div>
+    </div>
 
-**核心架构：**
-```
+    <!-- 导航标签 -->
+    <div class="nav-tabs">
+      <div class="nav-tab" :class="{active:activeTab==='detail'}" @click="activeTab='detail'">📖 项目详解</div>
+      <div class="nav-tab" :class="{active:activeTab==='why'}" @click="activeTab='why'">📈 为什么关注</div>
+      <div class="nav-tab" :class="{active:activeTab==='procon'}" @click="activeTab='procon'">⚡ 优缺点</div>
+      <div class="nav-tab" :class="{active:activeTab==='start'}" @click="activeTab='start'">🚀 快速上手</div>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="content-area">
+      <div class="main-content">
+        <!-- 项目详解 -->
+        <div v-show="activeTab==='detail'">
+          <div class="content-card">
+            <div class="card-title"><span class="icon">📖</span> 项目详解</div>
+            <div class="md-body" v-html="renderedWhat"></div>
+          </div>
+        </div>
+
+        <!-- 为什么关注 -->
+        <div v-show="activeTab==='why'">
+          <div class="content-card">
+            <div class="card-title"><span class="icon">📈</span> 为什么值得关注</div>
+            <div class="md-body" v-html="renderedWhy"></div>
+          </div>
+        </div>
+
+        <!-- 优缺点 -->
+        <div v-show="activeTab==='procon'">
+          <div class="content-card">
+            <div class="card-title"><span class="icon">⚡</span> 优缺点分析</div>
+            <div class="pro-con-grid">
+              <div class="pro-box">
+                <div class="box-title">✅ 优势</div>
+                <ul class="box-list">
+                  <li v-for="(p,i) in pros" :key="i">{ p }</li>
+                </ul>
+              </div>
+              <div class="con-box">
+                <div class="box-title">⚠️ 局限</div>
+                <ul class="box-list" v-if="cons.length">
+                  <li v-for="(c,i) in cons" :key="i">{ c }</li>
+                </ul>
+                <ul class="box-list" v-else><li>暂无已知局限性</li></ul>
+              </div>
+            </div>
+          </div>
+          <div class="content-card">
+            <div class="card-title"><span class="icon">👥</span> 适合谁用</div>
+            <div class="md-body"><p>{ who }</p></div>
+          </div>
+        </div>
+
+        <!-- 快速上手 -->
+        <div v-show="activeTab==='start'">
+          <div class="content-card">
+            <div class="card-title"><span class="icon">🚀</span> 快速上手</div>
+            <div class="md-body" v-html="renderedInstall"></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card">
+          <a :href="'https://github.com/' + githubName" target="_blank">⭐ 去 GitHub 看看</a>
+        </div>
+      </div>
+
+      <!-- 侧边栏 -->
+      <div class="sidebar">
+        <div class="side-card">
+          <div class="side-card-title">📊 项目信息</div>
+          <div class="side-meta">
+            <div class="side-meta-row"><span class="side-meta-label">Stars</span><span class="side-meta-val">⭐ { stars }</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">语言</span><span class="side-meta-val">{ language }</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">协议</span><span class="side-meta-val">{ license }</span></div>
+            <div class="side-meta-row" v-if="topics.length"><span class="side-meta-label">标签</span><div class="side-tags"><span class="side-tag" v-for="t in topics.slice(0,5)" :key="t">{ t }</span></div></div>
+          </div>
+        </div>
+
+        <div class="side-card" v-if="docLinks.length">
+          <div class="side-card-title">🔗 相关链接</div>
+          <div class="doc-list">
+            <a class="doc-item" v-for="(doc,i) in docLinks" :key="i" :href="doc.url" target="_blank">
+              <span class="doc-icon">→</span> { doc.label }
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      © { new Date().getFullYear() } AI Agent 前沿追踪 ·
+      <a href="/agent/index.html" style="color:#409EFF">Dashboard</a> ·
+      <a href="/agent/curated.html" style="color:#409EFF">每日精选</a> ·
+      报告生成时间: 2026-05-06 10:17:33
+    </div>
+  </div>
+</div>
+
+<script>
+const {createApp, ref, computed} = Vue
+createApp({
+  setup() {
+    const activeTab = ref('detail')
+    const projectName = 'ruvnet/ruflo'
+    const githubName = 'ruvnet/ruflo'
+    const summary = `Ruflo 是面向 Claude Code 的多 Agent 编排平台，通过 \`npx ruflo init\` 一条命令给 Claude Code 装上「神经系统」：Agent 自动组队执行任务、从成功模式中自学习、跨会话记忆持久化，还支持联邦通信让不同机器上的 Agent 安全协作不泄露数据。`
+    const stars = '43,758'
+    const forks = '4,869'
+    const language = 'TypeScript'
+    const license = 'MIT'
+    const tags = ["Multi-Agent编排","Claude Code","Agent 记忆","自优化","MCP"]
+    const topics = ["agentic-ai","agentic-framework","multi-agent","claude-code"]
+    const who = `重度使用 Claude Code 的开发者/团队，以及希望 AI 编程助手能自主协作、持续学习进化的企业`
+    const pros = ["**零学习成本**：安装后正常用 Claude Code，Ruflo 在后台自动协调，不需要改工作流","**98 个专业化 Agent**：从代码生成到安全审计，从文档到部署，覆盖全流程","**自优化能力**：Ruflo 会从成功案例中学习，不断优化下次任务分配策略","**联邦安全**：不同机器上的 Agent 可以协作，但数据不会跨边界泄露，适合企业","**插件生态丰富**：32 个插件按需安装，不像 LangChain 那样全量引入"]
+    const cons = ["强依赖 Claude Code，非 Claude 用户无法使用","完整安装对工作区有文件侵入（.claude/ 等目录）","国内网络安装 npm 包可能较慢"]
+    const docLinks = [{label:"GitHub 仓库",url:"https://github.com/ruvnet/claude-flow"},{label:"Ruflo 在线体验",url:"https://flo.ruv.io"},{label:"Goal Planner",url:"https://goal.ruv.io"}]
+
+    const md = (text) => {
+      if (!text) return ''
+      // Configure marked
+      if (typeof marked !== 'undefined') {
+        marked.setOptions({
+          breaks: true,
+          gfm: true,
+          headerIds: false,
+          mangle: false,
+        })
+        return marked.parse(text)
+      }
+      return text
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+    }
+
+    const renderedWhat = computed(() => md(`Ruflo（ 前身是 claude-flow）是一个专为 Claude Code 打造的多 Agent 编排平台。它的核心定位是**给 AI 编码助手增加协调层**，让多个专业 Agent 能像团队一样协作。
+
+### 核心架构
+
+\`\`\`
 User --> Ruflo (CLI/MCP) --> Router --> Swarm --> Agents --> Memory --> LLM Providers
                           ^                           |
                           +---- Learning Loop <-------+
-```
-用户正常写代码，Ruflo 在后台自动完成：任务路由、Agent 编排、学习记忆、联邦通信。
+\`\`\`
 
-**两大安装路径：**
+### 两种安装路径对比
 
 | | Claude Code 插件（轻量） | CLI 完整安装 |
 |---|---|---|
-| 安装后文件 | 零文件侵入 | `.claude/`、`.claude-flow/` 等 |
+| 安装后文件 | **零文件** | \`.claude/\`、\`.claude-flow/\` 等 |
 | MCP Server | 不注册 | 注册到系统 |
 | Hooks | 无 | 完整安装 |
-| Agent 数量 | 几个 | 98 个 Agent、60+ 命令、30+ 技能 |
-| 适合场景 | 试用体验 | 正式生产 |
+| Agent 数量 | 几个 | **98 个 Agent**、60+ 命令、30+ 技能 |
+| 适合场景 | 试用体验 | **正式生产** |
 
-**核心能力：**
+### 核心能力
+
 - **Self-Learning（自学习）**：从成功执行的任务中提取模式，下次自动复用
 - **Multi-Agent Swarm（多 Agent 蜂群）**：任务自动拆解分配给最合适的 Agent
-- **Federated Memory（联邦记忆）**：跨机器安全共享记忆，不泄露数据
-- **Plugin 生态（32 个插件）**：ruflo-core、ruflo-swarm、ruflo-autopilot、ruflo-federation 等</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2><span class="icon">📈</span> 为什么值得关注</h2>
-    <ul><li>零学习成本：安装后正常用 Claude Code，Ruflo 在后台自动协调，不需要改工作流</li><li>98 个专业化 Agent：从代码生成到安全审计，从文档到部署，覆盖全流程</li><li>自优化能力：Ruflo 会从成功案例中学习，不断优化下次任务分配策略</li><li>联邦安全：不同机器上的 Agent 可以协作，但数据不会跨边界泄露，适合企业</li><li>插件生态丰富：32 个插件按需安装，不像 LangChain 那样全量引入</li></ul>
-  </div>
-
-  <div class="section">
-    <h2><span class="icon">⚡</span> 优缺点分析</h2>
-    <div class="pro-con">
-      <div>
-        <div class="pro-item" v-for="p in pros" :key="p">
-          <strong>✅ 优势</strong>· 零学习成本：安装后正常用 Claude Code，Ruflo 在后台自动协调，不需要改工作流<br>· 98 个专业化 Agent：从代码生成到安全审计，从文档到部署，覆盖全流程<br>· 自优化能力：Ruflo 会从成功案例中学习，不断优化下次任务分配策略<br>· 联邦安全：不同机器上的 Agent 可以协作，但数据不会跨边界泄露，适合企业<br>· 插件生态丰富：32 个插件按需安装，不像 LangChain 那样全量引入
-        </div>
-      </div>
-      <div>
-        <div class="con-item">
-          <strong>⚠️ 局限</strong>· 强依赖 Claude Code，非 Claude 用户无法使用<br>· 完整安装对工作区有文件侵入（.claude/ 等目录）<br>· 国内网络安装 npm 包可能较慢
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2><span class="icon">👥</span> 适合谁用</h2>
-    <p>重度使用 Claude Code 的开发者/团队，以及希望 AI 编程助手能自主协作、持续学习进化的企业</p>
-  </div>
-
-  <div class="section">
-    <h2><span class="icon">🚀</span> 快速上手</h2>
-    <pre>```bash
+- **Federated Memory（联邦记忆）**：跨机器安全共享记忆，数据不跨边界泄露
+- **Plugin 生态（32 个插件）**：ruflo-core、ruflo-swarm、ruflo-autopilot、ruflo-federation 等按需安装`))
+    const renderedWhy = computed(() => md(`- **零学习成本**：安装后正常用 Claude Code，Ruflo 在后台自动协调，不需要改工作流
+- **98 个专业化 Agent**：从代码生成到安全审计，从文档到部署，覆盖全流程
+- **自优化能力**：Ruflo 会从成功案例中学习，不断优化下次任务分配策略
+- **联邦安全**：不同机器上的 Agent 可以协作，但数据不会跨边界泄露，适合企业
+- **插件生态丰富**：32 个插件按需安装，不像 LangChain 那样全量引入`))
+    const renderedInstall = computed(() => md(`\`\`\`bash
 # 完整安装（推荐生产环境）
 npx ruflo init
 
@@ -145,22 +341,15 @@ npx ruflo init
 /plugin marketplace add ruvnet/ruflo
 /plugin install ruflo-core@ruflo
 /plugin install ruflo-swarm@ruflo
-```</pre>
-    <div class="doc-links">
-      <a class='doc-link' href='https://github.com/ruvnet/claude-flow' target='_blank'>• GitHub 仓库</a><a class='doc-link' href='https://flo.ruv.io' target='_blank'>• Ruflo 在线体验</a><a class='doc-link' href='https://goal.ruv.io' target='_blank'>• Goal Planner</a>
-    </div>
-  </div>
+\`\`\``))
 
-  <div class="cta-box">
-    <a href="https://github.com/ruvnet/ruflo" target="_blank">⭐ 去 GitHub 看看</a>
-  </div>
-
-  <div class="footer">
-    © 2026 <a href="https://github.com/leapord/agent" target="_blank">leapord/agent</a> ·
-    <a href="/agent/index.html">Dashboard</a> ·
-    <a href="/agent/curated.html">每日精选</a> ·
-    报告生成时间: 2026-05-06 10:01:14
-  </div>
-</div>
+    return {
+      activeTab, projectName, githubName, summary, stars, forks, language, license,
+      tags, topics, who, pros, cons, docLinks,
+      renderedWhat, renderedWhy, renderedInstall,
+    }
+  }
+}).use(ElementPlus).mount('#app')
+</script>
 </body>
 </html>
