@@ -262,14 +262,39 @@
 
       <!-- ── TAB: 每日精选 ── -->
       <div class="tab-content" :class="{active:activeTab==='curated'}">
+        <!-- 归档入口 -->
         <div class="section-card">
           <div class="section-card-header">
-            <h2 class="section-card-title">⭐ 每日精选 · 1k+ Stars AI Agent 项目</h2>
-            <span style="font-size:11px;color:#999">{{ curatedProjects.length }} 个精选项目</span>
+            <h2 class="section-card-title">⭐ 每日精选归档</h2>
+            <span style="font-size:11px;color:#999">{{ curatedArchive.length }} 天归档</span>
           </div>
           <div class="content-body">
-            <div v-if="curatedProjects.length === 0" class="empty">暂无精选数据（将在下次扫描后更新）</div>
-            <div class="curated-grid" v-else>
+            <div v-if="curatedArchive.length === 0" class="empty">暂无归档数据</div>
+            <ul class="report-list" v-else>
+              <li class="report-item" v-for="r in curatedArchive" :key="r.date">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span class="report-date">{{ r.date }}</span>
+                  <span class="report-label">{{ r.count }} 项目</span>
+                  <div style="display:flex;gap:4px;flex-wrap:wrap">
+                    <span v-for="tag in (r.tags||[]).slice(0,4)" :key="tag" class="curated-tag" style="font-size:10px;padding:1px 6px">{{ tag }}</span>
+                  </div>
+                  <div style="display:flex;gap:6px;margin-left:auto;font-size:11px;color:#7a8ba8">
+                    <span v-for="top in (r.topProjects||[]).slice(0,2)" :key="top.name">⭐ {{ top.name.split('/')[1] }} {{ top.stars }}</span>
+                  </div>
+                </div>
+                <a class="report-link" :href="r.url" target="_blank">查看 {{ r.date }} →</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 当日精选项目卡片 -->
+        <div class="section-card" v-if="curatedProjects.length > 0">
+          <div class="section-card-header">
+            <h2 class="section-card-title">🔥 今日精选 · {{ todayCuratedDate }}</h2>
+            <span style="font-size:11px;color:#999">{{ curatedProjects.length }} 个 1k+ Stars 项目</span>
+          </div>
+          <div class="content-body">
+            <div class="curated-grid">
               <div class="curated-card" v-for="p in curatedProjects" :key="p.name">
                 <div class="curated-name">
                   <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
@@ -327,11 +352,11 @@
         <div class="side-stat"><span class="label">报告存档</span><span class="val">{{ reports.length }}</span></div>
         <div class="side-stat"><span class="label">分类领域</span><span class="val">{{ catStats.length }}</span></div>
       </div>
-      <!-- 分类分布 -->
+      <!-- 分类分布 - 紧凑面包屑 -->
       <div class="side-card" v-if="catStats.length > 0">
         <div class="side-card-title">🏷️ 技术分类</div>
         <div class="side-tags">
-          <span class="side-tag" v-for="s in catStats.slice(0,15)" :key="s.name">{{ s.name }} {{ s.count }}</span>
+          <span class="side-tag" v-for="s in catStats.slice(0,12)" :key="s.name" style="font-size:10px;padding:2px 7px">{{ s.name }} {{ s.count }}</span>
         </div>
       </div>
       <!-- 语言分布 -->
@@ -371,6 +396,7 @@ createApp({
     const activeCat = ref('')
     const trendingProjects = ref([])
     const curatedProjects = ref([])
+    const curatedArchive = ref([])
     const reports = ref([])
 
     const slugify = (name) => name.replace(/\//g, '-')
@@ -457,6 +483,11 @@ createApp({
       return list
     })
 
+    const todayCuratedDate = computed(() => {
+      const today = new Date().toISOString().slice(0, 10)
+      return today
+    })
+
     onMounted(() => {
       // 加载 trending 数据
       fetch('trending.json').then(r=>r.json()).then(d=>{
@@ -468,6 +499,11 @@ createApp({
       // 加载精选数据
       fetch('curated.json').then(r=>r.json()).then(d=>{
         curatedProjects.value = Array.isArray(d) ? d : (d.projects||[])
+      }).catch(()=>{})
+
+      // 加载精选归档索引
+      fetch('curated-archive.json').then(r=>r.json()).then(d=>{
+        curatedArchive.value = Array.isArray(d) ? d : []
       }).catch(()=>{})
 
       // 加载报告列表
@@ -489,9 +525,9 @@ createApp({
 
     return {
       activeTab, loading, searchQuery, sortBy, activeCat,
-      trendingProjects, curatedProjects, reports,
+      trendingProjects, curatedProjects, curatedArchive, reports,
       catStats, allLangs, filteredProjects, trendInsights,
-      todayReportUrl, weeklyReportUrl, slugify
+      todayReportUrl, weeklyReportUrl, slugify, todayCuratedDate
     }
   }
 }).use(ElementPlus).mount('#app')
