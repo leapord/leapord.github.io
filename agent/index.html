@@ -60,13 +60,10 @@
     .section-title{font-size:17px;font-weight:600;color:#1a1a2e;display:flex;align-items:center;gap:8px}
     .section-title::before{content:'';display:block;width:4px;height:16px;background:#409EFF;border-radius:2px}
     .section-link{font-size:12px;color:#409EFF}
-    /* ── Stats Grid ── */
-    .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax:130px,1fr));gap:10px;margin-bottom:32px}
-    .stat-card{background:#fff;border-radius:10px;padding:14px;border:1px solid #f0f0f0;text-align:center}
-    .stat-card .sc-num{font-size:20px;font-weight:700;color:#409EFF}
-    .stat-card .sc-label{font-size:10px;color:#999;margin-top:3px;text-transform:uppercase;letter-spacing:.5px}
-    .stat-card .sc-bar{height:3px;background:#ecf5ff;border-radius:2px;margin-top:8px;overflow:hidden}
-    .stat-card .sc-bar-fill{height:100%;background:#409EFF;border-radius:2px;transition:width .6s ease}
+    /* ── Stats Breadcrumb ── */
+    .stats-breadcrumb{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;align-items:center}
+    .stat-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:#ecf5ff;color:#409EFF;border-radius:14px;font-size:11px;font-weight:500}
+    .stat-tag .st-num{background:#409EFF;color:#fff;border-radius:10px;padding:0 5px;font-size:10px;font-weight:700}
     /* ── New Badge ── */
     .new-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;letter-spacing:.5px;text-transform:uppercase}
     /* ── Trending Cards ── */
@@ -193,41 +190,15 @@
   <!-- Main -->
   <main class="main-content">
 
-    <!-- Stats Overview -->
-    <section id="stats" style="margin-bottom:32px;">
-      <div class="section-header">
-        <h2 class="section-title">📊 技术分类统计</h2>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-card" v-for="s in catStats" :key="s.name">
-          <div class="sc-num">{{ s.count }}</div>
-          <div class="sc-label">{{ s.name }}</div>
-          <div class="sc-bar"><div class="sc-bar-fill" :style="{width: (s.count / maxCatCount * 100) + '%'}"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Search + Sort -->
-    <div style="margin-bottom:24px;">
-      <div class="search-bar">
-        <input class="search-input" v-model="searchQuery" placeholder="🔍 搜索项目名称、描述或标签..." />
-        <el-select v-model="langFilter" placeholder="编程语言" clearable style="width:130px" size="large">
-          <el-option v-for="l in allLangs" :key="l" :label="l" :value="l"></el-option>
-        </el-select>
-      </div>
-      <div class="sort-tabs">
-        <span class="sort-tab" :class="{active:sortBy==='stars'}" @click="sortBy='stars'">⭐ 按热度</span>
-        <span class="sort-tab" :class="{active:sortBy==='today'}" @click="sortBy='today'">🆕 今日新增</span>
-        <span class="sort-tab" :class="{active:sortBy==='name'}" @click="sortBy='name'">📛 按名称</span>
-        <span class="sort-tab" :class="{active:sortBy==='lang'}" @click="sortBy='lang'">💻 按语言</span>
-      </div>
-    </div>
-
     <!-- Trending Projects -->
     <section id="projects" style="margin-bottom:32px;">
       <div class="section-header">
         <h2 class="section-title">🔥 热门 AI Agent 项目</h2>
         <el-link class="section-link" href="https://github.com/trending?since=daily" target="_blank">GitHub 趋势 →</el-link>
+      </div>
+      <!-- 分类统计 breadcrumb -->
+      <div class="stats-breadcrumb">
+        <span class="stat-tag" v-for="s in catStats.slice(0,12)" :key="s.name">{{ s.name }} <span class="st-num">{{ s.count }}</span></span>
       </div>
       <div class="categories">
         <span class="cat-pill" :class="{active:activeCat===''}" @click="activeCat=''">
@@ -236,6 +207,22 @@
         <span class="cat-pill" :class="{active:activeCat===cat.name}" @click="activeCat=activeCat===cat.name?'':cat.name" v-for="cat in catStats" :key="cat.name">
           {{ cat.name }} <span class="cat-count">{{ cat.count }}</span>
         </span>
+      </div>
+
+      <!-- Search + Sort -->
+      <div style="margin-bottom:16px;">
+        <div class="search-bar">
+          <input class="search-input" v-model="searchQuery" placeholder="🔍 搜索项目名称、描述或标签..." />
+          <el-select v-model="langFilter" placeholder="编程语言" clearable style="width:130px" size="large">
+            <el-option v-for="l in allLangs" :key="l" :label="l" :value="l"></el-option>
+          </el-select>
+        </div>
+        <div class="sort-tabs">
+          <span class="sort-tab" :class="{active:sortBy==='stars'}" @click="sortBy='stars'">⭐ 按热度</span>
+          <span class="sort-tab" :class="{active:sortBy==='today'}" @click="sortBy='today'">🆕 今日新增</span>
+          <span class="sort-tab" :class="{active:sortBy==='name'}" @click="sortBy='name'">📛 按名称</span>
+          <span class="sort-tab" :class="{active:sortBy==='lang'}" @click="sortBy='lang'">💻 按语言</span>
+        </div>
       </div>
 
       <div v-if="loading" class="loading">加载中...</div>
@@ -348,7 +335,6 @@ createApp({
         .map(([name, count]) => ({name, count}))
         .sort((a,b) => b.count - a.count)
     })
-    const maxCatCount = computed(() => Math.max(...catStats.value.map(c=>c.count), 1))
     const allLangs = computed(() => {
       const s = new Set(trendingProjects.value.map(p=>p.language).filter(Boolean))
       return [...s].sort()
@@ -412,7 +398,7 @@ createApp({
     return {
       loading, searchQuery, langFilter, sortBy, activeCat,
       trendingProjects, arxivPapers, reports,
-      catStats, maxCatCount, allLangs, displayProjects,
+      catStats, allLangs, displayProjects,
       todayReport, weeklyReport, slugify
     }
   }
