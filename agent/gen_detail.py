@@ -885,7 +885,7 @@ def generate_detail(name, info, out_dir):
         timestamp=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     )
 
-    html = _t.replace('__name__','{name}').replace('__stars__','{stars}').replace('__forks__','{forks}').replace('__language__','{language}').replace('__license__','{license}').replace('__summary__','{summary}').replace('__who__','{who}').replace('__timestamp__','{timestamp}')
+    html = _t.replace('__name__','{{name}}').replace('__stars__','{{stars}}').replace('__forks__','{{forks}}').replace('__language__','{{language}}').replace('__license__','{{license}}').replace('__summary__','{{summary}}').replace('__who__','{{who}}').replace('__timestamp__','{{timestamp}}').replace('{ t }','{{t}}').replace('{ p }','{{p}}').replace('{ c }','{{c}}').replace('{t}','{{t}}').replace('{p}','{{p}}').replace('{c}','{{c}}')
 
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write(html)
