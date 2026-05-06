@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>AI Agent 前沿追踪 · 每日热榜</title>
+  <title>AI Agent 前沿追踪 · 全景黄页</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="AI Agent 前沿研究黄页导航 — 追踪热门项目、技术趋势与每日动态">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -11,110 +11,135 @@
   <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f5f7fa;color:#1a1a2e;line-height:1.6}
+    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.6}
     a{text-decoration:none;color:inherit}
     /* ── Header ── */
     .site-header{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.07);position:sticky;top:0;z-index:100}
-    .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px}
-    .site-logo{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
-    .site-logo span{font-size:22px}
-    .header-nav{display:flex;gap:24px}
-    .header-nav a{font-size:14px;color:#606266;transition:color .2s}
+    .header-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+    .site-logo{font-size:17px;font-weight:700;display:flex;align-items:center;gap:6px}
+    .site-logo span{font-size:20px}
+    .header-nav{display:flex;gap:20px;align-items:center}
+    .header-nav a{font-size:13px;color:#606266;transition:color .2s}
     .header-nav a:hover{color:#409EFF}
-    .nav-btn{font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid #409EFF;color:#409EFF;transition:all .2s}
-    .nav-btn:hover{background:#409EFF;color:#fff}
-    /* ── Hero ── */
-    .hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:50px 24px}
-    .hero-inner{max-width:1200px;margin:0 auto}
-    .hero-badge{display:inline-block;background:rgba(64,158,255,.15);border:1px solid rgba(64,158,255,.3);color:#7ec3ff;font-size:12px;padding:4px 12px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
-    .hero h1{font-size:34px;font-weight:700;margin-bottom:10px;letter-spacing:-.5px}
-    .hero h1 span{color:#409EFF}
-    .hero-desc{font-size:14px;color:#b0c4de;max-width:620px;line-height:1.8;margin-bottom:28px}
-    .hero-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px}}
-    .hero-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 18px;min-width:90px;flex:1}
-    .hero-stat-num{font-size:24px;font-weight:700;color:#409EFF}
-    .hero-stat-label{font-size:10px;color:#7a8ba8;margin-top:2px;text-transform:uppercase;letter-spacing:1px}
-    /* ── Report Cards in Hero ── */
-    .hero-reports{display:flex;gap:12px;flex-wrap:wrap}
-    .hero-report-card{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;text-decoration:none;color:#fff;transition:all .2s;min-width:180px}
-    .hero-report-card:hover{background:rgba(64,158,255,.2);border-color:#409EFF}
-    .hero-report-icon{font-size:22px}
-    .hero-report-info{}
-    .hero-report-type{font-size:11px;color:#7ec3ff;text-transform:uppercase;letter-spacing:.5px}
-    .hero-report-name{font-size:14px;font-weight:600;margin-top:2px}
-    .hero-report-meta{font-size:11px;color:#7a8ba8;margin-top:2px}
-    /* ── Main ── */
-    .main-content{max-width:1200px;margin:0 auto;padding:36px 24px}
-    /* ── Search Bar ── */
-    .search-bar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-    .search-input{flex:1;min-width:180px;padding:9px 14px;border:1px solid #e4e7ed;border-radius:8px;font-size:14px;outline:none;transition:border-color .2s}
-    .search-input:focus{border-color:#409EFF}
-    /* ── Category Pills ── */
-    .categories{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
-    .cat-pill{padding:5px 12px;background:#fff;border:1px solid #e4e7ed;border-radius:20px;font-size:12px;color:#606266;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
-    .cat-pill .cat-count{background:#f0f0f0;border-radius:10px;padding:1px 6px;font-size:10px;color:#999}
-    .cat-pill:hover,.cat-pill.active{background:#409EFF;color:#fff;border-color:#409EFF}
-    .cat-pill.active .cat-count{background:rgba(255,255,255,.2);color:#fff}
-    /* ── Section Headers ── */
-    .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .section-title{font-size:17px;font-weight:600;color:#1a1a2e;display:flex;align-items:center;gap:8px}
-    .section-title::before{content:'';display:block;width:4px;height:16px;background:#409EFF;border-radius:2px}
-    .section-link{font-size:12px;color:#409EFF}
+    /* ── Tab Nav ── */
+    .tab-nav{display:flex;gap:4px;background:#fff;padding:0 24px;border-bottom:1px solid #f0f0f0}
+    .tab-nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:4px}
+    .tab-btn{padding:10px 18px;font-size:13px;color:#606266;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
+    .tab-btn:hover{color:#409EFF}
+    .tab-btn.active{color:#409EFF;border-bottom-color:#409EFF;font-weight:600}
+    /* ── Page Layout ── */
+    .page-wrap{max-width:1400px;margin:0 auto;padding:20px 24px;display:flex;gap:20px;align-items:flex-start}
+    .main-area{flex:1;min-width:0}
+    /* ── Sidebar ── */
+    .sidebar{width:220px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;position:sticky;top:80px}
+    .side-card{background:#fff;border-radius:10px;padding:14px;border:1px solid #f0f0f0}
+    .side-card-title{font-size:11px;color:#999;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+    .side-stat{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #f5f5f5}
+    .side-stat:last-child{border-bottom:none}
+    .side-stat .label{font-size:12px;color:#606266}
+    .side-stat .val{font-size:13px;font-weight:700;color:#409EFF}
+    .side-tags{display:flex;flex-wrap:wrap;gap:5px}
+    .side-tag{display:inline-block;padding:2px 8px;background:#ecf5ff;color:#409EFF;border-radius:10px;font-size:10px}
+    /* ── Hero Bar ── */
+    .hero-bar{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%);color:#fff;padding:28px 24px;border-radius:12px;margin-bottom:16px}
+    .hero-bar-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .hero-bar h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
+    .hero-bar h1 span{color:#409EFF}
+    .hero-bar-desc{font-size:12px;color:#7a8ba8;margin-top:4px}
+    .hero-quick-links{display:flex;gap:10px;flex-wrap:wrap}
+    .quick-link{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:12px;transition:all .2s}
+    .quick-link:hover{background:rgba(64,158,255,.25);border-color:#409EFF}
+    /* ── Section Card ── */
+    .section-card{background:#fff;border-radius:10px;border:1px solid #f0f0f0;margin-bottom:16px;overflow:hidden}
+    .section-card-header{padding:14px 18px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+    .section-card-title{font-size:14px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .section-card-title::before{content:'';display:block;width:3px;height:14px;background:#409EFF;border-radius:2px}
+    /* ── Content Area ── */
+    .content-body{padding:16px 18px}
     /* ── Stats Breadcrumb ── */
-    .stats-breadcrumb{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;align-items:center}
+    .stats-breadcrumb{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center}
     .stat-tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:#ecf5ff;color:#409EFF;border-radius:14px;font-size:11px;font-weight:500}
     .stat-tag .st-num{background:#409EFF;color:#fff;border-radius:10px;padding:0 5px;font-size:10px;font-weight:700}
-    /* ── New Badge ── */
-    .new-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;letter-spacing:.5px;text-transform:uppercase}
-    /* ── Trending Cards ── */
-    .trending-card{display:flex;gap:14px;padding:14px;background:#fff;border-radius:10px;border:1px solid #f0f0f0;margin-bottom:10px;transition:border-color .2s,transform .2s}
-    .trending-card:hover{border-color:#409EFF;transform:translateX(4px)}
-    .trending-rank{font-size:20px;font-weight:700;color:#dcdfe6;width:32px;flex-shrink:0;line-height:1;text-align:center;padding-top:3px}
-    .trending-rank.t1{color:#f5a623}.trending-rank.t2{color:#909399}.trending-rank.t3{color:#cd7f32}
-    .trending-body{flex:1;min-width:0}
-    .trending-name{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
-    .trending-name a{color:#409EFF}
-    .trending-desc{font-size:11px;color:#7a8ba8;line-height:1.5;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .trending-meta{display:flex;gap:8px;font-size:10px;color:#b0c4de;flex-wrap:wrap;align-items:center}
-    .meta-lang{color:#409EFF;font-weight:500}
-    .meta-tag{padding:2px 7px;background:#ecf5ff;color:#409EFF;border-radius:4px}
-    .trending-action{margin-left:auto;flex-shrink:0}
-    .detail-btn{display:inline-block;background:#f0f9ff;color:#409EFF;border:1px solid #409EFF;font-size:11px;padding:4px 10px;border-radius:6px;transition:all .2s;white-space:nowrap}
-    .detail-btn:hover{background:#409EFF;color:#fff}
-    /* ── Sort Tabs ── */
-    .sort-tabs{display:flex;gap:4px;margin-bottom:16px}
-    .sort-tab{padding:5px 12px;background:#fff;border:1px solid #e4e7ed;border-radius:6px;font-size:12px;color:#606266;cursor:pointer;transition:all .2s}
+    /* ── Category Pills ── */
+    .categories{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+    .cat-pill{padding:4px 11px;background:#fff;border:1px solid #e4e7ed;border-radius:20px;font-size:11px;color:#606266;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px}
+    .cat-pill .cat-count{background:#f0f0f0;border-radius:10px;padding:0 5px;font-size:10px;color:#888}
+    .cat-pill:hover,.cat-pill.active{background:#409EFF;color:#fff;border-color:#409EFF}
+    .cat-pill.active .cat-count{background:rgba(255,255,255,.2);color:#fff}
+    /* ── Search & Sort ── */
+    .search-bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+    .search-input{flex:1;min-width:140px;padding:7px 12px;border:1px solid #e4e7ed;border-radius:7px;font-size:13px;outline:none;transition:border-color .2s}
+    .search-input:focus{border-color:#409EFF}
+    .sort-tabs{display:flex;gap:3px}
+    .sort-tab{padding:4px 10px;background:#fff;border:1px solid #e4e7ed;border-radius:6px;font-size:11px;color:#606266;cursor:pointer;transition:all .2s}
     .sort-tab.active{background:#409EFF;color:#fff;border-color:#409EFF}
     .sort-tab:hover:not(.active){border-color:#409EFF;color:#409EFF}
-    /* ── ArXiv Cards ── */
-    .arxiv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:32px}
-    .arxiv-card{background:#fff;border-radius:10px;padding:14px;border:1px solid #f0f0f0;transition:border-color .2s;display:flex;flex-direction:column}
-    .arxiv-card:hover{border-color:#409EFF}
-    .arxiv-title{font-size:12px;font-weight:600;color:#1a1a2e;line-height:1.5;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .arxiv-meta{font-size:10px;color:#b0c4de;margin-bottom:6px}
-    .arxiv-digest{font-size:11px;color:#606266;line-height:1.7;flex:1;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding:8px;background:#f8fafc;border-radius:6px;border-left:3px solid #409EFF}
-    .arxiv-footer{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .arxiv-links{display:flex;gap:8px;margin-left:auto}
-    .arxiv-links a{font-size:11px;color:#409EFF}
+    /* ── Project Cards ── */
+    .proj-card{display:flex;gap:12px;padding:12px;border-bottom:1px solid #f5f5f5;transition:background .2s}
+    .proj-card:last-child{border-bottom:none}
+    .proj-card:hover{background:#f8fafc}
+    .proj-rank{font-size:18px;font-weight:700;color:#dcdfe6;width:28px;flex-shrink:0;line-height:1;text-align:center;padding-top:2px}
+    .proj-rank.t1{color:#f5a623}.proj-rank.t2{color:#909399}.proj-rank.t3{color:#cd7f32}
+    .proj-body{flex:1;min-width:0}
+    .proj-name{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px}
+    .proj-name a{color:#409EFF}
+    .proj-desc{font-size:11px;color:#7a8ba8;line-height:1.5;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .proj-meta{display:flex;gap:7px;font-size:10px;color:#b0c4de;flex-wrap:wrap;align-items:center}
+    .meta-lang{color:#409EFF;font-weight:500}
+    .meta-tag{padding:1px 6px;background:#ecf5ff;color:#409EFF;border-radius:3px}
+    .proj-action{margin-left:auto;flex-shrink:0}
+    .detail-btn{display:inline-block;background:#f0f9ff;color:#409EFF;border:1px solid #409EFF;font-size:11px;padding:3px 9px;border-radius:5px;transition:all .2s;white-space:nowrap}
+    .detail-btn:hover{background:#409EFF;color:#fff}
+    /* ── New Badge ── */
+    .new-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:8px;margin-left:4px;vertical-align:middle;letter-spacing:.5px;text-transform:uppercase}
     /* ── Report List ── */
-    .report-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-    .report-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#fff;border-radius:8px;border:1px solid #f0f0f0;transition:border-color .2s}
-    .report-item:hover{border-color:#409EFF}
+    .report-list{list-style:none}
+    .report-item{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid #f5f5f5}
+    .report-item:last-child{border-bottom:none}
+    .report-item:hover{background:#f8fafc}
     .report-date{font-size:13px;font-weight:600;color:#1a1a2e}
     .report-label{font-size:10px;color:#999;margin-left:8px}
     .report-link{font-size:12px;color:#409EFF}
-    /* ── Weekly Badge ── */
-    .weekly-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:6px;vertical-align:middle;text-transform:uppercase}
+    .weekly-badge{display:inline-block;background:#f59e0b;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:8px;margin-left:6px;text-transform:uppercase}
+    /* ── Loading ── */
+    .loading{text-align:center;padding:24px;color:#b0c4de;font-size:13px}
+    .empty{text-align:center;padding:20px;color:#b0c4de;font-size:13px}
     /* ── Footer ── */
-    .site-footer{background:#fff;border-top:1px solid #f0f0f0;padding:20px;text-align:center;font-size:12px;color:#b0c4de}
+    .site-footer{background:#fff;border-top:1px solid #f0f0f0;padding:16px;text-align:center;font-size:12px;color:#b0c4de;margin-top:24px}
     .site-footer a{color:#409EFF}
-    /* ── Misc ── */
-    .loading{text-align:center;padding:32px;color:#b0c4de}
-    .empty{text-align:center;padding:28px;color:#b0c4de;font-size:13px}
-    @media(max-width:768px){
-      .hero h1{font-size:24px}
+    /* ── Curated Cards ── */
+    .curated-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+    .curated-card{background:#fff;border-radius:10px;border:1px solid #f0f0f0;padding:14px;transition:border-color .2s;display:flex;flex-direction:column}
+    .curated-card:hover{border-color:#409EFF}
+    .curated-name{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+    .curated-name a{color:#409EFF}
+    .curated-stats{font-size:11px;color:#7a8ba8;margin-bottom:8px;display:flex;gap:8px}
+    .curated-digest{font-size:12px;color:#606266;line-height:1.6;flex:1;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .curated-footer{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .curated-tags{display:flex;gap:5px;flex-wrap:wrap}
+    .curated-tag{padding:2px 7px;background:#ecf5ff;color:#409EFF;border-radius:10px;font-size:10px}
+    /* ── Trend Section ── */
+    .trend-summary{background:#fff;border-radius:10px;border:1px solid #f0f0f0;padding:16px;margin-bottom:16px}
+    .trend-summary h3{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:10px}
+    .trend-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .trend-insight{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid #f5f5f5}
+    .trend-insight:last-child{border-bottom:none}
+    .trend-insight-icon{font-size:16px;flex-shrink:0;padding-top:1px}
+    .trend-insight-text{font-size:12px;color:#606266;line-height:1.6}
+    /* ── Tab Content ── */
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+    /* ── Lang Filter ── */
+    .lang-filter-btn{padding:4px 10px;background:#fff;border:1px solid #e4e7ed;border-radius:6px;font-size:11px;color:#606266;cursor:pointer;transition:all .2s}
+    .lang-filter-btn:hover{border-color:#409EFF;color:#409EFF}
+    .lang-filter-btn.active{background:#409EFF;color:#fff;border-color:#409EFF}
+    @media(max-width:900px){
+      .sidebar{display:none}
+      .page-wrap{padding:12px 16px}
+    }
+    @media(max-width:600px){
+      .tab-btn{padding:8px 12px;font-size:12px}
       .header-nav{display:none}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
     }
   </style>
 </head>
@@ -126,172 +151,212 @@
     <div class="header-inner">
       <div class="site-logo"><span>🤖</span><strong>Agent</strong><span style="color:#409EFF;font-weight:400">.dashboard</span></div>
       <nav class="header-nav">
-        <a href="#projects">🔥 热门项目</a>
-        <a href="#papers">📚 前沿论文</a>
-        <a href="#reports">📅 报告归档</a>
+        <a href="https://github.com/trending?since=daily" target="_blank">🔥 GitHub 趋势</a>
+        <a href="https://arxiv.org/search/?searchfor=cs.AI&query=AI+agent" target="_blank">📚 ArXiv 论文</a>
         <a href="https://github.com/leapord/agent" target="_blank" class="nav-btn">📦 源码</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-badge">🚀 AI Agent 前沿研究 · 每日 09:00 自动更新</div>
-      <h1>AI Agent <span>全景黄页</span></h1>
-      <p class="hero-desc">
-        追踪 GitHub 热门 AI Agent 开源项目，涵盖自主代理、多智能体、工具调用、记忆架构、RAG+Agent 等方向。点击项目卡片查看深度中文解读。
-      </p>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">{{ trendingProjects.length }}</div>
-          <div class="hero-stat-label">热门项目</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">{{ arxivPapers.length }}</div>
-          <div class="hero-stat-label">前沿论文</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">{{ reports.length }}</div>
-          <div class="hero-stat-label">报告存档</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">{{ catStats.length }}</div>
-          <div class="hero-stat-label">分类领域</div>
-        </div>
+  <!-- Tab Navigation -->
+  <div class="tab-nav">
+    <div class="tab-nav-inner">
+      <div class="tab-btn" :class="{active:activeTab==='trending'}" @click="activeTab='trending'">
+        📊 趋势分析
       </div>
-      <div class="hero-reports">
-        <a class="hero-report-card" :href="todayReport.url" v-if="todayReport">
-          <div class="hero-report-icon">📋</div>
-          <div class="hero-report-info">
-            <div class="hero-report-type">今日日报</div>
-            <div class="hero-report-name">{{ todayReport.date }}</div>
-          </div>
-        </a>
-        <a class="hero-report-card" :href="weeklyReport.url" v-if="weeklyReport">
-          <div class="hero-report-icon">📊</div>
-          <div class="hero-report-info">
-            <div class="hero-report-type">本周周报</div>
-            <div class="hero-report-name">{{ weeklyReport.label }}</div>
-          </div>
-        </a>
-        <a class="hero-report-card" href="https://github.com/leapord/agent" target="_blank">
-          <div class="hero-report-icon">📂</div>
-          <div class="hero-report-info">
-            <div class="hero-report-type">源码仓库</div>
-            <div class="hero-report-name">leapord/agent</div>
-            <div class="hero-report-meta">每日自动同步</div>
-          </div>
-        </a>
+      <div class="tab-btn" :class="{active:activeTab==='curated'}" @click="activeTab='curated'">
+        ⭐ 每日精选
+      </div>
+      <div class="tab-btn" :class="{active:activeTab==='reports'}" @click="activeTab='reports'">
+        📅 报告归档
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Main -->
-  <main class="main-content">
+  <!-- Page -->
+  <div class="page-wrap">
 
-    <!-- Trending Projects -->
-    <section id="projects" style="margin-bottom:32px;">
-      <div class="section-header">
-        <h2 class="section-title">🔥 热门 AI Agent 项目</h2>
-        <el-link class="section-link" href="https://github.com/trending?since=daily" target="_blank">GitHub 趋势 →</el-link>
-      </div>
-      <!-- 分类统计 breadcrumb -->
-      <div class="stats-breadcrumb">
-        <span class="stat-tag" v-for="s in catStats.slice(0,12)" :key="s.name">{{ s.name }} <span class="st-num">{{ s.count }}</span></span>
-      </div>
-      <div class="categories">
-        <span class="cat-pill" :class="{active:activeCat===''}" @click="activeCat=''">
-          全部 <span class="cat-count">{{ trendingProjects.length }}</span>
-        </span>
-        <span class="cat-pill" :class="{active:activeCat===cat.name}" @click="activeCat=activeCat===cat.name?'':cat.name" v-for="cat in catStats" :key="cat.name">
-          {{ cat.name }} <span class="cat-count">{{ cat.count }}</span>
-        </span>
-      </div>
+    <!-- Main Area -->
+    <div class="main-area">
 
-      <!-- Search + Sort -->
-      <div style="margin-bottom:16px;">
-        <div class="search-bar">
-          <input class="search-input" v-model="searchQuery" placeholder="🔍 搜索项目名称、描述或标签..." />
-          <el-select v-model="langFilter" placeholder="编程语言" clearable style="width:130px" size="large">
-            <el-option v-for="l in allLangs" :key="l" :label="l" :value="l"></el-option>
-          </el-select>
+      <!-- Hero Bar -->
+      <div class="hero-bar">
+        <div>
+          <h1>AI Agent <span>全景黄页</span></h1>
+          <div class="hero-bar-desc">每日 09:00 自动更新 · 追踪 GitHub 热门 AI Agent 开源项目</div>
         </div>
-        <div class="sort-tabs">
-          <span class="sort-tab" :class="{active:sortBy==='stars'}" @click="sortBy='stars'">⭐ 按热度</span>
-          <span class="sort-tab" :class="{active:sortBy==='today'}" @click="sortBy='today'">🆕 今日新增</span>
-          <span class="sort-tab" :class="{active:sortBy==='name'}" @click="sortBy='name'">📛 按名称</span>
-          <span class="sort-tab" :class="{active:sortBy==='lang'}" @click="sortBy='lang'">💻 按语言</span>
+        <div class="hero-quick-links">
+          <a class="quick-link" :href="todayReportUrl" v-if="todayReportUrl">
+            📋 今日日报
+          </a>
+          <a class="quick-link" :href="weeklyReportUrl" v-if="weeklyReportUrl">
+            📊 本周周报
+          </a>
+          <a class="quick-link" href="https://github.com/leapord/agent" target="_blank">
+            🔗 源码仓
+          </a>
         </div>
       </div>
 
-      <div v-if="loading" class="loading">加载中...</div>
-      <div v-else-if="displayProjects.length === 0" class="empty">暂无匹配项目</div>
-      <div v-else>
-        <div class="trending-card" v-for="(p, i) in displayProjects" :key="p.name">
-          <div class="trending-rank" :class="'t'+((i+1)<=3?(i+1):'')">{{ i+1 }}</div>
-          <div class="trending-body">
-            <div class="trending-name">
-              <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
-              <span class="new-badge" v-if="p.isNew">新</span>
+      <!-- ── TAB: 趋势分析 ── -->
+      <div class="tab-content" :class="{active:activeTab==='trending'}">
+        <!-- 趋势洞察摘要 -->
+        <div class="trend-summary" v-if="trendInsights.length > 0">
+          <h3>📊 今日趋势洞察</h3>
+          <div class="trend-insight" v-for="ins in trendInsights" :key="ins.text">
+            <span class="trend-insight-icon">{{ ins.icon }}</span>
+            <span class="trend-insight-text">{{ ins.text }}</span>
+          </div>
+        </div>
+
+        <!-- 热门项目 -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <h2 class="section-card-title">🔥 热门 AI Agent 项目</h2>
+            <span style="font-size:11px;color:#999">{{ filteredProjects.length }} 个项目</span>
+          </div>
+          <div class="content-body">
+            <!-- 分类 breadcrumb -->
+            <div class="stats-breadcrumb">
+              <span class="stat-tag" v-for="s in catStats.slice(0,10)" :key="s.name">{{ s.name }} <span class="st-num">{{ s.count }}</span></span>
             </div>
-            <div class="trending-desc">{{ p.description || '暂无描述' }}</div>
-            <div class="trending-meta">
-              <span class="meta-lang" v-if="p.language">{{ p.language }}</span>
-              <span>⭐ {{ p.stars }}</span>
-              <span v-if="p.forks">🍴 {{ p.forks }}</span>
-              <span class="meta-tag" v-for="tag in (p.tags||[]).slice(0,3)" :key="tag">{{ tag }}</span>
+            <!-- 分类筛选 -->
+            <div class="categories">
+              <span class="cat-pill" :class="{active:activeCat===''}" @click="activeCat=''">全部 <span class="cat-count">{{ trendingProjects.length }}</span></span>
+              <span class="cat-pill" :class="{active:activeCat===cat.name}" @click="activeCat=activeCat===cat.name?'':cat.name" v-for="cat in catStats" :key="cat.name">
+                {{ cat.name }} <span class="cat-count">{{ cat.count }}</span></span>
             </div>
-          </div>
-          <div class="trending-action">
-            <a class="detail-btn" :href="'detail/'+slugify(p.name)+'.html'" target="_blank">深度解读 →</a>
+            <!-- 搜索+排序 -->
+            <div class="search-bar">
+              <input class="search-input" v-model="searchQuery" placeholder="🔍 搜索项目名称、描述或标签..." />
+              <div class="sort-tabs">
+                <span class="sort-tab" :class="{active:sortBy==='stars'}" @click="sortBy='stars'">⭐</span>
+                <span class="sort-tab" :class="{active:sortBy==='today'}" @click="sortBy='today'">🆕</span>
+                <span class="sort-tab" :class="{active:sortBy==='name'}" @click="sortBy='name'">📛</span>
+                <span class="sort-tab" :class="{active:sortBy==='lang'}" @click="sortBy='lang'">💻</span>
+              </div>
+            </div>
+            <!-- 项目列表 -->
+            <div v-if="loading" class="loading">加载中...</div>
+            <div v-else-if="filteredProjects.length === 0" class="empty">暂无匹配项目</div>
+            <div v-else>
+              <div class="proj-card" v-for="(p, i) in filteredProjects" :key="p.name">
+                <div class="proj-rank" :class="'t'+((i+1)<=3?(i+1):'')">{{ i+1 }}</div>
+                <div class="proj-body">
+                  <div class="proj-name">
+                    <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
+                    <span class="new-badge" v-if="p.isNew">新</span>
+                  </div>
+                  <div class="proj-desc">{{ p.description || '暂无描述' }}</div>
+                  <div class="proj-meta">
+                    <span class="meta-lang" v-if="p.language">{{ p.language }}</span>
+                    <span>⭐ {{ p.stars }}</span>
+                    <span v-if="p.forks">🍴 {{ p.forks }}</span>
+                    <span class="meta-tag" v-for="tag in (p.tags||[]).slice(0,3)" :key="tag">{{ tag }}</span>
+                  </div>
+                </div>
+                <div class="proj-action">
+                  <a class="detail-btn" :href="'detail/'+slugify(p.name)+'.html'" target="_blank">深度解读 →</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ArXiv Papers -->
-    <section id="papers" style="margin-bottom:32px;">
-      <div class="section-header">
-        <h2 class="section-title">📚 AI Agent 前沿论文</h2>
-        <el-link class="section-link" href="https://arxiv.org/search/?searchfor=cs.AI&query=AI+agent" target="_blank">查看更多 →</el-link>
-      </div>
-      <div v-if="arxivPapers.length === 0" class="empty">暂无论文数据（ArXiv 查询可能暂时受限）</div>
-      <div class="arxiv-grid" v-else>
-        <div class="arxiv-card" v-for="p in arxivPapers" :key="p.id">
-          <div class="arxiv-title">{{ p.title }}</div>
-          <div class="arxiv-meta">{{ p.authors }} · {{ p.published }}</div>
-          <div class="arxiv-digest" v-if="p.digest">{{ p.digest }}</div>
-          <div class="arxiv-footer">
-            <span class="meta-tag" v-for="tag in (p.tags||[]).slice(0,2)" :key="tag">{{ tag }}</span>
-            <div class="arxiv-links">
-              <a :href="p.url" target="_blank">📄 摘要</a>
-              <a :href="p.pdf" target="_blank">📕 PDF</a>
+      <!-- ── TAB: 每日精选 ── -->
+      <div class="tab-content" :class="{active:activeTab==='curated'}">
+        <div class="section-card">
+          <div class="section-card-header">
+            <h2 class="section-card-title">⭐ 每日精选 · 1k+ Stars AI Agent 项目</h2>
+            <span style="font-size:11px;color:#999">{{ curatedProjects.length }} 个精选项目</span>
+          </div>
+          <div class="content-body">
+            <div v-if="curatedProjects.length === 0" class="empty">暂无精选数据（将在下次扫描后更新）</div>
+            <div class="curated-grid" v-else>
+              <div class="curated-card" v-for="p in curatedProjects" :key="p.name">
+                <div class="curated-name">
+                  <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
+                  <span>⭐ {{ p.stars }}</span>
+                </div>
+                <div class="curated-stats">
+                  <span v-if="p.language">{{ p.language }}</span>
+                  <span v-if="p.forks">🍴 {{ p.forks }}</span>
+                  <span>{{ p.trend || '稳定' }}</span>
+                </div>
+                <div class="curated-digest">{{ p.digest || p.description || '暂无中文解读' }}</div>
+                <div class="curated-footer">
+                  <div class="curated-tags">
+                    <span class="curated-tag" v-for="tag in (p.tags||[]).slice(0,3)" :key="tag">{{ tag }}</span>
+                  </div>
+                  <a class="detail-btn" :href="'detail/'+slugify(p.name)+'.html'" target="_blank" style="margin-left:auto">深度解读 →</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Reports -->
-    <section id="reports">
-      <div class="section-header">
-        <h2 class="section-title">📅 报告归档</h2>
-        <span style="font-size:12px;color:#999">{{ reports.filter(r=>!r.isWeekly).length }} 份日报 · {{ reports.filter(r=>r.isWeekly).length }} 份周报</span>
-      </div>
-      <ul class="report-list">
-        <li class="report-item" v-for="r in reports" :key="r.name">
-          <div>
-            <span class="report-date">{{ r.date || r.label }}</span>
-            <span class="report-label" v-if="!r.isWeekly">每日简报</span>
-            <span class="weekly-badge" v-if="r.isWeekly">周报</span>
+      <!-- ── TAB: 报告归档 ── -->
+      <div class="tab-content" :class="{active:activeTab==='reports'}">
+        <div class="section-card">
+          <div class="section-card-header">
+            <h2 class="section-card-title">📅 报告归档</h2>
+            <span style="font-size:11px;color:#999">{{ reports.filter(r=>!r.isWeekly).length }} 份日报 · {{ reports.filter(r=>r.isWeekly).length }} 份周报</span>
           </div>
-          <a class="report-link" :href="r.url" target="_blank">查看 →</a>
-        </li>
-      </ul>
-    </section>
+          <div class="content-body">
+            <ul class="report-list">
+              <li class="report-item" v-for="r in reports" :key="r.name">
+                <div>
+                  <span class="report-date">{{ r.date || r.label }}</span>
+                  <span class="report-label" v-if="!r.isWeekly">每日简报</span>
+                  <span class="weekly-badge" v-if="r.isWeekly">周报</span>
+                </div>
+                <a class="report-link" :href="r.url" target="_blank">查看 →</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-  </main>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- 总览统计 -->
+      <div class="side-card">
+        <div class="side-card-title">📊 数据总览</div>
+        <div class="side-stat"><span class="label">热门项目</span><span class="val">{{ trendingProjects.length }}</span></div>
+        <div class="side-stat"><span class="label">精选项目</span><span class="val">{{ curatedProjects.length }}</span></div>
+        <div class="side-stat"><span class="label">报告存档</span><span class="val">{{ reports.length }}</span></div>
+        <div class="side-stat"><span class="label">分类领域</span><span class="val">{{ catStats.length }}</span></div>
+      </div>
+      <!-- 分类分布 -->
+      <div class="side-card" v-if="catStats.length > 0">
+        <div class="side-card-title">🏷️ 技术分类</div>
+        <div class="side-tags">
+          <span class="side-tag" v-for="s in catStats.slice(0,15)" :key="s.name">{{ s.name }} {{ s.count }}</span>
+        </div>
+      </div>
+      <!-- 语言分布 -->
+      <div class="side-card" v-if="allLangs.length > 0">
+        <div class="side-card-title">💻 编程语言</div>
+        <div class="side-tags">
+          <span class="side-tag" v-for="l in allLangs.slice(0,10)" :key="l">{{ l }}</span>
+        </div>
+      </div>
+      <!-- 快捷入口 -->
+      <div class="side-card">
+        <div class="side-card-title">🚀 快捷入口</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="https://github.com/trending?since=daily" target="_blank" style="font-size:12px;color:#409EFF">→ GitHub 趋势</a>
+          <a href="https://arxiv.org/search/?searchfor=cs.AI&query=AI+agent" target="_blank" style="font-size:12px;color:#409EFF">→ ArXiv 论文</a>
+          <a href="https://github.com/leapord/agent" target="_blank" style="font-size:12px;color:#409EFF">→ 源码仓库</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
@@ -304,26 +369,29 @@
 const { createApp, ref, computed, onMounted } = Vue
 createApp({
   setup() {
+    const activeTab = ref('trending')
     const loading = ref(true)
     const searchQuery = ref('')
-    const langFilter = ref('')
     const sortBy = ref('stars')
     const activeCat = ref('')
     const trendingProjects = ref([])
-    const arxivPapers = ref([])
+    const curatedProjects = ref([])
     const reports = ref([])
 
     const slugify = (name) => name.replace(/\//g, '-')
 
-    const todayReport = computed(() => {
+    // ── 今日/本周报告 URL ─────────────────────────────
+    const todayReportUrl = computed(() => {
       const today = new Date().toISOString().slice(0, 10)
-      return reports.value.find(r => r.date === today && !r.isWeekly) || null
+      const r = reports.value.find(r => r.date === today && !r.isWeekly)
+      return r ? r.url : null
     })
-    const weeklyReport = computed(() => {
+    const weeklyReportUrl = computed(() => {
       const w = reports.value.filter(r => r.isWeekly)
-      return w.length > 0 ? w[0] : null
+      return w.length > 0 ? w[0].url : null
     })
 
+    // ── 分类统计 ─────────────────────────────────────
     const catStats = computed(() => {
       const map = {}
       for (const p of trendingProjects.value) {
@@ -340,7 +408,36 @@ createApp({
       return [...s].sort()
     })
 
-    const displayProjects = computed(() => {
+    // ── 趋势洞察 ─────────────────────────────────────
+    const trendInsights = computed(() => {
+      const insights = []
+      const cats = catStats.value
+      if (cats.length >= 3) {
+        const top3 = cats.slice(0, 3)
+        insights.push({
+          icon: '🔥',
+          text: `当前最热方向：${top3.map(c=>`${c.name}（${c.count}个项目）`).join('、')}，持续吸引开发者关注。`
+        })
+      }
+      const langs = allLangs.value
+      if (langs.length > 0) {
+        insights.push({
+          icon: '💻',
+          text: `项目语言分布：${langs.slice(0,4).join('、')}等，其中 ${langs[0]} 项目占比最高。`
+        })
+      }
+      const newProjs = trendingProjects.value.filter(p => p.isNew)
+      if (newProjs.length > 0) {
+        insights.push({
+          icon: '🆕',
+          text: `今日新增 ${newProjs.length} 个新项目：${newProjs.slice(0,3).map(p=>p.name.split('/')[1]||p.name).join('、')} 等，值得关注。`
+        })
+      }
+      return insights.slice(0, 4)
+    })
+
+    // ── 过滤+排序后的项目列表 ─────────────────────────
+    const filteredProjects = computed(() => {
       let list = trendingProjects.value
       if (activeCat.value) {
         list = list.filter(p => (p.tags||[]).includes(activeCat.value))
@@ -352,9 +449,6 @@ createApp({
           (p.description||'').toLowerCase().includes(q) ||
           (p.tags||[]).some(t=>t.toLowerCase().includes(q))
         )
-      }
-      if (langFilter.value) {
-        list = list.filter(p => p.language === langFilter.value)
       }
       if (sortBy.value === 'stars') {
         list = [...list].sort((a,b) => parseFloat(b.stars||0)*1000 - parseFloat(a.stars||0)*1000)
@@ -369,16 +463,19 @@ createApp({
     })
 
     onMounted(() => {
+      // 加载 trending 数据
       fetch('trending.json').then(r=>r.json()).then(d=>{
         d.forEach((p, i) => { p.isNew = i < 5 })
         trendingProjects.value = d
         loading.value = false
-      }).catch(()=>{ loading.value=false })
+      }).catch(()=>{ loading.value = false })
 
-      fetch('arxiv.json').then(r=>r.json()).then(d=>{
-        arxivPapers.value = Array.isArray(d) ? d : (d.papers||[])
+      // 加载精选数据
+      fetch('curated.json').then(r=>r.json()).then(d=>{
+        curatedProjects.value = Array.isArray(d) ? d : (d.projects||[])
       }).catch(()=>{})
 
+      // 加载报告列表
       fetch('pages.json').then(r=>r.json()).then(list=>{
         const daily = list
           .filter(n=>/^daily-\d{4}-\d{2}-\d{2}\.html$/.test(n))
@@ -396,10 +493,10 @@ createApp({
     })
 
     return {
-      loading, searchQuery, langFilter, sortBy, activeCat,
-      trendingProjects, arxivPapers, reports,
-      catStats, allLangs, displayProjects,
-      todayReport, weeklyReport, slugify
+      activeTab, loading, searchQuery, sortBy, activeCat,
+      trendingProjects, curatedProjects, reports,
+      catStats, allLangs, filteredProjects, trendInsights,
+      todayReportUrl, weeklyReportUrl, slugify
     }
   }
 }).use(ElementPlus).mount('#app')

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>行业趋势分析 · AI Agent 前沿追踪</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Agent 行业趋势分析报告 — 深度解读当前技术方向、热门项目与行业发展动态">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','PingFang SC','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.7}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .back-btn{display:inline-flex;align-items:center;gap:6px;color:#409EFF;font-size:13px;text-decoration:none;margin-bottom:20px;padding:6px 14px;background:#fff;border:1px solid #409EFF;border-radius:7px;transition:all .2s}
+    .back-btn:hover{background:#409EFF;color:#fff}
+    /* Page Header */
+    .page-header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%);border-radius:14px;padding:32px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden}
+    .page-header::before{content:'';position:absolute;top:-50%;right:-10%;width:350px;height:350px;background:radial-gradient(circle,rgba(64,158,255,.12),transparent 70%);border-radius:50%}
+    .page-header h1{font-size:24px;font-weight:700;margin-bottom:8px;position:relative}
+    .page-header h1 span{color:#409EFF}
+    .page-header .sub{color:rgba(255,255,255,.6);font-size:13px;margin-bottom:20px;position:relative}
+    .header-stats{display:flex;gap:24px;flex-wrap:wrap;position:relative}
+    .hstat{text-align:center}
+    .hstat .n{font-size:22px;font-weight:700;color:#409EFF}
+    .hstat .l{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px}
+    /* Section */
+    .section{background:#fff;border-radius:12px;border:1px solid #f0f0f0;margin-bottom:16px;overflow:hidden}
+    .section-header{padding:14px 20px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+    .section-title{font-size:15px;font-weight:700;color:#1a1a2e;display:flex;align-items:center;gap:8px}
+    .section-title::before{content:'';display:block;width:3px;height:15px;background:#409EFF;border-radius:2px}
+    .section-body{padding:18px 20px}
+    /* Insight Cards */
+    .insight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+    .insight-card{background:#f8fafc;border-radius:10px;padding:16px;border:1px solid #f0f0f0;border-left:3px solid #409EFF}
+    .insight-card .ic-icon{font-size:20px;margin-bottom:8px}
+    .insight-card .ic-type{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .insight-card .ic-title{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:8px}
+    .insight-card .ic-text{font-size:12px;color:#606266;line-height:1.7}
+    .insight-card .ic-projects{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+    .ic-proj{font-size:10px;padding:2px 7px;background:#ecf5ff;color:#409EFF;border-radius:8px}
+    /* Category Bar */
+    .cat-bar{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+    .cat-row{display:flex;align-items:center;gap:10px}
+    .cat-label{min-width:80px;font-size:12px;color:#606266;font-weight:500}
+    .cat-track{flex:1;height:8px;background:#ecf5ff;border-radius:4px;overflow:hidden}
+    .cat-fill{height:100%;background:#409EFF;border-radius:4px;transition:width .6s ease}
+    .cat-count{font-size:12px;font-weight:700;color:#409EFF;min-width:30px;text-align:right}
+    /* Top Projects */
+    .top-proj-list{display:flex;flex-direction:column;gap:10px}
+    .top-proj{display:flex;gap:14px;padding:12px;background:#f8fafc;border-radius:10px;border:1px solid #f0f0f0;transition:border-color .2s}
+    .top-proj:hover{border-color:#409EFF}
+    .tp-rank{font-size:20px;font-weight:700;color:#dcdfe6;width:28px;flex-shrink:0;text-align:center;padding-top:2px}
+    .tp-rank.r1{color:#f5a623}.tp-rank.r2{color:#909399}.tp-rank.r3{color:#cd7f32}
+    .tp-body{flex:1;min-width:0}
+    .tp-name{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+    .tp-name a{color:#409EFF}
+    .tp-desc{font-size:11px;color:#7a8ba8;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .tp-meta{display:flex;gap:7px;font-size:10px;color:#b0c4de;flex-wrap:wrap}
+    .tp-lang{color:#409EFF;font-weight:500}
+    .tp-tag{padding:1px 6px;background:#ecf5ff;color:#409EFF;border-radius:3px}
+    .tp-why{font-size:12px;color:#555;line-height:1.6;margin-top:6px;padding:8px;background:#fff;border-radius:7px;border-left:3px solid #67c23a}
+    /* Trend Direction */
+    .trend-dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+    .trend-dir{background:#fff;border-radius:10px;padding:16px;border:1px solid #f0f0f0}
+    .td-icon{font-size:24px;margin-bottom:8px}
+    .td-title{font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
+    .td-summary{font-size:12px;color:#409EFF;font-weight:500;margin-bottom:8px}
+    .td-detail{font-size:12px;color:#606266;line-height:1.7}
+    .td-techs{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}
+    .td-tech{font-size:10px;padding:2px 7px;background:#ecf5ff;color:#409EFF;border-radius:8px}
+    /* Loading */
+    .loading{text-align:center;padding:40px;color:#b0c4de}
+    /* Footer */
+    .footer{text-align:center;padding:24px;color:#b0c4de;font-size:12px}
+    .footer a{color:#409EFF}
+  </style>
+</head>
+<body>
+<div id="app" class="container">
+  <a class="back-btn" href="index.html">← 返回 Dashboard</a>
+
+  <!-- Page Header -->
+  <div class="page-header" v-if="report">
+    <h1>📊 AI Agent <span>行业趋势分析报告</span></h1>
+    <div class="sub">{{ report.date }} · 共 {{ report.total_projects }} 个热门项目 · Total Stars {{ report.total_stars }}</div>
+    <div class="header-stats">
+      <div class="hstat"><div class="n">{{ report.total_projects }}</div><div class="l">热门项目</div></div>
+      <div class="hstat"><div class="n">{{ report.total_stars }}</div><div class="l">累计 Stars</div></div>
+      <div class="hstat"><div class="n">{{ topCats.length }}</div><div class="l">技术方向</div></div>
+      <div class="hstat"><div class="n">{{ report.top_languages.length }}</div><div class="l">编程语言</div></div>
+    </div>
+  </div>
+  <div class="loading" v-else>加载中...</div>
+
+  <!-- 趋势洞察 -->
+  <div class="section" v-if="report && report.insights">
+    <div class="section-header">
+      <h2 class="section-title">💡 今日趋势洞察</h2>
+    </div>
+    <div class="section-body">
+      <div class="insight-grid">
+        <div class="insight-card" v-for="ins in report.insights" :key="ins.title">
+          <div class="ic-icon">{{ ins.icon }}</div>
+          <div class="ic-type">{{ ins.type }}</div>
+          <div class="ic-title">{{ ins.title }}</div>
+          <div class="ic-text">{{ ins.content }}</div>
+          <div class="ic-projects" v-if="ins.projects && ins.projects.length > 0">
+            <span class="ic-proj" v-for="p in ins.projects" :key="p">{{ p }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 技术分类统计 -->
+  <div class="section" v-if="topCats.length > 0">
+    <div class="section-header">
+      <h2 class="section-title">🏷️ 技术方向分布</h2>
+    </div>
+    <div class="section-body">
+      <div class="cat-bar">
+        <div class="cat-row" v-for="cat in topCats" :key="cat.name">
+          <span class="cat-label">{{ cat.name }}</span>
+          <div class="cat-track">
+            <div class="cat-fill" :style="{width: (cat.count / maxCatCount * 100) + '%'}"></div>
+          </div>
+          <span class="cat-count">{{ cat.count }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 行业深度趋势 -->
+  <div class="section" v-if="trendDirections.length > 0">
+    <div class="section-header">
+      <h2 class="section-title">🚀 行业深度趋势解读</h2>
+    </div>
+    <div class="section-body">
+      <div class="trend-dir-grid">
+        <div class="trend-dir" v-for="td in trendDirections" :key="td.name">
+          <div class="td-icon">{{ td.icon }}</div>
+          <div class="td-title">{{ td.name }}</div>
+          <div class="td-summary">{{ td.summary }}</div>
+          <div class="td-detail">{{ td.detail }}</div>
+          <div class="td-techs">
+            <span class="td-tech" v-for="t in td.technologies" :key="t">{{ t }}</span>
+            <span class="td-tech" style="background:#fff3e0;color:#e65100">{{ td.star_range }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP 5 项目 -->
+  <div class="section" v-if="report && report.top_projects">
+    <div class="section-header">
+      <h2 class="section-title">🔥 TOP 5 热门项目解读</h2>
+    </div>
+    <div class="section-body">
+      <div class="top-proj-list">
+        <div class="top-proj" v-for="(p, i) in report.top_projects" :key="p.name">
+          <div class="tp-rank" :class="'r'+(i+1)">{{ i+1 }}</div>
+          <div class="tp-body">
+            <div class="tp-name">
+              <a :href="'https://github.com/'+p.name" target="_blank">{{ p.name }}</a>
+              <span style="font-size:11px;color:#7a8ba8">⭐ {{ p.stars }}</span>
+              <span class="tp-tag" v-if="p.language">{{ p.language }}</span>
+            </div>
+            <div class="tp-desc">{{ p.description }}</div>
+            <div class="tp-meta">
+              <span class="tp-tag" v-for="tag in (p.tags||[]).slice(0,3)" :key="tag">{{ tag }}</span>
+            </div>
+            <div class="tp-why" v-if="p.why_hot">💡 {{ p.why_hot }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© {{ new Date().getFullYear() }} <a href="https://github.com/leapord/agent">leapord/agent</a> · AI Agent 前沿研究 · 每日 09:00 自动更新</p>
+  </div>
+</div>
+
+<script>
+const { createApp, ref, computed, onMounted } = Vue
+createApp({
+  setup() {
+    const report = ref(null)
+    const trendingProjects = ref([])
+
+    const topCats = computed(() => {
+      if (!report.value) return []
+      return report.value.top_categories || []
+    })
+    const maxCatCount = computed(() => Math.max(...(topCats.value.map(c=>c.count)), 1))
+
+    const trendDirections = computed(() => {
+      if (!report.value) return []
+      const ta = report.value.trend_analysis || {}
+      return Object.entries(ta).map(([name, data]) => ({name, ...data}))
+    })
+
+    onMounted(() => {
+      fetch('trend_report.json').then(r=>r.json()).then(d=>{
+        report.value = d
+      }).catch(()=>{})
+
+      fetch('trending.json').then(r=>r.json()).then(d=>{
+        trendingProjects.value = d.slice(0, 5)
+        if (report.value) {
+          report.value.top_projects = report.value.top_projects || d.slice(0, 5).map(p => ({
+            name: p.name,
+            description: p.description,
+            stars: p.stars,
+            language: p.language,
+            tags: p.tags,
+            why_hot: ''
+          }))
+        }
+      })
+    })
+
+    return { report, topCats, maxCatCount, trendDirections }
+  }
+}).use(ElementPlus).mount('#app')
+</script>
+</body>
+</html>
