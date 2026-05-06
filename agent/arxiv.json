@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": "2605.04039v1",
+    "title": "Safety and accuracy follow different scaling laws in clinical large language models",
+    "summary": "Clinical LLMs are often scaled by increasing model size, context length, retrieval complexity, or inference-time compute, with the implicit expectation that higher accuracy implies safer behavior. This assumption is incomplete in medicine, where a few confident, high-risk, or evidence-contradicting ",
+    "digest": "探讨知识检索、记忆管理：Clinical LLMs are often scaled by increasing model size, context length, retrieval complexity, or inference-time compute",
+    "authors": "Sebastian Wind, Tri-Thien Nguyen, Jeta Sopa et al.",
+    "published": "2026-05-05",
+    "url": "https://arxiv.org/abs/2605.04039v1",
+    "pdf": "https://arxiv.org/pdf/2605.04039v1.pdf",
+    "tags": [
+      "Memory",
+      "RAG+Agent",
+      "Research Agent",
+      "Safety"
+    ]
+  },
+  {
+    "id": "2605.04036v1",
+    "title": "OpenSeeker-v2: Pushing the Limits of Search Agents with Informative and High-Difficulty Trajectories",
+    "summary": "Deep search capabilities have become an indispensable competency for frontier Large Language Model (LLM) agents, yet their development remains dominated by industrial giants. The typical industry recipe involves a highly resource-intensive pipeline spanning pre-training, continual pre-training (CPT)",
+    "digest": "探讨多智能体、模型训练：Deep search capabilities have become an indispensable competency for frontier Large Language Model (LLM) agents, yet the",
+    "authors": "Yuwen Du, Rui Ye, Shuo Tang et al.",
+    "published": "2026-05-05",
+    "url": "https://arxiv.org/abs/2605.04036v1",
+    "pdf": "https://arxiv.org/pdf/2605.04036v1.pdf",
+    "tags": [
+      "Tool Calling",
+      "Research Agent",
+      "Dev Agent",
+      "Evaluation"
+    ]
+  },
+  {
+    "id": "2605.04029v1",
+    "title": "Stayin' Aligned Over Time: Towards Longitudinal Human-LLM Alignment via Contextual Reflection and Privacy-Preserving Behavioral Data",
+    "summary": "Current human-AI alignment and evaluation methods for large language models (LLMs) often rely on preference signals collected immediately after an interaction. This practice implicitly treats preference as static, even though many LLM-mediated decisions unfold over time and may be re-evaluated diffe",
+    "digest": "探讨AI Agent 应用：Current human-AI alignment and evaluation methods for large language models (LLMs) often rely on preference signals coll",
+    "authors": "Simret Araya Gebreegziabher, Allison E Sproul, Yinuo Yang et al.",
+    "published": "2026-05-05",
+    "url": "https://arxiv.org/abs/2605.04029v1",
+    "pdf": "https://arxiv.org/pdf/2605.04029v1.pdf",
+    "tags": [
+      "Memory",
+      "Evaluation"
+    ]
+  },
+  {
+    "id": "2605.04019v1",
+    "title": "Redefining AI Red Teaming in the Agentic Era: From Weeks to Hours",
+    "summary": "AI systems are entering critical domains like healthcare, finance, and defense, yet remain vulnerable to adversarial attacks. While AI red teaming is a primary defense, current approaches force operators into manual, library-specific workflows. Operators spend weeks hand-crafting workflows - assembl",
+    "digest": "探讨AI Agent 应用：AI systems are entering critical domains like healthcare, finance, and defense, yet remain vulnerable to adversarial att",
+    "authors": "Raja Sekhar Rao Dheekonda, Will Pearce, Nick Landers",
+    "published": "2026-05-05",
+    "url": "https://arxiv.org/abs/2605.04019v1",
+    "pdf": "https://arxiv.org/pdf/2605.04019v1.pdf",
+    "tags": [
+      "Multi-Agent",
+      "Code Agent",
+      "Dev Agent",
+      "Multimodal"
+    ]
+  },
+  {
+    "id": "2605.04012v1",
+    "title": "SymptomAI: Towards a Conversational AI Agent for Everyday Symptom Assessment",
+    "summary": "Language models excel at diagnostic assessments on currated medical case-studies and vignettes, performing on par with, or better than, clinical professionals. However, existing studies focus on complex scenarios with rich context making it difficult to draw conclusions about how these systems perfo",
+    "digest": "探讨记忆管理：Language models excel at diagnostic assessments on currated medical case-studies and vignettes, performing on par with,",
+    "authors": "Joseph Breda, Fadi Yousif, Beszel Hawkins et al.",
+    "published": "2026-05-05",
+    "url": "https://arxiv.org/abs/2605.04012v1",
+    "pdf": "https://arxiv.org/pdf/2605.04012v1.pdf",
+    "tags": [
+      "Memory",
+      "Dev Agent",
+      "Evaluation"
+    ]
+  }
+]
