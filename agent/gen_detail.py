@@ -646,7 +646,7 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
       <span>›</span>
       <a href="/agent/curated.html">每日精选</a>
       <span>›</span>
-      <span>{{name}}</span>
+      <span>__name__</span>
     </div>
     <div class="topbar-back">
       <a class="topbar-btn" href="/agent/index.html">← Dashboard</a>
@@ -658,19 +658,19 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
     <!-- Hero -->
     <div class="hero-card">
       <div class="hero-badge">⭐ AI Agent 精选</div>
-      <h1 class="hero-title">{{name}}</h1>
-      <p class="hero-summary">{{summary}}</p>
+      <h1 class="hero-title">__name__</h1>
+      <p class="hero-summary">__summary__</p>
       <div class="hero-tags">
-        <span class="hero-tag" v-for="t in tags" :key="t">{{ t }}</span>
+        <span class="hero-tag" v-for="t in tags" :key="t">{{t}}</span>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="num">⭐ {{stars}}</div><div class="lbl">Stars</div></div>
-        <div class="hero-stat"><div class="num">{{forks}}</div><div class="lbl">Forks</div></div>
-        <div class="hero-stat"><div class="num">{{language}}</div><div class="lbl">语言</div></div>
-        <div class="hero-stat"><div class="num">{{license}}</div><div class="lbl">协议</div></div>
+        <div class="hero-stat"><div class="num">⭐ __stars__</div><div class="lbl">Stars</div></div>
+        <div class="hero-stat"><div class="num">__forks__</div><div class="lbl">Forks</div></div>
+        <div class="hero-stat"><div class="num">__language__</div><div class="lbl">语言</div></div>
+        <div class="hero-stat"><div class="num">__license__</div><div class="lbl">协议</div></div>
       </div>
       <div class="hero-meta" v-if="topics.length">
-        <span v-for="t in topics" :key="t">🏷️ {{ t }}</span>
+        <span v-for="t in topics" :key="t">🏷️ {{t}}</span>
       </div>
     </div>
 
@@ -746,9 +746,9 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
         <div class="side-card">
           <div class="side-card-title">📊 项目信息</div>
           <div class="side-meta">
-            <div class="side-meta-row"><span class="side-meta-label">Stars</span><span class="side-meta-val">⭐ {{stars}}</span></div>
-            <div class="side-meta-row"><span class="side-meta-label">语言</span><span class="side-meta-val">{{language}}</span></div>
-            <div class="side-meta-row"><span class="side-meta-label">协议</span><span class="side-meta-val">{{license}}</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">Stars</span><span class="side-meta-val">⭐ __stars__</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">语言</span><span class="side-meta-val">__language__</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">协议</span><span class="side-meta-val">__license__</span></div>
             <div class="side-meta-row" v-if="topics.length"><span class="side-meta-label">标签</span><div class="side-tags"><span class="side-tag" v-for="t in topics.slice(0,5)" :key="t">{{t}}</span></div></div>
           </div>
         </div>
@@ -864,7 +864,7 @@ def generate_detail(name, info, out_dir):
     def plain_text(s):
         return s.replace('**', '').replace('`', '').replace('#', '').replace('*', '').replace('_', '')
 
-    html = DETAIL_TEMPLATE.format(
+    _t = DETAIL_TEMPLATE.format(
         name=name,
         summary=info.get('summary', '')[:120],
         summary_raw=esc(info.get('summary', '')),
@@ -884,6 +884,8 @@ def generate_detail(name, info, out_dir):
         install_raw=esc(install),
         timestamp=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     )
+
+    html = _t.replace('__name__','{name}').replace('__stars__','{stars}').replace('__forks__','{forks}').replace('__language__','{language}').replace('__license__','{license}').replace('__summary__','{summary}').replace('__who__','{who}').replace('__timestamp__','{timestamp}')
 
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write(html)
