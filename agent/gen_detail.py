@@ -646,7 +646,7 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
       <span>›</span>
       <a href="/agent/curated.html">每日精选</a>
       <span>›</span>
-      <span>{{ projectName }}</span>
+      <span>{{name}}</span>
     </div>
     <div class="topbar-back">
       <a class="topbar-btn" href="/agent/index.html">← Dashboard</a>
@@ -658,16 +658,16 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
     <!-- Hero -->
     <div class="hero-card">
       <div class="hero-badge">⭐ AI Agent 精选</div>
-      <h1 class="hero-title">{{ projectName }}</h1>
-      <p class="hero-summary">{{ summary }}</p>
+      <h1 class="hero-title">{{name}}</h1>
+      <p class="hero-summary">{{summary}}</p>
       <div class="hero-tags">
         <span class="hero-tag" v-for="t in tags" :key="t">{{ t }}</span>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="num">⭐ {{ stars }}</div><div class="lbl">Stars</div></div>
-        <div class="hero-stat"><div class="num">{{ forks }}</div><div class="lbl">Forks</div></div>
-        <div class="hero-stat"><div class="num">{{ language }}</div><div class="lbl">语言</div></div>
-        <div class="hero-stat"><div class="num">{{ license }}</div><div class="lbl">协议</div></div>
+        <div class="hero-stat"><div class="num">⭐ {{stars}}</div><div class="lbl">Stars</div></div>
+        <div class="hero-stat"><div class="num">{{forks}}</div><div class="lbl">Forks</div></div>
+        <div class="hero-stat"><div class="num">{{language}}</div><div class="lbl">语言</div></div>
+        <div class="hero-stat"><div class="num">{{license}}</div><div class="lbl">协议</div></div>
       </div>
       <div class="hero-meta" v-if="topics.length">
         <span v-for="t in topics" :key="t">🏷️ {{ t }}</span>
@@ -709,13 +709,13 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
               <div class="pro-box">
                 <div class="box-title">✅ 优势</div>
                 <ul class="box-list">
-                  <li v-for="(p,i) in pros" :key="i">{{ p }}</li>
+                  <li v-for="(p,i) in pros" :key="i">{{p}}</li>
                 </ul>
               </div>
               <div class="con-box">
                 <div class="box-title">⚠️ 局限</div>
                 <ul class="box-list" v-if="cons.length">
-                  <li v-for="(c,i) in cons" :key="i">{{ c }}</li>
+                  <li v-for="(c,i) in cons" :key="i">{{c}}</li>
                 </ul>
                 <ul class="box-list" v-else><li>暂无已知局限性</li></ul>
               </div>
@@ -746,10 +746,10 @@ DETAIL_TEMPLATE = """<!DOCTYPE html>
         <div class="side-card">
           <div class="side-card-title">📊 项目信息</div>
           <div class="side-meta">
-            <div class="side-meta-row"><span class="side-meta-label">Stars</span><span class="side-meta-val">⭐ {{ stars }}</span></div>
-            <div class="side-meta-row"><span class="side-meta-label">语言</span><span class="side-meta-val">{{ language }}</span></div>
-            <div class="side-meta-row"><span class="side-meta-label">协议</span><span class="side-meta-val">{{ license }}</span></div>
-            <div class="side-meta-row" v-if="topics.length"><span class="side-meta-label">标签</span><div class="side-tags"><span class="side-tag" v-for="t in topics.slice(0,5)" :key="t">{{ t }}</span></div></div>
+            <div class="side-meta-row"><span class="side-meta-label">Stars</span><span class="side-meta-val">⭐ {{stars}}</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">语言</span><span class="side-meta-val">{{language}}</span></div>
+            <div class="side-meta-row"><span class="side-meta-label">协议</span><span class="side-meta-val">{{license}}</span></div>
+            <div class="side-meta-row" v-if="topics.length"><span class="side-meta-label">标签</span><div class="side-tags"><span class="side-tag" v-for="t in topics.slice(0,5)" :key="t">{{t}}</span></div></div>
           </div>
         </div>
 
