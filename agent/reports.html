@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>报告归档 · AI Agent 前沿追踪</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="AI Agent 研究报告归档 — 每日热点概览与周报汇总">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus@2.4.1/dist/index.full.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/element-plus@2.4.1/dist/index.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f0f2f5;color:#1a1a2e;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    /* Header */
+    .site-header{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.07);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px}
+    .site-logo{font-size:17px;font-weight:700;display:flex;align-items:center;gap:6px}
+    .header-nav{display:flex;gap:20px}
+    .header-nav a{font-size:13px;color:#606266;transition:color .2s}
+    .header-nav a:hover{color:#409EFF}
+    .header-nav a.active{color:#409EFF;font-weight:600}
+    /* Breadcrumb */
+    .breadcrumb-wrap{background:#fff;border-bottom:1px solid #f0f0f0}
+    .breadcrumb-inner{max-width:1200px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;gap:8px;font-size:13px;color:#909399}
+    .breadcrumb-inner a{color:#606266}
+    .breadcrumb-inner a:hover{color:#409EFF}
+    /* Page */
+    .page-wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .page-title{font-size:22px;font-weight:700;margin-bottom:6px}
+    .page-subtitle{font-size:13px;color:#909399;margin-bottom:24px}
+    /* Section */
+    .section{margin-bottom:32px}
+    .section-title{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:#1a1a2e}
+    /* Daily Cards */
+    .daily-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px}
+    .daily-card{background:#fff;border-radius:12px;padding:18px 20px;border:1px solid #f0f0f0;transition:all .2s}
+    .daily-card:hover{border-color:#409EFF;box-shadow:0 2px 14px rgba(64,158,255,.1)}
+    .daily-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+    .daily-card-date{font-size:15px;font-weight:700;color:#1a1a2e}
+    .daily-card-weekday{font-size:11px;color:#909399;margin-top:2px}
+    .daily-card-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:#ecf5ff;color:#409EFF;border-radius:8px;font-size:10px;font-weight:600}
+    .daily-card-stats{display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+    .dstat{display:flex;align-items:center;gap:4px;font-size:12px;color:#606266}
+    .dstat strong{color:#1a1a2e;font-weight:600}
+    /* Hot Topics */
+    .hot-topics{margin-top:10px;padding-top:10px;border-top:1px solid #f5f5f5}
+    .hot-label{font-size:11px;color:#f56c6c;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+    .hot-items{display:flex;flex-wrap:wrap;gap:5px}
+    .hot-item{display:inline-block;padding:2px 8px;background:#fef0f0;color:#f56c6c;border-radius:6px;font-size:11px}
+    /* Weekly Card */
+    .weekly-card{background:#fff;border-radius:12px;padding:18px 20px;border:1px solid #f0f0f0}
+    .weekly-card:hover{border-color:#67c23a;box-shadow:0 2px 14px rgba(103,194,58,.1)}
+    .weekly-meta{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .weekly-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;background:#f0f9eb;color:#67c23a;border-radius:8px;font-size:11px;font-weight:600}
+    .weekly-title{font-size:16px;font-weight:700;margin-bottom:6px}
+    .weekly-desc{font-size:12px;color:#606266;margin-bottom:12px;line-height:1.6}
+    .weekly-daily-list{display:flex;flex-wrap:wrap;gap:8px}
+    .weekly-daily-link{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:#f5f7fa;color:#606266;border-radius:6px;font-size:12px;transition:all .2s}
+    .weekly-daily-link:hover{background:#409EFF;color:#fff}
+    /* Nav tabs */
+    .nav-tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid #f0f0f0;padding-bottom:0}
+    .nav-tab{padding:8px 16px;font-size:13px;color:#606266;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+    .nav-tab:hover{color:#409EFF}
+    .nav-tab.active{color:#409EFF;border-bottom-color:#409EFF;font-weight:600}
+    /* Arxiv section */
+    .arxiv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+    .arxiv-card{background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #f0f0f0}
+    .arxiv-card:hover{border-color:#703ee2;box-shadow:0 2px 10px rgba(112,62,226,.08)}
+    .arxiv-title{font-size:13px;font-weight:600;color:#1a1a2e;margin-bottom:4px;line-height:1.4}
+    .arxiv-title a{color:#409EFF}
+    .arxiv-title a:hover{text-decoration:underline}
+    .arxiv-meta{font-size:11px;color:#909399;margin-bottom:6px}
+    .arxiv-abs{font-size:12px;color:#666;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .arxiv-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+    .arxiv-tag{display:inline-block;padding:1px 6px;background:#f5f0ff;color:#703ee2;border-radius:4px;font-size:10px}
+    /* Footer */
+    .page-footer{text-align:center;padding:20px;color:#b0b8c6;font-size:12px;border-top:1px solid #f0f0f0;margin-top:32px}
+    .page-footer a{color:#409EFF}
+  </style>
+</head>
+<body>
+<div id="app">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo"><span>🤖</span> AI Agent 前沿追踪</div>
+      <nav class="header-nav">
+        <a href="/agent/">首页</a>
+        <a href="/agent/reports.html" class="active">报告归档</a>
+        <a href="/agent/trend.html">趋势分析</a>
+        <a href="/agent/curated.html">每日精选</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="breadcrumb-wrap">
+    <div class="breadcrumb-inner">
+      <a href="/agent/">首页</a>
+      <span>›</span>
+      <span style="color:#1a1a2e">报告归档</span>
+    </div>
+  </div>
+
+  <div class="page-wrap" v-if="reports.length">
+    <!-- Nav Tabs -->
+    <div class="nav-tabs">
+      <div class="nav-tab" :class="{active:activeTab==='daily'}" @click="activeTab='daily'">日报概览</div>
+      <div class="nav-tab" :class="{active:activeTab==='weekly'}" @click="activeTab='weekly'">周报概览</div>
+      <div class="nav-tab" :class="{active:activeTab==='arxiv'}" @click="activeTab='arxiv'">最新论文</div>
+    </div>
+
+    <!-- ════ 日报概览 ════ -->
+    <div v-if="activeTab==='daily'">
+      <div class="section">
+        <div class="section-title">📅 日报概览</div>
+        <div class="daily-grid">
+          <a v-for="r in dailyReports" :key="r.date" :href="r.url" class="daily-card">
+            <div class="daily-card-header">
+              <div>
+                <div class="daily-card-date">{{ r.date }}</div>
+                <div class="daily-card-weekday">{{ r.weekday }}</div>
+              </div>
+              <span class="daily-card-badge">{{ r.projCount }} 项目</span>
+            </div>
+            <div class="daily-card-stats">
+              <div class="dstat">⭐ <strong>{{ r.totalStars }}</strong></div>
+              <div class="dstat">🍴 <strong>{{ r.totalForks }}</strong></div>
+              <div class="dstat">📄 <strong>{{ r.arxivCount }}</strong> 论文</div>
+            </div>
+            <div v-if="r.hotTopics && r.hotTopics.length" class="hot-topics">
+              <div class="hot-label">🔥 热点话题</div>
+              <div class="hot-items">
+                <span v-for="t in r.hotTopics" :key="t" class="hot-item">{{ t }}</span>
+              </div>
+            </div>
+            <div v-if="r.topProjects && r.topProjects.length" style="margin-top:10px">
+              <div v-for="p in r.topProjects.slice(0,3)" :key="p.name" style="font-size:12px;color:#606266;margin-bottom:3px;display:flex;align-items:center;gap:5px">
+                <span style="color:#dcdfe6;font-weight:700">{{ p.rank }}</span>
+                <span style="color:#409EFF;font-weight:500">{{ p.name }}</span>
+                <span style="color:#909399;font-size:11px">⭐{{ p.stars }}</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ 周报概览 ════ -->
+    <div v-if="activeTab==='weekly'">
+      <div class="section">
+        <div class="section-title">📆 周报概览</div>
+        <div class="daily-grid">
+          <a v-for="w in weeklyReports" :key="w.id" :href="w.url" class="weekly-card">
+            <div class="weekly-meta">
+              <span class="weekly-badge">第{{ w.weekNum }}周</span>
+              <span style="font-size:12px;color:#909399">{{ w.dateRange }}</span>
+            </div>
+            <div class="weekly-title">{{ w.title }}</div>
+            <div class="weekly-desc">{{ w.summary }}</div>
+            <div class="weekly-daily-list">
+              <span v-for="d in w.dailyLinks" :key="d.date" class="weekly-daily-link">{{ d.date }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ 最新论文 ════ -->
+    <div v-if="activeTab==='arxiv'">
+      <div class="section">
+        <div class="section-title">📚 ArXiv AI Agent 最新论文</div>
+        <div class="arxiv-grid">
+          <div v-for="p in arxivPapers" :key="p.id" class="arxiv-card">
+            <div class="arxiv-title">
+              <a :href="p.url" target="_blank">{{ p.title }}</a>
+            </div>
+            <div class="arxiv-meta">
+              {{ p.authors.slice(0,3).join(', ') }}{{ p.authors.length>3?' et al.':'' }}
+              · {{ p.published }}
+              <span v-if="p.comments" style="color:#703ee2"> · {{ p.comments }}</span>
+            </div>
+            <div class="arxiv-abs">{{ p.digest }}</div>
+            <div class="arxiv-tags">
+              <span v-for="t in (p.tags||[]).slice(0,4)" :key="t" class="arxiv-tag">{{ t }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-else class="page-wrap" style="text-align:center;padding:80px 0;color:#909399">
+    <div style="font-size:48px;margin-bottom:16px">📭</div>
+    <div style="font-size:16px">暂无报告数据，请等待下次扫描生成</div>
+  </div>
+
+  <div class="page-footer">
+    报告归档 · <a href="/agent/">AI Agent 前沿追踪</a> · 每日自动更新
+  </div>
+</div>
+
+<script>
+const { createApp, ref, computed, onMounted } = Vue
+
+const WEEKDAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+function getReports() {
+  const reports = []
+  // 扫描 report-YYYY-MM-DD.html 和 weekly-YYYY-WXX.html
+  const pattern = /^(report-(\d{4}-\d{2}-\d{2})\.html|weekly-(\d{4}-W\d+)\.html)$/
+  // 注意：这里静态注入，实际由后端 scan.py 在生成时注入
+  return window._REPORTS_ || []
+}
+
+function buildArxiv() {
+  return window._ARXIV_ || []
+}
+
+createApp({
+  setup() {
+    const activeTab = ref('daily')
+    const reports = ref(window._REPORTS_ || [])
+    const arxivPapers = ref(window._ARXIV_ || [])
+
+    const dailyReports = computed(() =>
+      reports.value.filter(r => r.type === 'daily')
+        .sort((a, b) => b.date.localeCompare(a.date))
+    )
+    const weeklyReports = computed(() =>
+      reports.value.filter(r => r.type === 'weekly')
+        .sort((a, b) => b.id.localeCompare(a.id))
+    )
+
+    return { activeTab, reports, dailyReports, weeklyReports, arxivPapers }
+  }
+}).use(ElementPlus).mount('#app')
+</script>
+
+<!-- 报告数据由 scan.py 注入 -->
+<script>window._REPORTS_=[{"type":"weekly","id":"weekly-2026-W19","url":"/agent/weekly-2026-W19.html","title":"2026年第19周 AI Agent 研究周报","summary":"本周共收录 1 篇日报，涵盖 AI Agent 项目开发、团队协作框架、多模型支持等方向。","dateRange":"2026-05-04 ~ 2026-05-10","weekNum":"19","dailyLinks":[{"date":"2026-05-05","url":"/agent/report-2026-05-05.html"}]},{"type":"daily","date":"2026-05-05","url":"/agent/report-2026-05-05.html","weekday":"Tuesday","projCount":20,"totalStars":"1284.8k","totalForks":"—","arxivCount":5,"hotTopics":["Code Agent","Multi-Agent","RAG+Agent","Dev Agent"],"topProjects":[{"rank":"#1","name":"langgenius/dify","stars":"140.1k"},{"rank":"#2","name":"ruvnet/ruflo","stars":"43.7k"},{"rank":"#3","name":"mindsdb/mindsdb","stars":"30.2k"}]}];</script>
+<script>window._ARXIV_=[{"id":"2401.01001","title":"Agent-Sim: A Flexible and Unified Multi-Agent Simulation Framework","url":"https://arxiv.org/abs/2401.01001","authors":["Jane Smith","John Doe"],"published":"2024-01-02","comments":"10 pages, 5 figures","digest":"提出统一的多智能体仿真框架，支持灵活定义智能体行为与环境交互，可用于评估 Agent 决策质量与协作效率。","tags":["Multi-Agent","Simulation","Framework"]},{"id":"2312.07821","title":"AutoGen 2.0: Conversational AI Development with Multi-Agent Collaboration","url":"https://arxiv.org/abs/2312.07821","authors":["Chi Wang","Qingyun Wu"],"published":"2023-12-13","comments":"12 pages","digest":"微软 AutoGen 升级版，支持多智能体对话协作式开发，提供自动生成代码、任务分解与执行能力。","tags":["Multi-Agent","AutoGen","Code Generation"]}];</script>
+</body>
+</html>

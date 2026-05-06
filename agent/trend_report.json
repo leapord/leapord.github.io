@@ -1,0 +1,84 @@
+{
+  "date": "2026-05-06",
+  "generated_at": "2026-05-06T09:06:52.963845",
+  "total_projects": 0,
+  "total_stars": "0k+",
+  "top_categories": [],
+  "top_languages": [],
+  "insights": [],
+  "top_projects": [],
+  "trend_analysis": {
+    "多智能体协作": {
+      "icon": "🤝",
+      "summary": "多智能体框架热度持续攀升，MetaGPT、CrewAI、AutoGen 三足鼎立",
+      "detail": "2024 年是多智能体（Multi-Agent）元年。以 MetaGPT、CrewAI、AutoGen 为代表的多智能体框架正在重塑 AI 应用开发范式。MetaGPT 通过模拟软件公司 SOP 流程让 Agent 协作更规范；CrewAI 以极低上手门槛吸引入门用户；AutoGen 凭借微软背书在企业场景快速落地。三者各有优势：MetaGPT 适合复杂任务分解，CrewAI 适合快速原型，AutoGen 适合企业集成。预计 2025 年多智能体将深入业务流程自动化领域。",
+      "technologies": [
+        "MetaGPT",
+        "CrewAI",
+        "AutoGen",
+        "ChatDev"
+      ],
+      "star_range": "30k-67k ⭐"
+    },
+    "Agent 开发平台": {
+      "icon": "🛠️",
+      "summary": "低代码/零代码 Agent 平台爆发，Dify 14万 Stars 领跑",
+      "detail": "Dify 和 Flowise 的崛起标志着 AI 应用开发进入「全民时代」。Dify 以 14 万 Stars 成为最热门 AI 应用开发平台，其工作流编排、RAG 引擎、Agent 模式三位一体，解决了从原型到生产的全链路需求。Flowise 以拖拽式低代码降低门槛，适合非技术背景用户。这一趋势说明：AI 应用开发正在从「高度定制」走向「标准化平台」，未来更多业务人员将直接参与 AI 应用搭建。",
+      "technologies": [
+        "Dify",
+        "Flowise",
+        "LangChain",
+        "LangServe"
+      ],
+      "star_range": "30k-140k ⭐"
+    },
+    "RAG 与知识检索": {
+      "icon": "📚",
+      "summary": "RAG 持续进化，从简单检索走向深度文档理解",
+      "detail": "RAG（检索增强生成）依然是 AI Agent 的核心技术方向。2024 年的 RAG 不再是简单的向量相似度匹配，而是向「深度文档理解」演进。RAGFlow 通过复杂 PDF 解析、多跳问答能力超越传统 RAG；LlamaIndex 专注文档理解，提供多种索引策略；Dify 内置的 RAG 引擎则覆盖大多数标准场景。随着企业私有知识库需求爆发，RAG 技术将继续在「理解深度」和「检索效率」两个方向突破。",
+      "technologies": [
+        "RAGFlow",
+        "LlamaIndex",
+        "Dify RAG",
+        "Quivr"
+      ],
+      "star_range": "10k-79k ⭐"
+    },
+    "Agent 记忆架构": {
+      "icon": "🧠",
+      "summary": "记忆能力成为 Agent 差异化核心，Mem0 开辟新赛道",
+      "detail": "「记不住」是 Agent 落地最大痛点之一。Mem0 针对性解决跨会话记忆、用户偏好存储、事实遗忘等问题，开辟了「Agent 记忆层」这一新赛道。Claude-mem 则为 Claude 用户提供会话压缩和长期上下文保持。记忆架构的重要性在于：真正有价值的 AI 助手必须「认识用户」，而非每次从零开始。随着 Agent 向个人助理场景渗透，记忆能力将成为标配。",
+      "technologies": [
+        "Mem0",
+        "claude-mem",
+        "LangChain Memory",
+        "Context7"
+      ],
+      "star_range": "5k-72k ⭐"
+    },
+    "Dev Agent": {
+      "icon": "⚡",
+      "summary": "Dev Agent 重塑软件开发，Dify、LangChain 分列一二",
+      "detail": "Dev Agent（AI 编程 Agent）今年大爆发。Dify 和 LangChain 分别代表两种路线：Dify 以可视化工作流让产品经理也能搭建 AI 流程；LangChain 以高度定制化满足复杂 AI 流水线的技术需求。在 GitHub Trending 上，Dev Agent 类项目长期占据高位，说明市场对「用 AI 提升开发效率」的需求极为旺盛。2025 年预计更多 Dev Agent 将整合代码审查、自动化测试、CI/CD 等环节。",
+      "technologies": [
+        "Dify",
+        "LangChain",
+        "Devin",
+        "GitHub Copilot"
+      ],
+      "star_range": "135k-140k ⭐"
+    },
+    "工具调用与函数执行": {
+      "icon": "🔧",
+      "summary": "Tool Use/Function Calling 成为 Agent 与外界交互的标准接口",
+      "detail": "Function Calling（函数调用）是 Agent 调用外部工具（搜索引擎、数据库、API）的主流方案。OpenAI、Anthropic、Google 都推出了各自的 Function Calling 规范，形成了事实标准。开源社区在此基础上构建了强大的工具生态：SerpAPI 搜索、Tavily 网页搜索、Browserbase 自动化浏览等。这一方向的竞争焦点在于：工具调用的稳定性、工具组合的灵活性、以及多步推理能力。",
+      "technologies": [
+        "OpenAI Function Calling",
+        "LangChain Tools",
+        "Semantic Kernel",
+        "AgentSDK"
+      ],
+      "star_range": "框架内置"
+    }
+  }
+}
