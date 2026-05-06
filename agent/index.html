@@ -262,31 +262,6 @@
 
       <!-- ── TAB: 每日精选 ── -->
       <div class="tab-content" :class="{active:activeTab==='curated'}">
-        <!-- 归档入口 -->
-        <div class="section-card">
-          <div class="section-card-header">
-            <h2 class="section-card-title">⭐ 每日精选归档</h2>
-            <span style="font-size:11px;color:#999">{{ curatedArchive.length }} 天归档</span>
-          </div>
-          <div class="content-body">
-            <div v-if="curatedArchive.length === 0" class="empty">暂无归档数据</div>
-            <ul class="report-list" v-else>
-              <li class="report-item" v-for="r in curatedArchive" :key="r.date">
-                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                  <span class="report-date">{{ r.date }}</span>
-                  <span class="report-label">{{ r.count }} 项目</span>
-                  <div style="display:flex;gap:4px;flex-wrap:wrap">
-                    <span v-for="tag in (r.tags||[]).slice(0,4)" :key="tag" class="curated-tag" style="font-size:10px;padding:1px 6px">{{ tag }}</span>
-                  </div>
-                  <div style="display:flex;gap:6px;margin-left:auto;font-size:11px;color:#7a8ba8">
-                    <span v-for="top in (r.topProjects||[]).slice(0,2)" :key="top.name">⭐ {{ top.name.split('/')[1] }} {{ top.stars }}</span>
-                  </div>
-                </div>
-                <a class="report-link" :href="r.url" target="_blank">查看 {{ r.date }} →</a>
-              </li>
-            </ul>
-          </div>
-        </div>
         <!-- 当日精选项目卡片 -->
         <div class="section-card" v-if="curatedProjects.length > 0">
           <div class="section-card-header">
@@ -313,6 +288,37 @@
                   <a class="detail-btn" :href="'detail/'+slugify(p.name)+'.html'" target="_blank" style="margin-left:auto">深度解读 →</a>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <!-- 历史归档 -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <h2 class="section-card-title">📅 每日精选归档</h2>
+            <span style="font-size:11px;color:#999">{{ curatedArchive.length }} 天归档</span>
+          </div>
+          <div class="content-body">
+            <div v-if="curatedArchive.length === 0" class="empty">暂无归档数据</div>
+            <ul class="report-list" v-else>
+              <li class="report-item" v-for="r in paginatedArchive" :key="r.date">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  <span class="report-date">{{ r.date }}</span>
+                  <span class="report-label">{{ r.count }} 项目</span>
+                  <div style="display:flex;gap:4px;flex-wrap:wrap">
+                    <span v-for="tag in (r.tags||[]).slice(0,4)" :key="tag" class="curated-tag" style="font-size:10px;padding:1px 6px">{{ tag }}</span>
+                  </div>
+                  <div style="display:flex;gap:6px;margin-left:auto;font-size:11px;color:#7a8ba8">
+                    <span v-for="top in (r.topProjects||[]).slice(0,2)" :key="top.name">⭐ {{ top.name.split('/')[1] }} {{ top.stars }}</span>
+                  </div>
+                </div>
+                <a class="report-link" :href="r.url" target="_blank">查看 {{ r.date }} →</a>
+              </li>
+            </ul>
+            <!-- 分页 -->
+            <div v-if="curatedArchive.length > pageSize" style="display:flex;justify-content:center;align-items:center;gap:8px;margin-top:14px">
+              <span class="sort-tab" @click="curatedPage=Math.max(1,curatedPage-1)">←</span>
+              <span style="font-size:12px;color:#606266">{{ curatedPage }} / {{ totalPages }}</span>
+              <span class="sort-tab" @click="curatedPage=Math.min(totalPages,curatedPage+1)">→</span>
             </div>
           </div>
         </div>
@@ -397,6 +403,8 @@ createApp({
     const trendingProjects = ref([])
     const curatedProjects = ref([])
     const curatedArchive = ref([])
+    const curatedPage = ref(1)
+    const pageSize = 10
     const reports = ref([])
 
     const slugify = (name) => name.replace(/\//g, '-')
@@ -488,6 +496,12 @@ createApp({
       return today
     })
 
+    const totalPages = computed(() => Math.ceil(curatedArchive.value.length / pageSize))
+    const paginatedArchive = computed(() => {
+      const start = (curatedPage.value - 1) * pageSize
+      return curatedArchive.value.slice(start, start + pageSize)
+    })
+
     onMounted(() => {
       // 加载 trending 数据
       fetch('trending.json').then(r=>r.json()).then(d=>{
@@ -527,7 +541,8 @@ createApp({
       activeTab, loading, searchQuery, sortBy, activeCat,
       trendingProjects, curatedProjects, curatedArchive, reports,
       catStats, allLangs, filteredProjects, trendInsights,
-      todayReportUrl, weeklyReportUrl, slugify, todayCuratedDate
+      todayReportUrl, weeklyReportUrl, slugify, todayCuratedDate,
+      curatedPage, pageSize, totalPages, paginatedArchive
     }
   }
 }).use(ElementPlus).mount('#app')
