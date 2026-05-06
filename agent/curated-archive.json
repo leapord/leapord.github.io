@@ -1,0 +1,36 @@
+[
+  {
+    "date": "2026-05-06",
+    "weekday": "Wednesday",
+    "url": "/agent/curated-2026-05-06.html",
+    "count": 12,
+    "total_stars": "944.4k",
+    "tags": [
+      "Dev Agent",
+      "RAG+Agent",
+      "Agent",
+      "Multi-Agent",
+      "Framework",
+      "Agentic",
+      "Code Agent",
+      "Agents",
+      "Tool Calling",
+      "Memory",
+      "Agentic Ai"
+    ],
+    "top_projects": [
+      {
+        "name": "langgenius/dify",
+        "stars": "140.2k"
+      },
+      {
+        "name": "langchain-ai/langchain",
+        "stars": "135.9k"
+      },
+      {
+        "name": "Shubhamsaboo/awesome-llm-apps",
+        "stars": "109.0k"
+      }
+    ]
+  }
+]
