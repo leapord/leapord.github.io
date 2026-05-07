@@ -87,7 +87,6 @@
 
     <div class="nav-tabs">
       <div class="nav-tab" :class="{active:activeTab==='daily'}" @click="activeTab='daily'">日报概览</div>
-      <div class="nav-tab" :class="{active:activeTab==='curated'}" @click="activeTab='curated'">每日精选</div>
       <div class="nav-tab" :class="{active:activeTab==='weekly'}" @click="activeTab='weekly'">周报概览</div>
     </div>
 
@@ -146,40 +145,6 @@
         </div>
       </div>
     </div>
-
-    <!-- 每日精选归档 -->
-    <div v-if="activeTab==='curated'">
-      <div class="section">
-        <div class="section-title">⭐ 每日精选归档 — 1k+ Stars AI Agent 项目每日汇总</div>
-        <div class="daily-grid">
-          <a v-for="r in curatedReports" :key="r.date" :href="r.url" class="daily-card curated-card">
-            <div class="daily-card-header">
-              <div>
-                <div class="daily-card-date">{r.date}</div>
-                <div class="daily-card-weekday">{r.weekday}</div>
-              </div>
-              <span class="daily-card-badge">{r.count} 项目</span>
-            </div>
-            <div class="daily-card-stats">
-              <div class="dstat">⭐ <strong>{r.total_stars}</strong></div>
-            </div>
-            <div v-if="r.tags && r.tags.length" class="hot-topics">
-              <div class="hot-label">🏷️ 技术分类</div>
-              <div class="hot-items">
-                <span v-for="t in r.tags.slice(0,6)" :key="t" class="hot-item" style="background:#ecf5ff;color:#409EFF;border-radius:6px">{t}</span>
-              </div>
-            </div>
-            <div v-if="r.top_projects && r.top_projects.length" style="margin-top:10px">
-              <div v-for="p in r.top_projects" :key="p.name" style="font-size:12px;color:#606266;margin-bottom:3px;display:flex;align-items:center;gap:5px">
-                <span style="color:#dcdfe6;font-weight:700">⭐</span>
-                <span style="color:#409EFF;font-weight:500">{p.name}</span>
-                <span style="color:#909399;font-size:11px">{p.stars}</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="page-footer">
@@ -193,15 +158,12 @@ createApp({
   setup() {
     const activeTab = ref('daily')
     const reports = ref(window._REPORTS_)
-    const curatedArchive = ref(window._CURATED_ARCHIVE_ || [])
     const dailyReports = computed(() => reports.value.filter(r=>r.type==='daily').sort((a,b)=>b.date.localeCompare(a.date)))
     const weeklyReports = computed(() => reports.value.filter(r=>r.type==='weekly').sort((a,b)=>b.id.localeCompare(a.id)))
-    const curatedReports = computed(() => curatedArchive.value.sort((a,b)=>b.date.localeCompare(a.date)))
-    return {activeTab, reports, dailyReports, weeklyReports, curatedReports}
+    return {activeTab, reports, dailyReports, weeklyReports}
   }
 }).use(ElementPlus).mount('#app')
 </script>
 <script>window._REPORTS_=[{"type": "weekly", "id": "2026-W19", "url": "/agent/weekly-2026-W19.html", "title": "2026年第19周 AI Agent 研究周报", "summary": "本周共收录 2 篇日报", "dateRange": "2026-05-04 ~ 2026-05-06", "weekNum": "19", "dailyLinks": [{"date": "2026-05-06", "url": "/agent/report-2026-05-06.html"}, {"date": "2026-05-06", "url": "/agent/report-2026-05-06.html"}]}, {"type": "daily", "date": "2026-05-06", "url": "/agent/report-2026-05-06.html", "weekday": "Wednesday", "projCount": "20", "totalStars": "1287.7k", "totalForks": "—", "arxivCount": "29", "hotTopics": ["Agents", "RAG+Agent", "Code Agent", "Dev Agent"], "topProjects": [{"rank": "#1", "name": "langgenius/dify", "stars": "140.2k"}, {"rank": "#2", "name": "langchain-ai/langchain", "stars": "135.9k"}, {"rank": "#3", "name": "Shubhamsaboo/awesome-llm-apps", "stars": "109.0k"}]}];</script>
-<script>window._CURATED_ARCHIVE_=[{"date": "2026-05-06", "weekday": "Wednesday", "url": "/agent/curated-2026-05-06.html", "count": 8, "total_stars": "847.0k", "tags": ["Multi-Agent", "RAG", "Workflow", "LLM", "Dev Agent"], "top_projects": [{"name": "langgenius/dify", "stars": "140.2k"}, {"name": "Shubhamsaboo/awesome-llm-apps", "stars": "109.0k"}, {"name": "FlowiseAI/Flowise", "stars": "31.3k"}]}];</script>
 </body>
 </html>

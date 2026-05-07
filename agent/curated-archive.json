@@ -1,5 +1,33 @@
 [
   {
+    "date": "2026-05-07",
+    "weekday": "Thursday",
+    "url": "/agent/curated-2026-05-07.html",
+    "count": 7,
+    "total_stars": "208774.0k",
+    "tags": [
+      "多智能体",
+      "Dev Agent",
+      "工具调用",
+      "RAG检索",
+      "自主代理"
+    ],
+    "top_projects": [
+      {
+        "name": "bytedance/deer-flow",
+        "stars": "65,543"
+      },
+      {
+        "name": "ruvnet/ruflo",
+        "stars": "45,285"
+      },
+      {
+        "name": "addyosmani/agent-skills",
+        "stars": "30,560"
+      }
+    ]
+  },
+  {
     "date": "2026-05-06",
     "weekday": "Wednesday",
     "url": "/agent/curated-2026-05-06.html",

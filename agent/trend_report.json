@@ -1,11 +1,15 @@
 {
-  "date": "2026-05-06",
-  "generated_at": "2026-05-06T12:21:42.762533",
-  "total_projects": 8,
-  "total_stars": "206k+",
+  "date": "2026-05-07",
+  "generated_at": "2026-05-07T09:18:53.278562",
+  "total_projects": 7,
+  "total_stars": "208k+",
   "top_categories": [
     {
       "name": "Dev Agent",
+      "count": 5
+    },
+    {
+      "name": "RAG检索",
       "count": 3
     },
     {
@@ -13,15 +17,7 @@
       "count": 3
     },
     {
-      "name": "RAG检索",
-      "count": 2
-    },
-    {
       "name": "自主代理",
-      "count": 2
-    },
-    {
-      "name": "AI Agent",
       "count": 2
     },
     {
@@ -29,7 +25,7 @@
       "count": 1
     },
     {
-      "name": "记忆架构",
+      "name": "评测基准",
       "count": 1
     }
   ],
@@ -49,10 +45,6 @@
     {
       "name": "Shell",
       "count": 1
-    },
-    {
-      "name": "JavaScript",
-      "count": 1
     }
   ],
   "insights": [
@@ -60,11 +52,11 @@
       "type": "技术方向",
       "icon": "🔥",
       "title": "当前最热方向：Dev Agent",
-      "content": "从今日 GitHub Trending 来看，Dev Agent（3个项目）、工具调用（3个项目）、RAG检索（2个项目），这三大方向持续吸引开发者关注。",
+      "content": "从今日 GitHub Trending 来看，Dev Agent（5个项目）、RAG检索（3个项目）、工具调用（3个项目），这三大方向持续吸引开发者关注。",
       "projects": [
         "Hmbown/DeepSeek-TUI",
-        "ruvnet/ruflo",
-        "virattt/dexter"
+        "addyosmani/agent-skills",
+        "InsForge/InsForge"
       ]
     },
     {
@@ -91,17 +83,49 @@
     {
       "name": "Hmbown/DeepSeek-TUI",
       "description": "Coding agent for DeepSeek models that runs in your terminal",
-      "stars": "8,876",
+      "stars": "14,056",
       "language": "Rust",
       "tags": [
         "Dev Agent"
       ],
-      "why_hot": "GitHub Stars 8,876，在 Dev Agent 方向近期热度较高，受到开发者关注。"
+      "why_hot": "GitHub Stars 14,056，在 Dev Agent 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "addyosmani/agent-skills",
+      "description": "Production-grade engineering skills for AI coding agents.",
+      "stars": "30,560",
+      "language": "Shell",
+      "tags": [
+        "Dev Agent"
+      ],
+      "why_hot": "GitHub Stars 30,560，在 Dev Agent 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "InsForge/InsForge",
+      "description": "InsForge is a Postgres-based backend with auth, storage, compute, hosting, and AI gateway. Built for coding agents.",
+      "stars": "8,462",
+      "language": "TypeScript",
+      "tags": [
+        "RAG检索",
+        "Dev Agent"
+      ],
+      "why_hot": "GitHub Stars 8,462，在 RAG检索/Dev Agent 方向近期热度较高，受到开发者关注。"
+    },
+    {
+      "name": "virattt/dexter",
+      "description": "An autonomous agent for deep financial research",
+      "stars": "24,363",
+      "language": "TypeScript",
+      "tags": [
+        "工具调用",
+        "自主代理"
+      ],
+      "why_hot": "GitHub Stars 24,363，在 工具调用/自主代理 方向近期热度较高，受到开发者关注。"
     },
     {
       "name": "ruvnet/ruflo",
       "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
-      "stars": "44,003",
+      "stars": "45,285",
       "language": "TypeScript",
       "tags": [
         "多智能体",
@@ -109,40 +133,7 @@
         "Dev Agent",
         "自主代理"
       ],
-      "why_hot": "GitHub Stars 44,003，在 多智能体/RAG检索 方向近期热度较高，受到开发者关注。"
-    },
-    {
-      "name": "virattt/dexter",
-      "description": "An autonomous agent for deep financial research",
-      "stars": "23,914",
-      "language": "TypeScript",
-      "tags": [
-        "工具调用",
-        "自主代理"
-      ],
-      "why_hot": "GitHub Stars 23,914，在 工具调用/自主代理 方向近期热度较高，受到开发者关注。"
-    },
-    {
-      "name": "mksglu/context-mode",
-      "description": "Context window optimization for AI coding agents. Sandboxes tool output, 98% reduction. 14 platforms",
-      "stars": "13,197",
-      "language": "TypeScript",
-      "tags": [
-        "记忆架构",
-        "Dev Agent",
-        "工具调用"
-      ],
-      "why_hot": "GitHub Stars 13,197，在 记忆架构/Dev Agent 方向近期热度较高，受到开发者关注。"
-    },
-    {
-      "name": "cocoindex-io/cocoindex",
-      "description": "Incremental engine for long horizon agents 🌟 Star if you like it!",
-      "stars": "8,465",
-      "language": "Python",
-      "tags": [
-        "AI Agent"
-      ],
-      "why_hot": "GitHub Stars 8,465，在 AI Agent 方向近期热度较高，受到开发者关注。"
+      "why_hot": "GitHub Stars 45,285，在 多智能体/RAG检索 方向近期热度较高，受到开发者关注。"
     }
   ],
   "trend_analysis": {
