@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": "2605.06664v1",
+    "title": "BAMI: Training-Free Bias Mitigation in GUI Grounding",
+    "summary": "GUI grounding is a critical capability for enabling GUI agents to execute tasks such as clicking and dragging. However, in complex scenarios like the ScreenSpot-Pro benchmark, existing models often suffer from suboptimal performance. Utilizing the proposed \\textbf{Masked Prediction Distribution (MPD",
+    "digest": "探讨多智能体、知识检索、多模态：GUI grounding is a critical capability for enabling GUI agents to execute tasks such as clicking and dragging",
+    "authors": "Borui Zhang, Bo Zhang, Bo Wang et al.",
+    "published": "2026-05-07",
+    "url": "https://arxiv.org/abs/2605.06664v1",
+    "pdf": "https://arxiv.org/pdf/2605.06664v1.pdf",
+    "tags": [
+      "RAG+Agent",
+      "Code Agent",
+      "Research Agent",
+      "Multimodal"
+    ]
+  },
+  {
+    "id": "2605.06651v1",
+    "title": "AI Co-Mathematician: Accelerating Mathematicians with Agentic AI",
+    "summary": "We introduce the AI co-mathematician, a workbench for mathematicians to interactively leverage AI agents to pursue open-ended research. The AI co-mathematician is optimized to provide holistic support for the exploratory and iterative reality of mathematical workflows, including ideation, literature",
+    "digest": "探讨多智能体、知识检索：We introduce the AI co-mathematician, a workbench for mathematicians to interactively leverage AI agents to pursue open-",
+    "authors": "Daniel Zheng, Ingrid von Glehn, Yori Zwols et al.",
+    "published": "2026-05-07",
+    "url": "https://arxiv.org/abs/2605.06651v1",
+    "pdf": "https://arxiv.org/pdf/2605.06651v1.pdf",
+    "tags": [
+      "RAG+Agent",
+      "Research Agent",
+      "Dev Agent",
+      "Evaluation"
+    ]
+  },
+  {
+    "id": "2605.06647v1",
+    "title": "Superintelligent Retrieval Agent: The Next Frontier of Information Retrieval",
+    "summary": "Retrieval-augmented agents are increasingly the interface to large organizational knowledge bases, yet most still treat retrieval as a black box: they issue exploratory queries, inspect returned snippets, and iteratively reformulate until useful evidence emerges. This approach resembles how a newcom",
+    "digest": "探讨多智能体、知识检索：Retrieval-augmented agents are increasingly the interface to large organizational knowledge bases, yet most still treat",
+    "authors": "Zeyu Yang, Qi Ma, Jason Chen et al.",
+    "published": "2026-05-07",
+    "url": "https://arxiv.org/abs/2605.06647v1",
+    "pdf": "https://arxiv.org/pdf/2605.06647v1.pdf",
+    "tags": [
+      "Tool Calling",
+      "RAG+Agent",
+      "Research Agent",
+      "Evaluation"
+    ]
+  },
+  {
+    "id": "2605.06642v1",
+    "title": "StraTA: Incentivizing Agentic Reinforcement Learning with Strategic Trajectory Abstraction",
+    "summary": "Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision making remains difficult because current methods are largely purely reactive, which weakens both exploration and credit assignment over extended trajectories. In this work, we pres",
+    "digest": "探讨多智能体：Large language models (LLMs) are increasingly used as interactive agents, but optimizing them for long-horizon decision",
+    "authors": "Xiangyuan Xue, Yifan Zhou, Zidong Wang et al.",
+    "published": "2026-05-07",
+    "url": "https://arxiv.org/abs/2605.06642v1",
+    "pdf": "https://arxiv.org/pdf/2605.06642v1.pdf",
+    "tags": [
+      "AI Agent"
+    ]
+  },
+  {
+    "id": "2605.06641v1",
+    "title": "GlazyBench: A Benchmark for Ceramic Glaze Property Prediction and Image Generation",
+    "summary": "Developing ceramic glazes is a costly, time-consuming process of trial and error due to complex chemistry, placing a significant burden on independent artists. While recent advances in multimodal AI offer a modern solution, the field lacks the large-scale datasets required to train these models. We ",
+    "digest": "探讨多模态：Developing ceramic glazes is a costly, time-consuming process of trial and error due to complex chemistry, placing a sig",
+    "authors": "Ziyu Zhai, Siyou Li, Juexi Shao et al.",
+    "published": "2026-05-07",
+    "url": "https://arxiv.org/abs/2605.06641v1",
+    "pdf": "https://arxiv.org/pdf/2605.06641v1.pdf",
+    "tags": [
+      "Research Agent",
+      "Dev Agent",
+      "Multimodal",
+      "Evaluation"
+    ]
+  }
+]

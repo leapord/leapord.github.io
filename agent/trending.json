@@ -1,101 +1,239 @@
 [
   {
     "rank": 1,
-    "name": "Hmbown/DeepSeek-TUI",
-    "description": "Coding agent for DeepSeek models that runs in your terminal",
-    "language": "Rust",
-    "stars": "14,056",
-    "todayStars": "6,175",
-    "forks": "1,082",
+    "name": "langgenius/dify",
+    "description": "Production-ready platform for agentic workflow development.",
+    "language": "TypeScript",
+    "stars": "140.5k",
+    "todayStars": "—",
+    "forks": "22.0k",
     "tags": [
-      "Dev Agent"
+      "Dev Agent",
+      "Agent",
+      "Agentic Ai",
+      "Agentic Framework"
     ],
-    "url": "https://github.com/Hmbown/DeepSeek-TUI"
+    "url": "https://github.com/langgenius/dify"
   },
   {
     "rank": 2,
-    "name": "addyosmani/agent-skills",
-    "description": "Production-grade engineering skills for AI coding agents.",
-    "language": "Shell",
-    "stars": "30,560",
-    "todayStars": "800",
-    "forks": "3,632",
+    "name": "langchain-ai/langchain",
+    "description": "The agent engineering platform. Available in TypeScript!",
+    "language": "Python",
+    "stars": "136.1k",
+    "todayStars": "—",
+    "forks": "22.5k",
     "tags": [
+      "Dev Agent",
+      "Framework",
+      "Agents",
+      "Ai"
+    ],
+    "url": "https://github.com/langchain-ai/langchain"
+  },
+  {
+    "rank": 3,
+    "name": "Shubhamsaboo/awesome-llm-apps",
+    "description": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
+    "language": "Python",
+    "stars": "109.2k",
+    "todayStars": "—",
+    "forks": "16.2k",
+    "tags": [
+      "RAG+Agent",
+      "Agents",
+      "Llms"
+    ],
+    "url": "https://github.com/Shubhamsaboo/awesome-llm-apps"
+  },
+  {
+    "rank": 4,
+    "name": "infiniflow/ragflow",
+    "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
+    "language": "Python",
+    "stars": "79.9k",
+    "todayStars": "—",
+    "forks": "9.1k",
+    "tags": [
+      "Memory",
+      "RAG+Agent",
+      "Agentic Ai",
+      "Agentic Retrieval"
+    ],
+    "url": "https://github.com/infiniflow/ragflow"
+  },
+  {
+    "rank": 5,
+    "name": "dair-ai/Prompt-Engineering-Guide",
+    "description": "🐙 Guides, papers, lessons, notebooks and resources for prompt engineering, context engineering, RAG, and AI Agents.",
+    "language": "MDX",
+    "stars": "74.3k",
+    "todayStars": "—",
+    "forks": "8.0k",
+    "tags": [
+      "Memory",
+      "RAG+Agent",
+      "Research Agent",
       "Dev Agent"
     ],
-    "url": "https://github.com/addyosmani/agent-skills"
+    "url": "https://github.com/dair-ai/Prompt-Engineering-Guide"
+  },
+  {
+    "rank": 6,
+    "name": "thedotmack/claude-mem",
+    "description": "A Claude Code plugin that automatically captures everything Claude does during your coding sessions, compresses it with AI (using Claude's agent-sdk), and injects relevant context back into future sessions.",
+    "language": "TypeScript",
+    "stars": "73.4k",
+    "todayStars": "—",
+    "forks": "6.3k",
+    "tags": [
+      "Tool Calling",
+      "Memory",
+      "Code Agent",
+      "Ai"
+    ],
+    "url": "https://github.com/thedotmack/claude-mem"
   },
   {
     "rank": 7,
-    "name": "InsForge/InsForge",
-    "description": "InsForge is a Postgres-based backend with auth, storage, compute, hosting, and AI gateway. Built for coding agents.",
-    "language": "TypeScript",
-    "stars": "8,462",
-    "todayStars": "230",
-    "forks": "703",
+    "name": "FoundationAgents/MetaGPT",
+    "description": "🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming",
+    "language": "Python",
+    "stars": "67.8k",
+    "todayStars": "—",
+    "forks": "8.6k",
     "tags": [
-      "RAG检索",
-      "Dev Agent"
+      "Multi-Agent",
+      "Code Agent",
+      "Dev Agent",
+      "Agent"
     ],
-    "url": "https://github.com/InsForge/InsForge"
+    "url": "https://github.com/FoundationAgents/MetaGPT"
   },
   {
     "rank": 8,
-    "name": "virattt/dexter",
-    "description": "An autonomous agent for deep financial research",
-    "language": "TypeScript",
-    "stars": "24,363",
-    "todayStars": "666",
-    "forks": "2,963",
+    "name": "bytedance/deer-flow",
+    "description": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
+    "language": "Python",
+    "stars": "65.9k",
+    "todayStars": "—",
+    "forks": "8.7k",
     "tags": [
-      "工具调用",
-      "自主代理"
+      "Tool Calling",
+      "RAG+Agent",
+      "Code Agent",
+      "Research Agent"
     ],
-    "url": "https://github.com/virattt/dexter"
+    "url": "https://github.com/bytedance/deer-flow"
+  },
+  {
+    "rank": 9,
+    "name": "microsoft/autogen",
+    "description": "A programming framework for agentic AI",
+    "language": "Python",
+    "stars": "57.8k",
+    "todayStars": "—",
+    "forks": "8.7k",
+    "tags": [
+      "Code Agent",
+      "Agentic",
+      "Agentic Agi",
+      "Agents"
+    ],
+    "url": "https://github.com/microsoft/autogen"
   },
   {
     "rank": 10,
-    "name": "ruvnet/ruflo",
-    "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
-    "language": "TypeScript",
-    "stars": "45,285",
-    "todayStars": "2,192",
-    "forks": "5,018",
+    "name": "mem0ai/mem0",
+    "description": "Universal memory layer for AI Agents",
+    "language": "Python",
+    "stars": "55.0k",
+    "todayStars": "—",
+    "forks": "6.2k",
     "tags": [
-      "多智能体",
-      "RAG检索",
+      "Memory",
+      "Agents",
+      "Ai",
+      "Ai Agents"
+    ],
+    "url": "https://github.com/mem0ai/mem0"
+  },
+  {
+    "rank": 11,
+    "name": "FlowiseAI/Flowise",
+    "description": "Build AI Agents, Visually",
+    "language": "TypeScript",
+    "stars": "52.6k",
+    "todayStars": "—",
+    "forks": "24.3k",
+    "tags": [
       "Dev Agent",
-      "自主代理"
+      "Agentic Ai",
+      "Agentic Workflow",
+      "Agents"
+    ],
+    "url": "https://github.com/FlowiseAI/Flowise"
+  },
+  {
+    "rank": 12,
+    "name": "crewAIInc/crewAI",
+    "description": "Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.",
+    "language": "Python",
+    "stars": "50.9k",
+    "todayStars": "—",
+    "forks": "7.0k",
+    "tags": [
+      "Multi-Agent",
+      "Agents",
+      "Ai",
+      "Ai Agents"
+    ],
+    "url": "https://github.com/crewAIInc/crewAI"
+  },
+  {
+    "rank": 13,
+    "name": "run-llama/llama_index",
+    "description": "LlamaIndex is the leading document agent and OCR platform",
+    "language": "Python",
+    "stars": "49.2k",
+    "todayStars": "—",
+    "forks": "7.4k",
+    "tags": [
+      "Framework",
+      "Agents",
+      "Llamaindex",
+      "Llm"
+    ],
+    "url": "https://github.com/run-llama/llama_index"
+  },
+  {
+    "rank": 14,
+    "name": "ruvnet/ruflo",
+    "description": "🌊 The leading agent orchestration platform for Claude. Deploy intelligent multi-agent swarms, coordinate autonomous workflows, and build conversational AI systems. Features    enterprise-grade architecture, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
+    "language": "TypeScript",
+    "stars": "46.2k",
+    "todayStars": "—",
+    "forks": "5.1k",
+    "tags": [
+      "Multi-Agent",
+      "RAG+Agent",
+      "Code Agent",
+      "Dev Agent"
     ],
     "url": "https://github.com/ruvnet/ruflo"
   },
   {
-    "rank": 11,
-    "name": "cheahjs/free-llm-api-resources",
-    "description": "A list of free LLM inference resources accessible via API.",
-    "language": "Python",
-    "stars": "20,505",
-    "todayStars": "198",
-    "forks": "2,089",
+    "rank": 15,
+    "name": "CherryHQ/cherry-studio",
+    "description": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
+    "language": "TypeScript",
+    "stars": "45.2k",
+    "todayStars": "—",
+    "forks": "4.3k",
     "tags": [
-      "工具调用"
+      "Agency Agents",
+      "Ai Agent"
     ],
-    "url": "https://github.com/cheahjs/free-llm-api-resources"
-  },
-  {
-    "rank": 14,
-    "name": "bytedance/deer-flow",
-    "description": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
-    "language": "Python",
-    "stars": "65,543",
-    "todayStars": "337",
-    "forks": "8,666",
-    "tags": [
-      "RAG检索",
-      "Dev Agent",
-      "工具调用",
-      "评测基准"
-    ],
-    "url": "https://github.com/bytedance/deer-flow"
+    "url": "https://github.com/CherryHQ/cherry-studio"
   }
 ]
