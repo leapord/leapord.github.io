@@ -1,5 +1,23 @@
 [
   {
+    "date": "2026-05-08",
+    "file": "deploy-2026-05-08.log",
+    "started": "—",
+    "github": 0,
+    "arxiv": 0,
+    "pushed": "❌",
+    "status": "⚠️需检查"
+  },
+  {
+    "date": "2026-05-07",
+    "file": "deploy-2026-05-07.log",
+    "started": "—",
+    "github": 0,
+    "arxiv": 0,
+    "pushed": "❌",
+    "status": "⚠️需检查"
+  },
+  {
     "date": "2026-05-06",
     "file": "deploy-2026-05-06.log",
     "started": "—",
